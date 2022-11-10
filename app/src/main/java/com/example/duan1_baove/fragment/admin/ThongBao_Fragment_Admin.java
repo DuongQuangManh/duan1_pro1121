@@ -1,8 +1,9 @@
 package com.example.duan1_baove.fragment.admin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -90,6 +91,7 @@ public class ThongBao_Fragment_Admin extends Fragment {
                 Toast.makeText(getContext(), "Insert thông báo thành công ", Toast.LENGTH_SHORT).show();
                 capNhat();
                 dialog.dismiss();
+                hideSoftKeyBroad();
             }
         });
 
@@ -110,7 +112,63 @@ public class ThongBao_Fragment_Admin extends Fragment {
     }
     public void capNhat(){
         list = DuAn1DataBase.getInstance(getContext()).thongBaoDAO().getAll();
-        adapter = new ThongBaoAdapter(getContext());
+        adapter = new ThongBaoAdapter(getContext(), new ThongBaoAdapter.MyOnclick() {
+            @Override
+            public void update(ThongBao thongBao) {
+                Dialog dialog = new Dialog(getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_addthongbao);
+                dialog.show();
+                Window window = dialog.getWindow();
+                if (window == null){
+                    return;
+                }
+                window.setBackgroundDrawable(null);
+                edt_id = dialog.findViewById(R.id.edt_mathongbao_dialogthongbao);
+                edt_title = dialog.findViewById(R.id.edt_tieude_dialogthongbao);
+                edt_content = dialog.findViewById(R.id.edt_noidung_dialogthongbao);
+                btn_add = dialog.findViewById(R.id.btn_luu_dialogthongbao);
+                btn_huy = dialog.findViewById(R.id.btn_huy_dialogthongbao);
+
+                edt_id.setText(thongBao.getId()+"");
+                edt_title.setText(thongBao.getTieude());
+                edt_content.setText(thongBao.getNoidung());
+
+                btn_huy.setOnClickListener(v1 -> {
+                    dialog.cancel();
+                });
+                btn_add.setOnClickListener(v1 -> {
+                    if (validate()){
+                        thongBao.setTieude(edt_title.getText().toString().trim());
+                        thongBao.setNoidung(edt_content.getText().toString().trim());
+                        thongBao.setUser_id(Admin_MainActivity.user);
+                        thongBao.setThoigian(currentDateandTime);
+                        DuAn1DataBase.getInstance(getContext()).thongBaoDAO().update(thongBao);
+                        Toast.makeText(getContext(), "Update thông báo thành công ", Toast.LENGTH_SHORT).show();
+                        capNhat();
+                        dialog.dismiss();
+                        hideSoftKeyBroad();
+                    }
+                });
+            }
+
+            @Override
+            public void delete(ThongBao thongBao) {
+                new AlertDialog.Builder(getContext()).setTitle("Xoá thông báo ?")
+                        .setMessage("Bạn có chắc chắn muốn xoá thông báo ?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                DuAn1DataBase.getInstance(getContext()).thongBaoDAO().delete(thongBao);
+                                list.remove(thongBao);
+                                capNhat();
+                            }
+                        })
+                        .setNegativeButton("No",null)
+                        .show();
+
+            }
+        });
         adapter.setData(list);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(manager);

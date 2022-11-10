@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
@@ -39,16 +40,24 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHo
     private EditText edt_id,edt_title,edt_content;
     private Button btn_add,btn_huy;
 
+    private MyOnclick myOnclick;
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm:ss", Locale.getDefault());
     String currentDateandTime = sdf.format(new Date());
 
-    public ThongBaoAdapter(Context context) {
+    public ThongBaoAdapter(Context context,MyOnclick myOnclick) {
         this.context = context;
+        this.myOnclick = myOnclick;
     }
     public void setData(List<ThongBao> list){
         this.list = list;
         notifyDataSetChanged();
     }
+    public interface MyOnclick{
+        void update(ThongBao thongBao);
+        void delete(ThongBao thongBao);
+    }
+
 
     @NonNull
     @Override
@@ -61,12 +70,16 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ThongBao thongBao = list.get(position);
         if (thongBao!=null){
-            holder.tv_title.setText("Tiêu đề: \n"+thongBao.getTieude());
-            holder.tv_content.setText("Nội dung: \n"+thongBao.getNoidung());
+            holder.tv_title.setText("Tiêu đề: "+thongBao.getTieude());
+            holder.tv_content.setText(thongBao.getNoidung());
             holder.tv_time.setText(thongBao.getThoigian());
             String user = DuAn1DataBase.getInstance(context).adminDAO().getName(thongBao.getUser_id());
             holder.tv_user.setText(user);
-
+            if (position <= 1){
+                holder.icnew.setVisibility(View.VISIBLE);
+            }else {
+                holder.icnew.setVisibility(View.INVISIBLE);
+            }
             if (DuAn1DataBase.getInstance(context).adminDAO().checkaccount(thongBao.getUser_id()).get(0).getHinhanh()==null){
                 holder.img_user.setImageResource(R.drawable.ic_account);
             }else {
@@ -75,55 +88,13 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHo
                 holder.img_user.setImageDrawable(Drawable.createFromPath(linkimg));
             }
             holder.layout_update.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(context).setTitle("Xoá thông báo ?")
-                        .setMessage("Bạn có chắc chắn muốn xoá thông báo ?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                DuAn1DataBase.getInstance(context).thongBaoDAO().delete(thongBao);
-                                list.remove(thongBao);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No",null)
-                        .show();
+                myOnclick.delete(thongBao);
+                notifyDataSetChanged();
                 return true;
             });
             holder.layout_update.setOnClickListener(v -> {
-                Dialog dialog = new Dialog(context);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_addthongbao);
-                dialog.show();
-                Window window = dialog.getWindow();
-                if (window == null){
-                    return;
-                }
-                window.setBackgroundDrawable(null);
-                edt_id = dialog.findViewById(R.id.edt_mathongbao_dialogthongbao);
-                edt_title = dialog.findViewById(R.id.edt_tieude_dialogthongbao);
-                edt_content = dialog.findViewById(R.id.edt_noidung_dialogthongbao);
-                btn_add = dialog.findViewById(R.id.btn_luu_dialogthongbao);
-                btn_huy = dialog.findViewById(R.id.btn_huy_dialogthongbao);
-
-                edt_id.setText(thongBao.getId()+"");
-                edt_title.setText(thongBao.getTieude());
-                edt_content.setText(thongBao.getNoidung());
-
-                btn_huy.setOnClickListener(v1 -> {
-                    dialog.cancel();
-                });
-                btn_add.setOnClickListener(v1 -> {
-                    if (validate()){
-                        thongBao.setTieude(edt_title.getText().toString().trim());
-                        thongBao.setNoidung(edt_content.getText().toString().trim());
-                        thongBao.setUser_id(Admin_MainActivity.user);
-                        thongBao.setThoigian(currentDateandTime);
-                        DuAn1DataBase.getInstance(context).thongBaoDAO().update(thongBao);
-                        Toast.makeText(context, "Update thông báo thành công ", Toast.LENGTH_SHORT).show();
-                        notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
+                myOnclick.update(thongBao);
+                notifyDataSetChanged();
             });
         }
     }
@@ -135,18 +106,11 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHo
         }
         return 0;
     }
-    private boolean validate(){
-        if (edt_title.getText().toString().trim().isEmpty() || edt_content.getText().toString().trim().isEmpty()){
-            Toast.makeText(context, "Vui lòng không bỏ trống thông tin", Toast.LENGTH_SHORT).show();
-            return false;
-        }else {
-            return true;
-        }
-    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_id,tv_user,tv_time,tv_title,tv_content;
         private CircleImageView img_user;
         private RelativeLayout layout_update;
+        private LottieAnimationView icnew;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -157,6 +121,7 @@ public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHo
             tv_content = itemView.findViewById(R.id.tv_content_itemthongbao);
             img_user = itemView.findViewById(R.id.avt_itemthongbao);
             layout_update = itemView.findViewById(R.id.layout_update_itemthongbao);
+            icnew = itemView.findViewById(R.id.lottie_icnew);
         }
     }
 }
