@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +57,14 @@ public class CuaHang_Fragment_Admin extends Fragment {
             edt_tinhtrang,edt_soluong,
             edt_trongluong,edt_hangsanxuat;
     private Button btn_chonanh,btn_add,btn_huy;
+    private Spinner spn_theloai;
     private ImageView img_cuahang;
     private String img;
     private CuaHang cuaHang;
 
     private CuaHangAdapter adapter;
+    String[] theloai = {"Món hàng","Dịch vụ"};
+    String strTheloai = "Món hàng";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -150,6 +154,33 @@ public class CuaHang_Fragment_Admin extends Fragment {
         btn_add = dialog.findViewById(R.id.btn_luu_dialogcuahang);
         btn_huy = dialog.findViewById(R.id.btn_huy_dialogcuahang);
         img_cuahang = dialog.findViewById(R.id.avt_dialogcuahang);
+        spn_theloai = dialog.findViewById(R.id.spn_theloai_dialogcuahang);
+
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,theloai);
+        spn_theloai.setAdapter(adapter);
+
+        spn_theloai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strTheloai = theloai[position];
+                if (strTheloai.equals("Dịch vụ")){
+                    edt_hangsanxuat.setEnabled(false);
+                    edt_hangsanxuat.setVisibility(View.GONE);
+                    edt_trongluong.setEnabled(false);
+                    edt_trongluong.setVisibility(View.GONE);
+                }else if (strTheloai.equals("Món hàng")){
+                    edt_hangsanxuat.setEnabled(true);
+                    edt_hangsanxuat.setVisibility(View.VISIBLE);
+                    edt_trongluong.setEnabled(true);
+                    edt_trongluong.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_chonanh.setOnClickListener(v -> {
             selectImg();
@@ -164,8 +195,14 @@ public class CuaHang_Fragment_Admin extends Fragment {
                 cuaHang.setName(edt_name.getText().toString().trim());
                 cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
                 cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
-                cuaHang.setTrongLuong(Integer.parseInt(edt_trongluong.getText().toString().trim()));
-                cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                if (strTheloai.equals("Món hàng")){
+                    cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
+                    cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                }else if (strTheloai.equals("Dịch vụ")){
+                    cuaHang.setTrongLuong(0);
+                    cuaHang.setHangSanXuat("");
+                }
+                cuaHang.setTheloai(strTheloai);
                 cuaHang.setImg(img);
                 if (Integer.parseInt(edt_soluong.getText().toString().trim())>0){
                     cuaHang.setTinhTrang("Còn hàng");
@@ -188,14 +225,16 @@ public class CuaHang_Fragment_Admin extends Fragment {
         recyclerView.setAdapter(adapter);
     }
     private boolean validate(){
-        if (edt_gia.getText().toString().trim().isEmpty() ||edt_trongluong.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty() || edt_hangsanxuat.getText().toString().trim().isEmpty()){
+        if (edt_gia.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty()){
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
                 Integer.parseInt(edt_gia.getText().toString().trim());
-                Integer.parseInt(edt_trongluong.getText().toString().trim());
+                if (!edt_trongluong.getText().toString().trim().isEmpty()){
+                    Float.parseFloat(edt_trongluong.getText().toString().trim());
+                }
                 return true;
             }catch (Exception e){
                 Toast.makeText(getContext(), "Định dạng không hợp lệ", Toast.LENGTH_SHORT).show();
