@@ -12,10 +12,10 @@ public class CuaHang {
     private String img;
     private String tinhTrang;
     private int soLuong;
-    private int trongLuong;
+    private float trongLuong;
     private String hangSanXuat;
 
-    public CuaHang(int id, String name, int gia, String img, String tinhTrang, int soLuong, int trongLuong, String hangSanXuat) {
+    public CuaHang(int id, String name, int gia, String img, String tinhTrang, int soLuong, float trongLuong, String hangSanXuat) {
         this.id = id;
         this.name = name;
         this.gia = gia;
@@ -77,11 +77,11 @@ public class CuaHang {
         this.soLuong = soLuong;
     }
 
-    public int getTrongLuong() {
+    public float getTrongLuong() {
         return trongLuong;
     }
 
-    public void setTrongLuong(int trongLuong) {
+    public void setTrongLuong(float trongLuong) {
         this.trongLuong = trongLuong;
     }
 

@@ -164,7 +164,7 @@ public class CuaHang_Fragment_Admin extends Fragment {
                 cuaHang.setName(edt_name.getText().toString().trim());
                 cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
                 cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
-                cuaHang.setTrongLuong(Integer.parseInt(edt_trongluong.getText().toString().trim()));
+                cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
                 cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
                 cuaHang.setImg(img);
                 if (Integer.parseInt(edt_soluong.getText().toString().trim())>0){
@@ -195,7 +195,7 @@ public class CuaHang_Fragment_Admin extends Fragment {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
                 Integer.parseInt(edt_gia.getText().toString().trim());
-                Integer.parseInt(edt_trongluong.getText().toString().trim());
+                Float.parseFloat(edt_trongluong.getText().toString().trim());
                 return true;
             }catch (Exception e){
                 Toast.makeText(getContext(), "Định dạng không hợp lệ", Toast.LENGTH_SHORT).show();

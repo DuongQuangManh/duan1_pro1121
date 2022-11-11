@@ -141,7 +141,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                         cuaHang.setName(edt_name.getText().toString().trim());
                         cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
                         cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
-                        cuaHang.setTrongLuong(Integer.parseInt(edt_trongluong.getText().toString().trim()));
+                        cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
                         cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
                         if (Integer.parseInt(edt_soluong.getText().toString().trim())>0){
                             cuaHang.setTinhTrang("Còn hàng");
@@ -203,7 +203,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
                 Integer.parseInt(edt_gia.getText().toString().trim());
-                Integer.parseInt(edt_trongluong.getText().toString().trim());
+                Float.parseFloat(edt_trongluong.getText().toString().trim());
                 return true;
             }catch (Exception e){
                 Toast.makeText(context, "Định dạng không hợp lệ", Toast.LENGTH_SHORT).show();
