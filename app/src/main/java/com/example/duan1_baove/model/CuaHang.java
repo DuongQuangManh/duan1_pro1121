@@ -14,8 +14,9 @@ public class CuaHang {
     private int soLuong;
     private float trongLuong;
     private String hangSanXuat;
+    private String theloai;
 
-    public CuaHang(int id, String name, int gia, String img, String tinhTrang, int soLuong, float trongLuong, String hangSanXuat) {
+    public CuaHang(int id, String name, int gia, String img, String tinhTrang, int soLuong, float trongLuong, String hangSanXuat, String theloai) {
         this.id = id;
         this.name = name;
         this.gia = gia;
@@ -24,6 +25,7 @@ public class CuaHang {
         this.soLuong = soLuong;
         this.trongLuong = trongLuong;
         this.hangSanXuat = hangSanXuat;
+        this.theloai = theloai;
     }
 
     public CuaHang() {
@@ -91,5 +93,13 @@ public class CuaHang {
 
     public void setHangSanXuat(String hangSanXuat) {
         this.hangSanXuat = hangSanXuat;
+    }
+
+    public String getTheloai() {
+        return theloai;
+    }
+
+    public void setTheloai(String theloai) {
+        this.theloai = theloai;
     }
 }

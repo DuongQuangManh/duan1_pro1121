@@ -9,12 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +46,10 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             edt_tinhtrang,edt_soluong,
             edt_trongluong,edt_hangsanxuat;
     private Button btn_chonanh,btn_add,btn_huy;
+    private Spinner spn_theloai;
     private ImageView img_cuahang;
+    String[] theloai = {"Món hàng","Dịch vụ"};
+    String strTheloai= "Món hàng";
 
     public CuaHangAdapter(Context context) {
         this.context = context;
@@ -69,9 +75,19 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             holder.tv_name.setText("Tên món hàng: "+cuaHang.getName());
             holder.tv_gia.setText("Giá: "+numberFormat.format(cuaHang.getGia())+" vnđ");
             holder.tv_soluong.setText("Số lượng: "+cuaHang.getSoLuong());
-            holder.tv_trongluong.setText("Trọng lượng: "+cuaHang.getTrongLuong()+ " kg");
-            holder.tv_hangsanxuat.setText("Hãng sản xuất: "+cuaHang.getHangSanXuat());
             holder.tv_tinhtrang.setText("Tình trạng: "+cuaHang.getTinhTrang());
+            holder.tv_theloai.setText(cuaHang.getTheloai());
+
+            if (cuaHang.getTheloai().equals("Dịch vụ")){
+                holder.tv_trongluong.setVisibility(View.GONE);
+                holder.tv_hangsanxuat.setVisibility(View.GONE);
+            }else if (cuaHang.getTheloai().equals("Món hàng")){
+                holder.tv_hangsanxuat.setVisibility(View.VISIBLE);
+                holder.tv_trongluong.setVisibility(View.VISIBLE);
+                holder.tv_trongluong.setText("Trọng lượng: "+cuaHang.getTrongLuong()+ " kg");
+                holder.tv_hangsanxuat.setText("Hãng sản xuất: "+cuaHang.getHangSanXuat());
+            }
+
             if (cuaHang.getImg()==null){
                 holder.img_cuahang.setImageResource(R.drawable.ic_account);
             }else {
@@ -117,6 +133,38 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                 btn_add = dialog.findViewById(R.id.btn_luu_dialogcuahang);
                 btn_huy = dialog.findViewById(R.id.btn_huy_dialogcuahang);
                 img_cuahang = dialog.findViewById(R.id.avt_dialogcuahang);
+                spn_theloai = dialog.findViewById(R.id.spn_theloai_dialogcuahang);
+
+                ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,theloai);
+                spn_theloai.setAdapter(adapter);
+
+                spn_theloai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        strTheloai = theloai[position];
+                        if (strTheloai.equals("Dịch vụ")){
+                            edt_hangsanxuat.setEnabled(false);
+                            edt_hangsanxuat.setVisibility(View.GONE);
+                            edt_trongluong.setEnabled(false);
+                            edt_trongluong.setVisibility(View.GONE);
+                        }else if (strTheloai.equals("Món hàng")){
+                            edt_hangsanxuat.setEnabled(true);
+                            edt_hangsanxuat.setVisibility(View.VISIBLE);
+                            edt_trongluong.setEnabled(true);
+                            edt_trongluong.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+                for (int i=0;i<theloai.length;i++){
+                    if (cuaHang.getTheloai().equals(theloai[i])){
+                        spn_theloai.setSelection(i);
+                    }
+                }
 
                 edt_id.setText(cuaHang.getId()+"");
                 edt_name.setText(cuaHang.getName());
@@ -141,14 +189,20 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                         cuaHang.setName(edt_name.getText().toString().trim());
                         cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
                         cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
-                        cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
-                        cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                        if (strTheloai.equals("Món hàng")){
+                            cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
+                            cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                        }else if (strTheloai.equals("Dịch vụ")){
+                            cuaHang.setTrongLuong(0);
+                            cuaHang.setHangSanXuat("");
+                        }
+                        cuaHang.setTheloai(strTheloai);
                         if (Integer.parseInt(edt_soluong.getText().toString().trim())>0){
                             cuaHang.setTinhTrang("Còn hàng");
                         }else {
                             cuaHang.setTinhTrang("Hết hàng");
                         }
-                        DuAn1DataBase.getInstance(context).cuaHangDAO().insert(cuaHang);
+                        DuAn1DataBase.getInstance(context).cuaHangDAO().update(cuaHang);
                         Toast.makeText(context, "Update món thành công", Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
                         dialog.dismiss();
@@ -196,14 +250,16 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
         };
     }
     private boolean validate(){
-        if (edt_gia.getText().toString().trim().isEmpty() ||edt_trongluong.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty() || edt_hangsanxuat.getText().toString().trim().isEmpty()){
+        if (edt_gia.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
                 Integer.parseInt(edt_gia.getText().toString().trim());
-                Float.parseFloat(edt_trongluong.getText().toString().trim());
+                if (!edt_trongluong.getText().toString().trim().isEmpty()){
+                    Float.parseFloat(edt_trongluong.getText().toString().trim());
+                }
                 return true;
             }catch (Exception e){
                 Toast.makeText(context, "Định dạng không hợp lệ", Toast.LENGTH_SHORT).show();
@@ -212,7 +268,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
         }
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_name,tv_gia,tv_soluong,tv_trongluong,tv_hangsanxuat,tv_tinhtrang;
+        private TextView tv_id,tv_name,tv_gia,tv_soluong,tv_trongluong,tv_hangsanxuat,tv_tinhtrang,tv_theloai;
         private ImageView img_cuahang;
         private RelativeLayout layout_update;
         public ViewHolder(@NonNull View itemView) {
@@ -226,6 +282,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             tv_tinhtrang = itemView.findViewById(R.id.tv_tinhtrang_itemcuahang);
             img_cuahang = itemView.findViewById(R.id.avt_itemcuahang);
             layout_update = itemView.findViewById(R.id.layout_update_itemcuahang);
+            tv_theloai = itemView.findViewById(R.id.tv_theloai_itemcuahang);
 
         }
     }

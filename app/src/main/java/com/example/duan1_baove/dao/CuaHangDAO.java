@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.duan1_baove.model.CuaHang;
 
@@ -15,6 +16,8 @@ public interface CuaHangDAO {
     @Insert
     void insert(CuaHang cuaHang);
 
+    @Update
+    void update(CuaHang cuaHang);
     @Delete
     void delete(CuaHang cuaHang);
 
