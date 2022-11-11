@@ -27,6 +27,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/img_naptien_canhanhocvien"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -70,6 +71,7 @@
                     android:fontFamily="@font/robotoreal"/>
 
                 <TextView
+                    android:id="@+id/tv_sodu_canhanhocvien"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_name_canhanhocvien"
@@ -100,6 +102,7 @@
                     android:textStyle="bold"
                     android:textSize="18sp"/>
                 <TextView
+                    android:id="@+id/tv_taikhoan_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Tài khoản"
@@ -110,6 +113,7 @@
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/ic_next"/>
                 <TextView
+                    android:id="@+id/tv_doimatkhau_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đổi mật khẩu"
@@ -120,6 +124,7 @@
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/ic_next"/>
                 <TextView
+                    android:id="@+id/tv_lichsugiaodich_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Lịch sử giao dịch"
@@ -147,6 +152,7 @@
                     android:textStyle="bold"
                     android:textSize="18sp"/>
                 <TextView
+                    android:id="@+id/tv_lienhe_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Liên hệ"
@@ -157,6 +163,7 @@
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/ic_next"/>
                 <TextView
+                    android:id="@+id/tv_doimauchudao_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đổi màu chủ đạo"
@@ -167,6 +174,7 @@
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/ic_next"/>
                 <TextView
+                    android:id="@+id/tv_dangxuat_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đăng xuất"

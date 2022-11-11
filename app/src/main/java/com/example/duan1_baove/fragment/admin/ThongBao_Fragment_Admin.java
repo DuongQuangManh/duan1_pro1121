@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -50,8 +51,7 @@ public class ThongBao_Fragment_Admin extends Fragment {
 
     private ThongBaoAdapter adapter;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_thong_bao___admin, container, false);
         initUi();
         capNhat();
@@ -96,6 +96,7 @@ public class ThongBao_Fragment_Admin extends Fragment {
         });
 
     }
+
 
     private void initUi() {
         avt_thongbao = view.findViewById(R.id.avt_thongbao);
@@ -148,6 +149,7 @@ public class ThongBao_Fragment_Admin extends Fragment {
                         capNhat();
                         dialog.dismiss();
                         hideSoftKeyBroad();
+
                     }
                 });
             }
