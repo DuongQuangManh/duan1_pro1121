@@ -1,9 +1,14 @@
 package com.example.duan1_baove.fragment.hocvien;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,10 +22,10 @@ import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.ThongBaoAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
+import com.example.duan1_baove.fragment.admin.ThongBao_Fragment_Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.ThongBao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,6 +44,7 @@ public class TrangChu_Fragment_HocVien extends Fragment {
         view = inflater.inflate(R.layout.fragment_trang_chu_hoc_vien, container, false);
         initUi();
         capNhat();
+
         List<KhachHang> listKhachHang = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
         tv_name.setText(listKhachHang.get(0).getHoten());
         if (listKhachHang.get(0).getAvata()==null){
@@ -75,4 +81,5 @@ public class TrangChu_Fragment_HocVien extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
     }
+
 }

@@ -6,8 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "thongbao",foreignKeys = @ForeignKey(entity = Admin.class,parentColumns = "user",childColumns = "user_id",onDelete = CASCADE,onUpdate = CASCADE))
-public class ThongBao {
+public class ThongBao{
     @PrimaryKey (autoGenerate = true)
     private int id;
     private String tieude;
