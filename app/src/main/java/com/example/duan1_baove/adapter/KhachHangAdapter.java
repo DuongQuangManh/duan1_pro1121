@@ -82,7 +82,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
             holder.tv_ngaysinh.setText("Ngày sinh: "+khachHang.getNamSinh());
             holder.tv_gioitinh.setText("Giới tính: "+khachHang.getGioitinh());
             holder.tv_pass.setText("Pass: "+khachHang.getPass());
-            holder.tv_lienlac.setText("Phương thức liên lạc: "+khachHang.getSoDienThoai());
+            holder.tv_lienlac.setText("Liên lạc: "+khachHang.getSoDienThoai());
 
             if (khachHang.getAvata()==null){
                 holder.img.setImageResource(R.drawable.ic_account);

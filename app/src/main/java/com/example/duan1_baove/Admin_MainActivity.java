@@ -7,6 +7,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.example.duan1_baove.activityload.Splash_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.fragment.admin.ChucVu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.CuaHang_Fragment_Admin;
@@ -151,7 +155,15 @@ public class Admin_MainActivity extends AppCompatActivity {
                         CurrentFragment = FRAGMENT_DOIMATKHAU;
                     }
                 }else if (id == R.id.nav_dangxuat){
-//                    opendialogdangxuat();
+                    new AlertDialog.Builder(Admin_MainActivity.this).setTitle("Đăng xuất").setMessage("Bạn có chắc chắn muốn đăng xuất?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(getApplicationContext(), Splash_MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton("No",null).show();
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;

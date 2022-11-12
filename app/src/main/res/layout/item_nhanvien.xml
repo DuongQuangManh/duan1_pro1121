@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
+    android:layout_height="240dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
@@ -11,23 +11,29 @@
         android:background="@color/blue2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:padding="5dp"
         android:id="@+id/layout_update_itemadmin">
 
-        <ImageView
-            android:id="@+id/avt_itemadmin"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_account" />
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+            <ImageView
+                android:id="@+id/avt_itemadmin"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/ic_account"
+                android:scaleType="fitXY"/>
+        </androidx.cardview.widget.CardView>
         <TextView
             android:id="@+id/tv_user_itemadmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tài khoản: 0862150203"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -39,7 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Họ tên: Dương Quang Mạnh"
-            android:textSize="18dp"/>
+            android:textSize="15dp"/>
         <TextView
             android:id="@+id/tv_pass_itemadmin"
             android:layout_width="wrap_content"
@@ -49,7 +55,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Pass: absdgsndvid"
-            android:textSize="18dp"
+            android:textSize="15dp"
             />
         <TextView
             android:id="@+id/tv_luong_itemadmin"
@@ -60,7 +66,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Lương: 10.000.000 vnđ"
-            android:textSize="18dp"
+            android:textSize="15dp"
             />
         <TextView
             android:id="@+id/tv_tennganhang_itemadmin"
@@ -71,7 +77,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Ngân hàng: MB bank"
-            android:textSize="18dp"
+            android:textSize="15dp"
             />
         <TextView
             android:id="@+id/tv_stk_itemadmin"
@@ -82,7 +88,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Số tài khoản: 185430868503604"
-            android:textSize="18dp"
+            android:textSize="15dp"
             />
         <TextView
             android:id="@+id/tv_chucvu_itemadmin"
@@ -93,7 +99,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
             android:text="Chức vụ: Huấn luyện viên cá nhân"
-            android:textSize="18dp"
+            android:textSize="15dp"
             />
 
     </RelativeLayout>
