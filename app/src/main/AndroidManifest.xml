@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1_BaoVe" >
 
+        <activity
+            android:name=".fragment.hocvien.DonHangChiTiet_MainActivity_HocVien"
+            android:exported="false">
+        </activity>
         <activity android:name=".activityload.LoadHocVien_MainActivity"
             android:exported="false"/>
         <activity

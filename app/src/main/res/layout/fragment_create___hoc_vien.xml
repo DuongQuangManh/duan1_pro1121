@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/custom_edt"
-        android:hint="Email hoặc số điệnt thoại"
+        android:hint="Email hoặc số điện thoại"
         android:paddingStart="10dp"
         android:layout_marginTop="20dp"/>
     <EditText
@@ -64,7 +64,7 @@
             android:id="@+id/edt_mk1_signinhocvien"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:hint="8 kí tự"
+            android:hint="Mật khẩu - 8 kí tự"
             android:inputType="textPassword"
             android:background="@drawable/custom_edt"
             android:paddingStart="10dp"
@@ -84,7 +84,7 @@
             android:id="@+id/edt_mk2_signinhocvien"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:hint="8 kí tự"
+            android:hint="Nhập lại mật khẩu - 8 kí tự"
             android:inputType="textPassword"
             android:background="@drawable/custom_edt"
             android:paddingStart="10dp"

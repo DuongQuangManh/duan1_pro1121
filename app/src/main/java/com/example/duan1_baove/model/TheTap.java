@@ -14,6 +14,7 @@ import androidx.room.PrimaryKey;
                 parentColumns = "id",
                 childColumns = "loaithetap_id",onDelete = CASCADE,onUpdate = CASCADE)
 })
+
 public class TheTap {
     @PrimaryKey(autoGenerate = true)
     private int id;

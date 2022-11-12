@@ -12,25 +12,27 @@ import com.google.android.material.tabs.TabLayout;
         @ForeignKey(entity = CuaHang.class,
                 parentColumns = "id",
                 childColumns = "cuahang_id",onDelete = CASCADE,onUpdate = CASCADE),
-        @ForeignKey(entity = TheTap.class,
-                parentColumns = "id",
-                childColumns = "thetap_id",onDelete = CASCADE,onUpdate = CASCADE)})
+        @ForeignKey(entity = KhachHang.class,
+                parentColumns = "soDienThoai",
+                childColumns = "khachang_id",onDelete = CASCADE,onUpdate = CASCADE)})
 public class DonHangChiTiet {
     @PrimaryKey (autoGenerate = true)
     private int id;
     private int cuahang_id;
-    private int thetap_id;
+    private String khachang_id;
     private int soLuong;
     private String starttime;
     private String endtime;
+    private String tinhTrang;
 
-    public DonHangChiTiet(int id, int cuahang_id, int thetap_id, int soLuong, String starttime, String endtime) {
+    public DonHangChiTiet(int id, int cuahang_id, String khachang_id, int soLuong, String starttime, String endtime, String tinhTrang) {
         this.id = id;
         this.cuahang_id = cuahang_id;
-        this.thetap_id = thetap_id;
+        this.khachang_id = khachang_id;
         this.soLuong = soLuong;
         this.starttime = starttime;
         this.endtime = endtime;
+        this.tinhTrang = tinhTrang;
     }
 
     public DonHangChiTiet() {
@@ -52,12 +54,12 @@ public class DonHangChiTiet {
         this.cuahang_id = cuahang_id;
     }
 
-    public int getThetap_id() {
-        return thetap_id;
+    public String getKhachang_id() {
+        return khachang_id;
     }
 
-    public void setThetap_id(int thetap_id) {
-        this.thetap_id = thetap_id;
+    public void setKhachang_id(String khachang_id) {
+        this.khachang_id = khachang_id;
     }
 
     public int getSoLuong() {
@@ -82,5 +84,13 @@ public class DonHangChiTiet {
 
     public void setEndtime(String endtime) {
         this.endtime = endtime;
+    }
+
+    public String getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
 }
