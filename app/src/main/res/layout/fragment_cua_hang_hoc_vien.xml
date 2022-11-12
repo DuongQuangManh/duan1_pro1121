@@ -1,26 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="@drawable/bg_tophocvien"
-        android:padding="20dp">
+        android:padding="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="230dp"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="@string/cuahang"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_shop_cuahanghocvien"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_shop" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+        <EditText
+            android:id="@+id/edt_search_cuahanghocvien"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_edt"
+            android:drawableEnd="@drawable/ic_search_black"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Spinner
+            android:id="@+id/spn_theloai_cuahanghocvien"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/custom_edt" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_cuahang_hocvien"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-15dp" />
-</LinearLayout>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
+
+    <RelativeLayout
+        android:id="@+id/layout_muahang_cuahanghocvien"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="120dp"
+        >
+        <ImageView
+            android:id="@+id/img_avt_layoutmuahang"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/tv_gia_layout_muahang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="125dp"
+            android:layout_toEndOf="@+id/img_avt_layoutmuahang"
+            android:text="250.000 vnđ"
+            android:textSize="18sp"
+            android:textColor="#FF0000"/>
+
+        <TextView
+            android:id="@+id/tv_soluong_layoutmuahang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gia_layout_muahang"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/img_avt_layoutmuahang"
+            android:text="SL: 45"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/img_close_layoutmuahang"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/black"
+            android:layout_alignParentEnd="true"/>
+        <RelativeLayout
+            android:id="@+id/layout_soluong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_avt_layoutmuahang"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed-medium"/>
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <ImageView
+                    android:id="@+id/img_tru_layoutsoluong"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_dev"
+                    android:layout_weight="3"
+                    android:background="@drawable/bg_stroke"/>
+                <EditText
+                    android:id="@+id/edt_soluong_layoutsoluong"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="4"
+                    android:background="@drawable/bg_stroke"
+                    android:layout_marginLeft="3dp"
+                    android:text="10"
+                    android:gravity="center"/>
+                <ImageView
+                    android:id="@+id/img_cong_layoutsoluong"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_plus_black"
+                    android:layout_weight="3"
+                    android:background="@drawable/bg_stroke"
+                    android:layout_marginLeft="3dp"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_hansudung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_avt_layoutmuahang"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hạn sử dụng"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed-medium"/>
+            <Spinner
+                android:id="@+id/spn_hansudung_layouthansudung"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/custom_edt"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view_layoutmuahang">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền: "
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed-medium"/>
+            <TextView
+                android:id="@+id/tv_tongtien_layoutmuahang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200.000.000 vnđ"
+                android:layout_alignParentEnd="true"
+                android:textColor="#FF0000"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+        <View
+            android:id="@+id/view_layoutmuahang"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#9F9F9C"
+            android:layout_above="@+id/btn_muangay_layoutmuahang"/>
+        <Button
+            android:id="@+id/btn_muangay_layoutmuahang"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Mua ngay"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_green"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
