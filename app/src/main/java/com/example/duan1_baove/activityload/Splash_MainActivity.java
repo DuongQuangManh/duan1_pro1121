@@ -29,7 +29,7 @@ public class Splash_MainActivity extends AppCompatActivity {
         admin.setStk("2915022003");
         admin.setTennganhang("Mb bank");
         admin.setChucvu_id(1);
-        if (DuAn1DataBase.getInstance(this).chucVuDAO().getAll().isEmpty()&& DuAn1DataBase.getInstance(this).adminDAO().getAll().isEmpty()){
+        if (DuAn1DataBase.getInstance(this).chucVuDAO().getAll().isEmpty()&&DuAn1DataBase.getInstance(this).adminDAO().getAll().isEmpty()){
             DuAn1DataBase.getInstance(this).chucVuDAO().insert(chucVu);
             DuAn1DataBase.getInstance(this).adminDAO().insert(admin);
         }
