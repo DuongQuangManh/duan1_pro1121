@@ -1,5 +1,8 @@
 package com.example.duan1_baove.fragment.hocvien;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -12,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
+import com.example.duan1_baove.activityload.Splash_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.KhachHang;
 
@@ -45,6 +50,17 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             Log.d("adapter",linkimg+" link");
             avt_hocvien.setImageDrawable(Drawable.createFromPath(linkimg));
         }
+        tv_dangxuat.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext()).setTitle("Đăng xuất").setMessage("Bạn có chắc chắn muốn đăng xuất?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getContext(), Splash_MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("No",null).show();
+        });
         return view;
     }
 
