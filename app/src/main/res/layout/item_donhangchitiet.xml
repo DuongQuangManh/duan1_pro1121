@@ -28,13 +28,21 @@
             android:textSize="15sp"
             android:fontFamily="sans-serif-condensed-medium"/>
         <TextView
+            android:id="@+id/tv_tennguoidat_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên: Dương Quang Mạnh"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_madonhangchitiet_donhangchitiet"/>
+        <TextView
             android:id="@+id/tv_tenmonhang_donhangchitiet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Món hàng: whey protein"
             android:textSize="15sp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:layout_below="@+id/tv_madonhangchitiet_donhangchitiet"/>
+            android:layout_below="@+id/tv_tennguoidat_donhangchitiet"/>
         <TextView
             android:id="@+id/tv_gianiemyet_donhangchitiet"
             android:layout_width="wrap_content"

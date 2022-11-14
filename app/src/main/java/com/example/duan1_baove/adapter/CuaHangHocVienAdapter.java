@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,6 +57,16 @@ public class CuaHangHocVienAdapter extends RecyclerView.Adapter<CuaHangHocVienAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CuaHang cuaHang = list.get(position);
         if (cuaHang!=null){
+            if (cuaHang.getSoLuong()<= 0){
+                holder.img_hethang.setVisibility(View.VISIBLE);
+            }else {
+                holder.img_hethang.setVisibility(View.GONE);
+            }
+            if (position <= 1){
+                holder.img_new.setVisibility(View.VISIBLE);
+            }else {
+                holder.img_new.setVisibility(View.GONE);
+            }
             if (cuaHang.getImg()==null){
                 holder.img_avt.setImageResource(R.drawable.ic_account);
             }else {
@@ -111,9 +122,9 @@ public class CuaHangHocVienAdapter extends RecyclerView.Adapter<CuaHangHocVienAd
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView img_avt;
+        private ImageView img_avt,img_new,img_hethang;
         private TextView tv_name,tv_gia,tv_soluong;
-        private LinearLayout layout_update;
+        private RelativeLayout layout_update;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_avt = itemView.findViewById(R.id.img_monhang_itemcuahanghocvien);
@@ -121,6 +132,8 @@ public class CuaHangHocVienAdapter extends RecyclerView.Adapter<CuaHangHocVienAd
             tv_gia = itemView.findViewById(R.id.tv_gia_itemcuahanghocvien);
             tv_soluong = itemView.findViewById(R.id.tv_soluong_itemcuahanghocvien);
             layout_update = itemView.findViewById(R.id.layout_update_itemcuahanghocvien);
+            img_new = itemView.findViewById(R.id.img_trangthainew_itemcuahanghocvien);
+            img_hethang = itemView.findViewById(R.id.img_trangthai_itemcuahanghocvien);
         }
     }
 }

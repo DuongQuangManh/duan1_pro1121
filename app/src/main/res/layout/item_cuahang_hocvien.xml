@@ -6,10 +6,9 @@
     app:cardCornerRadius="20dp"
     android:elevation="5dp"
     app:cardUseCompatPadding="true">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical"
         android:id="@+id/layout_update_itemcuahanghocvien">
         <ImageView
             android:id="@+id/img_monhang_itemcuahanghocvien"
@@ -17,6 +16,21 @@
             android:layout_height="200dp"
             android:src="@mipmap/ic_launcher"
             android:scaleType="fitXY"/>
+        <ImageView
+            android:id="@+id/img_trangthainew_itemcuahanghocvien"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_new"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            />
+        <ImageView
+            android:id="@+id/img_trangthai_itemcuahanghocvien"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_hethang"
+            android:visibility="gone"
+            />
         <TextView
             android:id="@+id/tv_name_itemcuahanghocvien"
             android:layout_width="match_parent"
@@ -25,27 +39,27 @@
             android:layout_marginStart="10dp"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-            <TextView
-                android:id="@+id/tv_gia_itemcuahanghocvien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="130.000 vnđ"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:textColor="#FF0000"/>
-            <TextView
-                android:id="@+id/tv_soluong_itemcuahanghocvien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="số lượng: 5"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="5dp"/>
-        </RelativeLayout>
-    </LinearLayout>
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/img_monhang_itemcuahanghocvien"/>
+        <TextView
+            android:id="@+id/tv_gia_itemcuahanghocvien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="130.000 vnđ"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:textColor="#FF0000"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/tv_soluong_itemcuahanghocvien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="số lượng: 5"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"/>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

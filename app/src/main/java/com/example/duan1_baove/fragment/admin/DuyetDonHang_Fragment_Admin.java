@@ -96,11 +96,11 @@ public class DuyetDonHang_Fragment_Admin extends Fragment {
     }
 
     private void search(String search) {
-
+        adapter.getFilter().filter(search);
     }
 
     public void capnhat(){
-        list = DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().getAll();
+        list = DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().getAllAdmin();
         adapter = new DonHangAdapter(getContext(), new DonHangAdapter.IClickListener() {
             @Override
             public void duyet(DonHangChiTiet donHangChiTiet) {
@@ -118,7 +118,7 @@ public class DuyetDonHang_Fragment_Admin extends Fragment {
         adapter = new DonHangAdapter(getContext(), new DonHangAdapter.IClickListener() {
             @Override
             public void duyet(DonHangChiTiet donHangChiTiet) {
-               duyetDon(donHangChiTiet);
+                duyetDonBy(donHangChiTiet);
             }
         });
         adapter.setData(list);
@@ -144,6 +144,27 @@ public class DuyetDonHang_Fragment_Admin extends Fragment {
                         donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
                         DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().update(donHangChiTiet);
                         capnhat();
+                    }
+                })
+                .show();
+    }
+    private void duyetDonBy(DonHangChiTiet donHangChiTiet){
+        new AlertDialog.Builder(getContext()).setTitle("Kiểm duyệt")
+                .setMessage(" Bạn muốn kiểm duyệt bấm yes !\n Bạn muốn huỷ kiểm duyệt bấm no !")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        donHangChiTiet.setTinhTrang("Đã kiểm duyệt");
+                        DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().update(donHangChiTiet);
+                        getByTrangThai(strTrangthai);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                        DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().update(donHangChiTiet);
+                        getByTrangThai(strTrangthai);
                     }
                 })
                 .show();
