@@ -147,4 +147,9 @@ public class LoginAdmin_MainActivity extends AppCompatActivity {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

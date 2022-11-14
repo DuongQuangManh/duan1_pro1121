@@ -246,25 +246,32 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     strHanSuDung = hansudung[position];
                     if (position==0){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,7);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,7);
                         tongtien = cuaHang.getGia()/4;
                     }else if (position==1){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,30);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,30);
                         tongtien = cuaHang.getGia();
                     }else if (position==2){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,90);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,90);
                         tongtien = cuaHang.getGia()*3;
                     }else if (position==3){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,180);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,180);
                         tongtien = cuaHang.getGia()*6;
                     }else if (position==4){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,360);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,360);
                         tongtien = cuaHang.getGia()*12;
                     }else if(position==5){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,1080);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,1080);
                         tongtien = cuaHang.getGia()*36;
                     }else if (position==6){
-                        lichEnd.roll(Calendar.DAY_OF_MONTH,1800);
+                        lichEnd = Calendar.getInstance();
+                        lichEnd.add(Calendar.DAY_OF_MONTH,1800);
                         tongtien =cuaHang.getGia()*60;
                     }
                     tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+ " vnđ");
