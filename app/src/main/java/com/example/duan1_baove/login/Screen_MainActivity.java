@@ -41,4 +41,9 @@ public class Screen_MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
