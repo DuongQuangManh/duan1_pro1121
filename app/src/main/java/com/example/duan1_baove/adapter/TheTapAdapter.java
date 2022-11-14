@@ -56,8 +56,9 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             holder.tv_starttime.setText("Thời gian bắt đầu: "+theTap.getNgayDangKy());
             holder.tv_endtime.setText("Thời gian kết thúc: "+theTap.getNgayHetHan());
             try {
-                Date datenow = sdf.parse(day+"-"+month+"-"+year);
+                Date datenow = sdf.parse(year+"-"+month+"-"+day);
                 Date dateend = sdf.parse(theTap.getNgayHetHan());
+                Log.d("date",datenow.toString()+"và "+dateend.toString()+"và"+theTap.getNgayHetHan());
                 if (datenow.after(dateend)){
                     holder.tv_trangthai.setTextColor(Color.GREEN);
                     holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
