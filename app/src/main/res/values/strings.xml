@@ -16,6 +16,8 @@
     <string name="nav_dangxuat_admin">Đăng xuất</string>
     <string name="nav_quanlytaikhoan_admin">Tài khoản</string>
     <string name="nav_quanlydoanhthu_admin">Doanh thu</string>
+    <string name="nav_naptien_admin">Nạp tiền</string>
+    <string name="nav_duyetdonhang_admin">Duyệt đơn hàng</string>
 
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
@@ -23,4 +25,6 @@
     <string name="loichao">Chúc bạn một ngày tốt lành</string>
     <string name="search">Tìm kiếm</string>
     <string name="FAB1">MENU</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

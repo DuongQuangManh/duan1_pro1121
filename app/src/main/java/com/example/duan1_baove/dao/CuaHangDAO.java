@@ -24,6 +24,9 @@ public interface CuaHangDAO {
     @Query("SELECT *FROM cuahang")
     List<CuaHang> getAll();
 
+    @Query("SELECT *FROM cuahang WHERE id= :id")
+    List<CuaHang> getByID(String id);
+
     @Query("SELECT *FROM cuahang WHERE theloai= :type")
     List<CuaHang> retrieveByType(String type);
 }

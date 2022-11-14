@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:id="@+id/layout_update_donhangchitiet">
+        <TextView
+            android:id="@+id/tv_thoigianmua_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15/02/2003, 10:22:22"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"/>
+        <TextView
+            android:id="@+id/tv_madonhangchitiet_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mã: 1240253"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"/>
+        <TextView
+            android:id="@+id/tv_tenmonhang_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Món hàng: whey protein"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_madonhangchitiet_donhangchitiet"/>
+        <TextView
+            android:id="@+id/tv_gianiemyet_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giá: 1.900.000 vnđ"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_tenmonhang_donhangchitiet"/>
+        <TextView
+            android:id="@+id/tv_soluong_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="số lượng: 10"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_gianiemyet_donhangchitiet"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_starttime_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian bắt đầu: 15/02/2003, 15:00:20"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_soluong_donhangchitiet"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_endtime_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thời gian kết thúc: 15/02/2003, 15:00:20"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_starttime_donhangchitiet"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/tv_tongtien_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền: 1.900.000 vnđ"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_endtime_donhangchitiet"/>
+
+        <TextView
+            android:id="@+id/tv_tinhtrang_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tình trạng: chưa kiểm duyệt"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_tongtien_donhangchitiet"
+            android:textColor="#FF0000"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

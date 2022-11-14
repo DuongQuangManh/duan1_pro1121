@@ -36,6 +36,7 @@ import com.example.duan1_baove.adapter.CuaHangHocVienAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.CuaHang;
 import com.example.duan1_baove.model.DonHangChiTiet;
+import com.example.duan1_baove.model.KhachHang;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -63,7 +64,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private RelativeLayout layout_muahang,layout_soluong,layout_hansudung;
     float v = 0;
-    int soluong = 1,tongtien = 0,soluongtrongkho,songay;
+    int soluong = 1,tongtien = 0,soluongtrongkho,songay,soDuMoi=0;
     Calendar lichStart = Calendar.getInstance();
     Calendar lichEnd = Calendar.getInstance();
     int yearStart = lichStart.get(Calendar.YEAR);
@@ -72,6 +73,9 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     int yearEnd = lichEnd.get(Calendar.YEAR);
     int monthEnd = lichEnd.get(Calendar.MONTH);
     int dayEnd = lichEnd.get(Calendar.DAY_OF_MONTH);
+    int hour = lichStart.get(Calendar.HOUR);
+    int minute = lichStart.get(Calendar.MINUTE);
+    int second = lichStart.get(Calendar.SECOND);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,9 +94,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 strTheloai = theloai[position];
                 if (strTheloai.equals("Tất cả")){
                     capnhat();
-                }else if (strTheloai.equals("Món hàng")){
-                    retrieveByType(strTheloai);
-                }else if (strTheloai.equals("Dịch vụ")){
+                }else{
                     retrieveByType(strTheloai);
                 }
             }
@@ -154,114 +156,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
         adapter = new CuaHangHocVienAdapter(getContext(), new CuaHangHocVienAdapter.IclickListener() {
             @Override
             public void muahang(CuaHang cuaHang) {
-                layout_muahang.animate().alpha(1).translationY(0).setStartDelay(300).setDuration(1000).start();
-                Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
-                soluongtrongkho = cuaHang.getSoLuong();
-                img_close.setOnClickListener(v1 -> {
-                    layout_muahang.animate().alpha(v).translationY(800).setStartDelay(300).setDuration(1000).start();
-                });
-                if (cuaHang.getTheloai().equals("Món hàng")){
-                    tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /sp");
-                    tongtien = soluong*cuaHang.getGia();
-                    tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    layout_hansudung.setVisibility(View.GONE);
-                    layout_soluong.setVisibility(View.VISIBLE);
-                    edt_soluong.addTextChangedListener(textWatcher);
-                    edt_soluong.setText(soluong+"");
-                    img_tru.setOnClickListener(v1 -> {
-                        soluong-=1;
-                        edt_soluong.setText(soluong+"");
-                        tongtien = soluong*cuaHang.getGia();
-                        tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    });
-                    img_cong.setOnClickListener(v1 -> {
-                        soluong+=1;
-                        edt_soluong.setText(soluong+"");
-                        tongtien = soluong*cuaHang.getGia();
-                        tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    });
-                    btn_muangay.setOnClickListener(v1 -> {
-                        int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                        if (tongtien > soDu){
-                            Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-                            donHangChiTiet.setSoLuong(soluong);
-                            donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
-                            donHangChiTiet.setCuahang_id(cuaHang.getId());
-                            donHangChiTiet.setTinhTrang("Chưa được duyệt");
-                            DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
-                            Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else if (cuaHang.getTheloai().equals("Dịch vụ")){
-                    tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /Tháng");
-                    layout_soluong.setVisibility(View.GONE);
-                    layout_hansudung.setVisibility(View.VISIBLE);
-                    ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,hansudung);
-                    spn_hansudung.setAdapter(adapter1);
-                    spn_hansudung.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            strHanSuDung = hansudung[position];
-                            if (position==0){
-                                songay = 7;
-                                tongtien = cuaHang.getGia()/4;
-                            }else if (position==1){
-                                songay = 30;
-                                tongtien = cuaHang.getGia();
-                            }else if (position==2){
-                                songay = 90;
-                                tongtien = cuaHang.getGia()*3;
-                            }else if (position==3){
-                                songay = 180;
-                                tongtien = cuaHang.getGia()*6;
-                            }else if (position==4){
-                                songay = 360;
-                                tongtien = cuaHang.getGia()*12;
-                            }else if(position==5){
-                                songay = 1080;
-                                tongtien = cuaHang.getGia()*36;
-                            }else if (position==6){
-                                songay = 1800;
-                                tongtien =cuaHang.getGia()*60;
-                            }
-                            tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+ " vnđ");
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                    btn_muangay.setOnClickListener(v1 -> {
-                        int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                        if (tongtien > soDu){
-                            Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-                            donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
-                            donHangChiTiet.setCuahang_id(cuaHang.getId());
-                            donHangChiTiet.setTinhTrang("Chưa được duyệt");
-                            donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
-                            lichEnd.roll(Calendar.DAY_OF_MONTH,songay);
-                            donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
-                            DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
-                            Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                if (cuaHang.getImg()==null){
-                    img_avt_monhang.setImageResource(R.drawable.ic_account);
-                }else {
-                    String linkimg = cuaHang.getImg();
-                    Log.d("adapter",linkimg+" link");
-                    img_avt_monhang.setImageDrawable(Drawable.createFromPath(linkimg));
-                }
-                tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ");
-                tv_soluong_layoutmuahang.setText("SL: "+cuaHang.getSoLuong());
-                edt_soluong.setText(soluong+"");
+                muaHang(cuaHang);
             }
         });
         adapter.setData(list);
@@ -275,116 +170,145 @@ public class CuaHang_Fragment_HocVien extends Fragment {
         adapter = new CuaHangHocVienAdapter(getContext(), new CuaHangHocVienAdapter.IclickListener() {
             @Override
             public void muahang(CuaHang cuaHang) {
-                layout_muahang.animate().alpha(1).translationY(0).setStartDelay(300).setDuration(1000).start();
-                Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
-                soluongtrongkho = cuaHang.getSoLuong();
-                img_close.setOnClickListener(v1 -> {
-                    layout_muahang.animate().alpha(v).translationY(800).setStartDelay(300).setDuration(1000).start();
-                });
-                if (cuaHang.getTheloai().equals("Món hàng")){
-                    tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /sp");
-                    tongtien = soluong*cuaHang.getGia();
-                    tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    layout_hansudung.setVisibility(View.GONE);
-                    layout_soluong.setVisibility(View.VISIBLE);
-                    edt_soluong.addTextChangedListener(textWatcher);
-                    img_tru.setOnClickListener(v1 -> {
-                        soluong-=1;
-                        edt_soluong.setText(soluong+"");
-                        tongtien = soluong*cuaHang.getGia();
-                        tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    });
-                    img_cong.setOnClickListener(v1 -> {
-                        soluong+=1;
-                        edt_soluong.setText(soluong+"");
-                        tongtien = soluong*cuaHang.getGia();
-                        tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
-                    });
-                    btn_muangay.setOnClickListener(v1 -> {
-                        int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                        if (tongtien > soDu){
-                            Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-                            donHangChiTiet.setSoLuong(soluong);
-                            donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
-                            donHangChiTiet.setCuahang_id(cuaHang.getId());
-                            donHangChiTiet.setTinhTrang("Chưa được duyệt");
-                            DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
-                            Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else if (cuaHang.getTheloai().equals("Dịch vụ")){
-                    tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /Tháng");
-                    layout_soluong.setVisibility(View.GONE);
-                    layout_hansudung.setVisibility(View.VISIBLE);
-                    ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,hansudung);
-                    spn_hansudung.setAdapter(adapter1);
-                    spn_hansudung.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            strHanSuDung = hansudung[position];
-                            if (position==0){
-                                songay = 7;
-                                tongtien = cuaHang.getGia()/4;
-                            }else if (position==1){
-                                songay = 30;
-                                tongtien = cuaHang.getGia();
-                            }else if (position==2){
-                                songay = 90;
-                                tongtien = cuaHang.getGia()*3;
-                            }else if (position==3){
-                                songay = 180;
-                                tongtien = cuaHang.getGia()*6;
-                            }else if (position==4){
-                                songay = 360;
-                                tongtien = cuaHang.getGia()*12;
-                            }else if(position==5){
-                                songay = 1080;
-                                tongtien = cuaHang.getGia()*36;
-                            }else if (position==6){
-                                songay = 1800;
-                                tongtien =cuaHang.getGia()*60;
-                            }
-                            tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+ " vnđ");
-                        }
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                    btn_muangay.setOnClickListener(v1 -> {
-                        int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                        if (tongtien > soDu){
-                            Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
-                        }else {
-                            DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
-                            donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
-                            donHangChiTiet.setCuahang_id(cuaHang.getId());
-                            donHangChiTiet.setTinhTrang("Chưa được duyệt");
-                            donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
-                            lichEnd.roll(Calendar.DAY_OF_MONTH,songay);
-                            donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
-                            DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
-                            Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-                if (cuaHang.getImg()==null){
-                    img_avt_monhang.setImageResource(R.drawable.ic_account);
-                }else {
-                    String linkimg = cuaHang.getImg();
-                    Log.d("adapter",linkimg+" link");
-                    img_avt_monhang.setImageDrawable(Drawable.createFromPath(linkimg));
-                }
-                tv_soluong_layoutmuahang.setText("SL: "+cuaHang.getSoLuong());
-                edt_soluong.setText(soluong+"");
+                muaHang(cuaHang);
             }
         });
         adapter.setData(list);
         recyclerView.setAdapter(adapter);
 
+    }
+    private void muaHang(CuaHang cuaHang){
+        layout_muahang.animate().alpha(1).translationY(0).setDuration(800).start();
+        soluongtrongkho = cuaHang.getSoLuong();
+        img_close.setOnClickListener(v1 -> {
+            layout_muahang.animate().alpha(v).translationY(800).setStartDelay(300).setDuration(1000).start();
+        });
+        if (cuaHang.getTheloai().equals("Món hàng")){
+            tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /sp");
+            tongtien = soluong*cuaHang.getGia();
+            tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
+            layout_hansudung.setVisibility(View.GONE);
+            layout_soluong.setVisibility(View.VISIBLE);
+            edt_soluong.addTextChangedListener(textWatcher);
+            img_tru.setOnClickListener(v1 -> {
+                soluong-=1;
+                edt_soluong.setText(soluong+"");
+                tongtien = soluong*cuaHang.getGia();
+                tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
+            });
+            img_cong.setOnClickListener(v1 -> {
+                soluong+=1;
+                edt_soluong.setText(soluong+"");
+                tongtien = soluong*cuaHang.getGia();
+                tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
+            });
+            btn_muangay.setOnClickListener(v1 -> {
+                int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
+                if (tongtien > soDu){
+                    Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                }else {
+                    DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+                    donHangChiTiet.setSoLuong(soluong);
+                    donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
+                    donHangChiTiet.setCuahang_id(cuaHang.getId());
+                    donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart+", "+hour+":"+minute+":"+second);
+                    donHangChiTiet.setTongtien(tongtien);
+                    donHangChiTiet.setGianiemyet(cuaHang.getGia());
+                    donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                    DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
+                    Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();
+                    List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+                    KhachHang khachHang = list1.get(0);
+                    soDuMoi = soDu - tongtien;
+                    khachHang.setSoDu(soDuMoi);
+                    DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
+                    List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
+                    CuaHang cuaHang1 = list2.get(0);
+                    cuaHang1.setSoLuong(cuaHang1.getSoLuong()-soluong);
+                    DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+                    layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
+                    capnhat();
+                }
+            });
+        }else if (cuaHang.getTheloai().equals("Dịch vụ")){
+            tv_gia_layoutmuahang.setText(numberFormat.format(cuaHang.getGia())+" vnđ /Tháng");
+            layout_soluong.setVisibility(View.GONE);
+            layout_hansudung.setVisibility(View.VISIBLE);
+            ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,hansudung);
+            spn_hansudung.setAdapter(adapter1);
+            spn_hansudung.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    strHanSuDung = hansudung[position];
+                    if (position==0){
+                        songay = 7;
+                        tongtien = cuaHang.getGia()/4;
+                    }else if (position==1){
+                        songay = 30;
+                        tongtien = cuaHang.getGia();
+                    }else if (position==2){
+                        songay = 90;
+                        tongtien = cuaHang.getGia()*3;
+                    }else if (position==3){
+                        songay = 180;
+                        tongtien = cuaHang.getGia()*6;
+                    }else if (position==4){
+                        songay = 360;
+                        tongtien = cuaHang.getGia()*12;
+                    }else if(position==5){
+                        songay = 1080;
+                        tongtien = cuaHang.getGia()*36;
+                    }else if (position==6){
+                        songay = 1800;
+                        tongtien =cuaHang.getGia()*60;
+                    }
+                    tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+ " vnđ");
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+            btn_muangay.setOnClickListener(v1 -> {
+                int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
+                if (tongtien > soDu){
+                    Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                }else {
+                    DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+                    donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
+                    donHangChiTiet.setCuahang_id(cuaHang.getId());
+                    donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                    donHangChiTiet.setTongtien(tongtien);
+                    donHangChiTiet.setGianiemyet(cuaHang.getGia());
+                    donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
+                    lichEnd.roll(Calendar.DAY_OF_MONTH,songay);
+                    donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                    DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
+                    Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();
+                    List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+                    KhachHang khachHang = list1.get(0);
+                    soDuMoi = soDu - tongtien;
+                    khachHang.setSoDu(soDuMoi);
+                    DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
+                    List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
+                    CuaHang cuaHang1 = list2.get(0);
+                    cuaHang1.setSoLuong(cuaHang1.getSoLuong()-1);
+                    DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+                    layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
+                    capnhat();
+                }
+            });
+        }
+
+        if (cuaHang.getImg()==null){
+            img_avt_monhang.setImageResource(R.drawable.ic_account);
+        }else {
+            String linkimg = cuaHang.getImg();
+            Log.d("adapter",linkimg+" link");
+            img_avt_monhang.setImageDrawable(Drawable.createFromPath(linkimg));
+        }
+        tv_soluong_layoutmuahang.setText("SL: "+cuaHang.getSoLuong());
+        edt_soluong.setText(soluong+"");
     }
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -418,4 +342,5 @@ public class CuaHang_Fragment_HocVien extends Fragment {
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
+
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.admin.NapTien_Fragment_Admin"
+    android:padding="20dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nạp tiền "
+        android:textSize="35sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thành viên: "
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+    <Spinner
+        android:id="@+id/spn_thanhvien_naptienadmin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edt"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số tiền: "
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-condensed-medium"/>
+    <EditText
+        android:id="@+id/edt_sotien_naptienadmin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nhập số tiền"
+        android:background="@drawable/custom_edt"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:drawableEnd="@drawable/ic_money"
+        android:paddingEnd="10dp"/>
+    <Button
+        android:id="@+id/btn_naptien_naptienadmin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_green"
+        android:text="Nạp tiền"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"/>
+
+
+</LinearLayout>

@@ -23,15 +23,19 @@ public class DonHangChiTiet {
     private int soLuong;
     private String starttime;
     private String endtime;
+    private int tongtien;
+    private int gianiemyet;
     private String tinhTrang;
 
-    public DonHangChiTiet(int id, int cuahang_id, String khachang_id, int soLuong, String starttime, String endtime, String tinhTrang) {
+    public DonHangChiTiet(int id, int cuahang_id, String khachang_id, int soLuong, String starttime, String endtime, int tongtien, int gianiemyet, String tinhTrang) {
         this.id = id;
         this.cuahang_id = cuahang_id;
         this.khachang_id = khachang_id;
         this.soLuong = soLuong;
         this.starttime = starttime;
         this.endtime = endtime;
+        this.tongtien = tongtien;
+        this.gianiemyet = gianiemyet;
         this.tinhTrang = tinhTrang;
     }
 
@@ -92,5 +96,21 @@ public class DonHangChiTiet {
 
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    public int getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(int tongtien) {
+        this.tongtien = tongtien;
+    }
+
+    public int getGianiemyet() {
+        return gianiemyet;
+    }
+
+    public void setGianiemyet(int gianiemyet) {
+        this.gianiemyet = gianiemyet;
     }
 }

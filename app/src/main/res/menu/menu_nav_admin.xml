@@ -38,6 +38,12 @@
                 <item android:id="@+id/nav_doanhthu"
                     android:title="@string/nav_quanlydoanhthu_admin"
                     android:icon="@drawable/ic_doanhthu"/>
+                <item android:id="@+id/nav_naptien"
+                    android:title="@string/nav_naptien_admin"
+                    android:icon="@drawable/ic_money"/>
+                <item android:id="@+id/nav_duyetdonhang"
+                    android:title="@string/nav_duyetdonhang_admin"
+                    android:icon="@drawable/ic_duyetdonhang"/>
             </group>
         </menu>
     </item>
