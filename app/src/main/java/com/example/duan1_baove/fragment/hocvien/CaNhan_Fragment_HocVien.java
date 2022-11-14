@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
+import com.example.duan1_baove.activitykhachhang.ChangePassKhachHangActivity;
 import com.example.duan1_baove.activityload.Splash_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.KhachHang;
@@ -60,6 +61,10 @@ public class CaNhan_Fragment_HocVien extends Fragment {
                         }
                     })
                     .setNegativeButton("No",null).show();
+        });
+        tv_doimatkhau.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ChangePassKhachHangActivity.class);
+            startActivity(intent);
         });
         return view;
     }

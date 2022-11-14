@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.duan1_baove" >
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    package="com.example.duan1_baove">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DuAn1_BaoVe" >
-
+        android:theme="@style/Theme.DuAn1_BaoVe">
+        <activity
+            android:name=".activitykhachhang.ChangePassKhachHangActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".fragment.hocvien.DonHangChiTiet_MainActivity_HocVien"
-            android:exported="false">
-        </activity>
-        <activity android:name=".activityload.LoadHocVien_MainActivity"
-            android:exported="false"/>
+            android:exported="false"></activity>
+        <activity
+            android:name=".activityload.LoadHocVien_MainActivity"
+            android:exported="false" />
         <activity
             android:name=".HocVien_MainActivity"
             android:exported="false" />
@@ -38,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".activityload.Splash_MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,18 +53,20 @@
         </activity>
         <activity
             android:name=".Admin_MainActivity"
-            android:exported="true">
+            android:exported="true"></activity>
 
-        </activity>
-        <service android:name=".service.LoginService"
+        <service
+            android:name=".service.LoginService"
             android:enabled="true"
-            android:exported="true"/>
-        <service android:name=".service.SignInServiceHocVien"
+            android:exported="true" />
+        <service
+            android:name=".service.SignInServiceHocVien"
             android:enabled="true"
-            android:exported="true"/>
-        <service android:name=".service.LoginServiceHocVien"
+            android:exported="true" />
+        <service
+            android:name=".service.LoginServiceHocVien"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
