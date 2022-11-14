@@ -2,21 +2,17 @@ package com.example.duan1_baove.fragment.admin;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,11 +32,10 @@ import android.widget.Toast;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.NhanVienAdapter;
-import com.example.duan1_baove.adapter.SpinerAdapter;
+import com.example.duan1_baove.adapter.SpinnerAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ChucVu;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -64,7 +59,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
     Spinner spn_chucvu;
     Button btn_add,btn_huy;
 
-    SpinerAdapter spinerAdapter;
+    SpinnerAdapter spinerAdapter;
     List<ChucVu> chucVuList;
     NhanVienAdapter adapter;
     int chucvu_id;
@@ -160,7 +155,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
         spn_chucvu = dialog.findViewById(R.id.spinner_chucvu_dialognhanvien);
 
         chucVuList = DuAn1DataBase.getInstance(getContext()).chucVuDAO().getAll();
-        spinerAdapter = new SpinerAdapter(getContext(),R.layout.item_spiner,chucVuList);
+        spinerAdapter = new SpinnerAdapter(getContext(),R.layout.item_spiner,chucVuList);
         spn_chucvu.setAdapter(spinerAdapter);
 
         avt.setOnClickListener(v -> {

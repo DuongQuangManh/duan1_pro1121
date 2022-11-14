@@ -33,15 +33,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.adapter.NhanVienAdapter;
-import com.example.duan1_baove.adapter.SpinerAdapter;
 import com.example.duan1_baove.adapter.ThietBiAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ThietBi;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ThietBi_Fragment_Admin extends Fragment {

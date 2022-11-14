@@ -36,10 +36,7 @@ import android.widget.Toast;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.KhachHangAdapter;
-import com.example.duan1_baove.adapter.NhanVienAdapter;
-import com.example.duan1_baove.adapter.SpinerAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;

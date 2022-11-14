@@ -10,14 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.adapter.SpinerAdapterNapTien;
+import com.example.duan1_baove.adapter.SpinnerAdapterNapTien;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.KhachHang;
 
@@ -38,7 +37,7 @@ public class NapTien_Fragment_Admin extends Fragment {
         view=  inflater.inflate(R.layout.fragment_nap_tien___admin, container, false);
         initUi();
         list = DuAn1DataBase.getInstance(getContext()).khachHangDAO().getAll();
-        SpinerAdapterNapTien adapter = new SpinerAdapterNapTien(getContext(), R.layout.item_spiner_naptien,list);
+        SpinnerAdapterNapTien adapter = new SpinnerAdapterNapTien(getContext(), R.layout.item_spiner_naptien,list);
         spn_thanhvien.setAdapter(adapter);
         spn_thanhvien.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
