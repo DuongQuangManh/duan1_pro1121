@@ -11,20 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.model.ChucVu;
+import com.example.duan1_baove.model.LoaiTheTap;
 
 import java.util.List;
 
-public class SpinerAdapter extends ArrayAdapter<ChucVu> {
+public class SpinnerAdapterLoaiTheTap extends ArrayAdapter<LoaiTheTap> {
     private Context context;
     private int resource;
-    private List<ChucVu> list;
+    private List<LoaiTheTap> list;
     private LayoutInflater inflater;
-
-    public SpinerAdapter(@NonNull Context context, int resource, @NonNull List<ChucVu> objects) {
+    public SpinnerAdapterLoaiTheTap(@NonNull Context context, int resource, @NonNull List<LoaiTheTap> objects) {
         super(context, resource, objects);
         this.context = context;
-        this.resource = resource;
+        this.resource =resource;
         this.list = objects;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -36,15 +35,13 @@ public class SpinerAdapter extends ArrayAdapter<ChucVu> {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(resource,null);
-            viewHolder.tv_id = convertView.findViewById(R.id.tv_id_spinner);
-            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinner);
+            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinnernaptien);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ChucVu admin = list.get(position);
-        viewHolder.tv_id.setText(admin.getId()+"");
-        viewHolder.tv_name.setText(admin.getTenchucvu());
+        LoaiTheTap loaiTheTap = list.get(position);
+        viewHolder.tv_name.setText(loaiTheTap.getName());
         return convertView;
     }
 
@@ -54,19 +51,17 @@ public class SpinerAdapter extends ArrayAdapter<ChucVu> {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(resource,null);
-            viewHolder.tv_id = convertView.findViewById(R.id.tv_id_spinner);
-            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinner);
+            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinnernaptien);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ChucVu admin = list.get(position);
-        viewHolder.tv_id.setText(admin.getId()+"");
-        viewHolder.tv_name.setText(admin.getTenchucvu());
+        LoaiTheTap loaiTheTap = list.get(position);
+        viewHolder.tv_name.setText(loaiTheTap.getName());
         return convertView;
     }
 
     public class ViewHolder{
-        private TextView tv_id,tv_name;
+        private TextView tv_name;
     }
 }

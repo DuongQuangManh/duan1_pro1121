@@ -12,20 +12,19 @@ import androidx.annotation.Nullable;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.model.ChucVu;
-import com.example.duan1_baove.model.KhachHang;
 
 import java.util.List;
 
-public class SpinerAdapterNapTien extends ArrayAdapter<KhachHang> {
+public class SpinnerAdapter extends ArrayAdapter<ChucVu> {
     private Context context;
     private int resource;
-    private List<KhachHang> list;
+    private List<ChucVu> list;
     private LayoutInflater inflater;
 
-    public SpinerAdapterNapTien(@NonNull Context context, int resource, @NonNull List<KhachHang> objects) {
+    public SpinnerAdapter(@NonNull Context context, int resource, @NonNull List<ChucVu> objects) {
         super(context, resource, objects);
         this.context = context;
-        this.resource =resource;
+        this.resource = resource;
         this.list = objects;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -37,13 +36,15 @@ public class SpinerAdapterNapTien extends ArrayAdapter<KhachHang> {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(resource,null);
-            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinnernaptien);
+            viewHolder.tv_id = convertView.findViewById(R.id.tv_id_spinner);
+            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinner);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        KhachHang khachHang = list.get(position);
-        viewHolder.tv_name.setText(khachHang.getHoten());
+        ChucVu admin = list.get(position);
+        viewHolder.tv_id.setText(admin.getId()+"");
+        viewHolder.tv_name.setText(admin.getTenchucvu());
         return convertView;
     }
 
@@ -53,17 +54,19 @@ public class SpinerAdapterNapTien extends ArrayAdapter<KhachHang> {
         if (convertView == null){
             viewHolder = new ViewHolder();
             convertView = inflater.inflate(resource,null);
-            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinnernaptien);
+            viewHolder.tv_id = convertView.findViewById(R.id.tv_id_spinner);
+            viewHolder.tv_name = convertView.findViewById(R.id.tv_name_spinner);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        KhachHang khachHang = list.get(position);
-        viewHolder.tv_name.setText(khachHang.getHoten());
+        ChucVu admin = list.get(position);
+        viewHolder.tv_id.setText(admin.getId()+"");
+        viewHolder.tv_name.setText(admin.getTenchucvu());
         return convertView;
     }
 
     public class ViewHolder{
-        private TextView tv_name;
+        private TextView tv_id,tv_name;
     }
 }

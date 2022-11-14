@@ -25,4 +25,7 @@ public interface LoaiTheTapDAO {
 
     @Query("SELECT *FROM loaithetap")
     List<LoaiTheTap> getAll();
+
+    @Query("SELECT *FROM loaithetap WHERE id= :id")
+    List<LoaiTheTap> getByID(String id);
 }

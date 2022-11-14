@@ -18,17 +18,20 @@ import androidx.room.PrimaryKey;
 public class TheTap {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int khachhang_id;
+    private String khachhang_id;
     private int loaithetap_id;
     private String ngayDangKy;
     private String ngayHetHan;
 
-    public TheTap(int id, int khachhang_id, int loaithetap_id, String ngayDangKy, String ngayHetHan) {
+    public TheTap(int id, String khachhang_id, int loaithetap_id, String ngayDangKy, String ngayHetHan) {
         this.id = id;
         this.khachhang_id = khachhang_id;
         this.loaithetap_id = loaithetap_id;
         this.ngayDangKy = ngayDangKy;
         this.ngayHetHan = ngayHetHan;
+    }
+
+    public TheTap() {
     }
 
     public int getId() {
@@ -39,11 +42,11 @@ public class TheTap {
         this.id = id;
     }
 
-    public int getKhachhang_id() {
+    public String getKhachhang_id() {
         return khachhang_id;
     }
 
-    public void setKhachhang_id(int khachhang_id) {
+    public void setKhachhang_id(String khachhang_id) {
         this.khachhang_id = khachhang_id;
     }
 

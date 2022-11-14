@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true"
+    >
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loại thẻ tập"
+            android:background="@drawable/custom_header_dialog"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:textStyle="normal"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            >
+            <EditText
+                android:id="@+id/edt_mathetap_dialogthetap"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edt"
+                android:hint="Mã thẻ tập"
+                android:paddingStart="10dp"
+                android:enabled="false"/>
+            <Spinner
+                android:id="@+id/spn_tenkhachhang_dialogthetap"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edt"
+                android:layout_marginTop="10dp"/>
+            <Spinner
+                android:id="@+id/spn_loaithetap_dialogthetap"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edt"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/edt_starttime_dialogthetap"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edt"
+                android:hint="Start time"
+                android:paddingStart="10dp"
+                android:layout_marginTop="10dp"
+                android:enabled="false"/>
+            <EditText
+                android:id="@+id/edt_endtime_dialogthetap"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/custom_edt"
+                android:hint="End time"
+                android:paddingStart="10dp"
+                android:layout_marginTop="10dp"
+                android:enabled="false"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#8E24AA"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:background="#FFFFFF"
+            >
+
+            <Button
+                android:id="@+id/btn_luu_dialogthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="50dp"
+                android:layout_toStartOf="@+id/btn_huy_dialogthetap"
+                android:background="@drawable/bg_green"
+                android:paddingStart="2dp"
+                android:text="Lưu"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_huy_dialogthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_green"
+                android:text="Huỷ"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

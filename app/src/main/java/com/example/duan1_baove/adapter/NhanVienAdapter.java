@@ -3,9 +3,7 @@ package com.example.duan1_baove.adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +28,6 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ChucVu;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -49,7 +46,7 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
     private Spinner spn_chucvu;
     private Button btn_add,btn_huy;
 
-    SpinerAdapter spinerAdapter;
+    SpinnerAdapter spinerAdapter;
     List<ChucVu> chucVuList;
     int chucvu_id;
 
@@ -138,7 +135,7 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
                 spn_chucvu = dialog.findViewById(R.id.spinner_chucvu_dialognhanvien);
 
                 chucVuList = DuAn1DataBase.getInstance(context).chucVuDAO().getAll();
-                spinerAdapter = new SpinerAdapter(context,R.layout.item_spiner,chucVuList);
+                spinerAdapter = new SpinnerAdapter(context,R.layout.item_spiner,chucVuList);
                 spn_chucvu.setAdapter(spinerAdapter);
 
                 spn_chucvu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -247,7 +244,7 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
     }
     private boolean validate(){
         if (edt_user.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() ||
-        edt_pass.getText().toString().trim().isEmpty() || edt_luong.getText().toString().trim().isEmpty() ||
+                edt_pass.getText().toString().trim().isEmpty() || edt_luong.getText().toString().trim().isEmpty() ||
                 edt_tennganhang.getText().toString().trim().isEmpty() || edt_stk.getText().toString().trim().isEmpty()){
             return false;
         }else {
