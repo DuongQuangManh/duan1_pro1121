@@ -58,9 +58,4 @@ public class LoginHocVien_MainActivity extends AppCompatActivity {
         tv_dangky = findViewById(R.id.tv_dangky_hocvien);
         viewPager2 = findViewById(R.id.viewpager_hocvien);
     }
-
-    @Override
-    public void onBackPressed() {
-
-    }
 }

@@ -45,4 +45,9 @@ public class HocVien_MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         viewPager.setUserInputEnabled(false);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

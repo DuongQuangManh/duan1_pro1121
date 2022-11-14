@@ -27,4 +27,9 @@ public class LoadHocVien_MainActivity extends AppCompatActivity {
             }
         },2000);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

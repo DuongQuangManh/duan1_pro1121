@@ -148,8 +148,4 @@ public class LoginAdmin_MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 }
