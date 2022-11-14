@@ -30,7 +30,7 @@ import com.example.duan1_baove.model.ThongBao;
         DonHangChiTiet.class, KhachHang.class, LoaiTheTap.class,
         TheTap.class, ThietBi.class, ThongBao.class},version = 1)
 public abstract class DuAn1DataBase extends RoomDatabase {
-    private static final String DATABASE_NAME= "duan1.t";
+    private static final String DATABASE_NAME= "duan1.o";
     private static DuAn1DataBase instance;
 
     public static synchronized DuAn1DataBase getInstance(Context context){
@@ -39,6 +39,7 @@ public abstract class DuAn1DataBase extends RoomDatabase {
         }
         return instance;
     }
+
     public abstract AdminDAO adminDAO();
     public abstract ChucVuDAO chucVuDAO();
     public abstract CuaHangDAO cuaHangDAO();

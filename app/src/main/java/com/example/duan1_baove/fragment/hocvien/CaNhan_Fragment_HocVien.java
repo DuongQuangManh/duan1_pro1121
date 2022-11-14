@@ -77,4 +77,12 @@ public class CaNhan_Fragment_HocVien extends Fragment {
         tv_dangxuat = view.findViewById(R.id.tv_dangxuat_canhanhocvien);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<KhachHang> acc = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+        tv_name.setText(acc.get(0).getHoten());
+        tv_sodu.setText("Số dư: "+numberFormat.format(acc.get(0).getSoDu())+" vnđ");
+    }
 }

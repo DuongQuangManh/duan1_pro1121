@@ -24,8 +24,10 @@ import com.example.duan1_baove.fragment.admin.ChucVu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.CuaHang_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.DoanhThu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.DoiMatKhau_Fragment_Admin;
+import com.example.duan1_baove.fragment.admin.DuyetDonHang_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.KhachHang_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.LoaiTheTap_Fragment_Admin;
+import com.example.duan1_baove.fragment.admin.NapTien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.NhanVien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.TaiKhoan_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.TheTap_Fragment_Admin;
@@ -49,6 +51,8 @@ public class Admin_MainActivity extends AppCompatActivity {
     private static final int FRAGMENT_DOANHTHU = 9;
     private static final int FRAGMENT_TAIKHOAN= 10;
     private static final int FRAGMENT_DOIMATKHAU = 11;
+    private static final int FRAGMENT_NAPTIEN= 12;
+    private static final int FRAGMENT_DUYETDONHANG= 13;
     private int CurrentFragment = FRAGMENT_THONGBAO;
 
     NavigationView navigationView;
@@ -84,6 +88,7 @@ public class Admin_MainActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_doanhthu).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_quanlychucvu).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_quanlyadmin).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_naptien).setVisible(false);
         }
 
         toolbar.setNavigationIcon(R.drawable.ic_menu);
@@ -154,6 +159,16 @@ public class Admin_MainActivity extends AppCompatActivity {
                         replaceFragment(new DoiMatKhau_Fragment_Admin());
                         CurrentFragment = FRAGMENT_DOIMATKHAU;
                     }
+                }else if (id == R.id.nav_naptien){
+                    if (CurrentFragment != FRAGMENT_NAPTIEN){
+                        replaceFragment(new NapTien_Fragment_Admin());
+                        CurrentFragment = FRAGMENT_NAPTIEN;
+                    }
+                }else if (id == R.id.nav_duyetdonhang){
+                    if (CurrentFragment != FRAGMENT_DUYETDONHANG){
+                        replaceFragment(new DuyetDonHang_Fragment_Admin());
+                        CurrentFragment = FRAGMENT_DUYETDONHANG;
+                    }
                 }else if (id == R.id.nav_dangxuat){
                     new AlertDialog.Builder(Admin_MainActivity.this).setTitle("Đăng xuất").setMessage("Bạn có chắc chắn muốn đăng xuất?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -200,5 +215,4 @@ public class Admin_MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-
 }
