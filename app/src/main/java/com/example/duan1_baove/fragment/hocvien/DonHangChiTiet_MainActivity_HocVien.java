@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.DonHangAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
@@ -32,7 +33,7 @@ public class DonHangChiTiet_MainActivity_HocVien extends AppCompatActivity {
     }
 
     private void capnhat() {
-        list = DuAn1DataBase.getInstance(this).donHangChiTietDAO().getAll();
+        list = DuAn1DataBase.getInstance(this).donHangChiTietDAO().getAll(HocVien_MainActivity.userHocVien);
         adapter = new DonHangAdapter(this, new DonHangAdapter.IClickListener() {
             @Override
             public void duyet(DonHangChiTiet donHangChiTiet) {

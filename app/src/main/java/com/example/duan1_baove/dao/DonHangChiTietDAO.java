@@ -19,7 +19,10 @@ public interface DonHangChiTietDAO {
     void update(DonHangChiTiet donHangChiTiet);
 
     @Query("SELECT *FROM donhangchitiet ORDER BY id DESC")
-    List<DonHangChiTiet> getAll();
+    List<DonHangChiTiet> getAllAdmin();
+
+    @Query("SELECT *FROM donhangchitiet WHERE khachang_id= :khachhang_id ORDER BY id DESC")
+    List<DonHangChiTiet> getAll(String khachhang_id);
 
     @Query("SELECT *FROM donhangchitiet WHERE tinhTrang= :trangthai")
     List<DonHangChiTiet> getByTrangThai(String trangthai);

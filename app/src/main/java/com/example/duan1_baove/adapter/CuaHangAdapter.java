@@ -75,8 +75,12 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             holder.tv_name.setText("Tên món hàng: "+cuaHang.getName());
             holder.tv_gia.setText("Giá: "+numberFormat.format(cuaHang.getGia())+" vnđ");
             holder.tv_soluong.setText("Số lượng: "+cuaHang.getSoLuong());
-            holder.tv_tinhtrang.setText("Tình trạng: "+cuaHang.getTinhTrang());
-            holder.tv_theloai.setText(cuaHang.getTheloai());
+            if (cuaHang.getSoLuong()<=0){
+                holder.tv_tinhtrang.setText("Tình trạng: Hết hàng");
+            }else {
+                holder.tv_tinhtrang.setText("Tình trạng: Còn hàng");
+            }
+            holder.tv_theloai.setText("Thể loại: "+cuaHang.getTheloai());
 
             if (cuaHang.getTheloai().equals("Dịch vụ")){
                 holder.tv_trongluong.setVisibility(View.GONE);

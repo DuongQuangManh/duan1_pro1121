@@ -95,6 +95,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
             }else {
                 holder.tv_tinhtrang.setTextColor(Color.RED);
             }
+            holder.tv_nameuser.setText("Tên người đặt: "+DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(donHangChiTiet.getKhachang_id()).get(0).getHoten());
             holder.tv_thoigiandathang.setText(donHangChiTiet.getStarttime());
             holder.tv_id.setText("Mã đơn đơn hàng: "+donHangChiTiet.getId());
             List<CuaHang> list = DuAn1DataBase.getInstance(context).cuaHangDAO().getByID(String.valueOf(donHangChiTiet.getCuahang_id()));
@@ -134,11 +135,12 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_name,tv_gia,tv_soluong,tv_strarttime,tv_endtime,tv_tongtien,tv_tinhtrang,tv_thoigiandathang;
+        private TextView tv_id,tv_nameuser,tv_name,tv_gia,tv_soluong,tv_strarttime,tv_endtime,tv_tongtien,tv_tinhtrang,tv_thoigiandathang;
         private RelativeLayout layout_update;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_id = itemView.findViewById(R.id.tv_madonhangchitiet_donhangchitiet);
+            tv_nameuser = itemView.findViewById(R.id.tv_tennguoidat_donhangchitiet);
             tv_name = itemView.findViewById(R.id.tv_tenmonhang_donhangchitiet);
             tv_gia = itemView.findViewById(R.id.tv_gianiemyet_donhangchitiet);
             tv_soluong = itemView.findViewById(R.id.tv_soluong_donhangchitiet);

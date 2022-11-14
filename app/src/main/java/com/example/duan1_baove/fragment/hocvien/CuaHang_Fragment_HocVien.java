@@ -64,15 +64,13 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private RelativeLayout layout_muahang,layout_soluong,layout_hansudung;
     float v = 0;
-    int soluong = 1,tongtien = 0,soluongtrongkho,songay,soDuMoi=0;
+    int soluong = 1,tongtien = 0,soluongtrongkho,soDuMoi=0;
     Calendar lichStart = Calendar.getInstance();
     Calendar lichEnd = Calendar.getInstance();
     int yearStart = lichStart.get(Calendar.YEAR);
-    int monthStart = lichStart.get(Calendar.MONTH);
+    int monthStart = lichStart.get(Calendar.MONTH)+1;
     int dayStart = lichStart.get(Calendar.DAY_OF_MONTH);
-    int yearEnd = lichEnd.get(Calendar.YEAR);
-    int monthEnd = lichEnd.get(Calendar.MONTH);
-    int dayEnd = lichEnd.get(Calendar.DAY_OF_MONTH);
+
     int hour = lichStart.get(Calendar.HOUR);
     int minute = lichStart.get(Calendar.MINUTE);
     int second = lichStart.get(Calendar.SECOND);
@@ -180,6 +178,13 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     private void muaHang(CuaHang cuaHang){
         layout_muahang.animate().alpha(1).translationY(0).setDuration(800).start();
         soluongtrongkho = cuaHang.getSoLuong();
+        if (soluongtrongkho<=0){
+            btn_muangay.setEnabled(false);
+            btn_muangay.setBackground(getActivity().getDrawable(R.drawable.bg_gray));
+        }else {
+            btn_muangay.setEnabled(true);
+            btn_muangay.setBackground(getActivity().getDrawable(R.drawable.bg_green));
+        }
         img_close.setOnClickListener(v1 -> {
             layout_muahang.animate().alpha(v).translationY(800).setStartDelay(300).setDuration(1000).start();
         });
@@ -241,25 +246,25 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     strHanSuDung = hansudung[position];
                     if (position==0){
-                        songay = 7;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,7);
                         tongtien = cuaHang.getGia()/4;
                     }else if (position==1){
-                        songay = 30;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,30);
                         tongtien = cuaHang.getGia();
                     }else if (position==2){
-                        songay = 90;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,90);
                         tongtien = cuaHang.getGia()*3;
                     }else if (position==3){
-                        songay = 180;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,180);
                         tongtien = cuaHang.getGia()*6;
                     }else if (position==4){
-                        songay = 360;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,360);
                         tongtien = cuaHang.getGia()*12;
                     }else if(position==5){
-                        songay = 1080;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,1080);
                         tongtien = cuaHang.getGia()*36;
                     }else if (position==6){
-                        songay = 1800;
+                        lichEnd.roll(Calendar.DAY_OF_MONTH,1800);
                         tongtien =cuaHang.getGia()*60;
                     }
                     tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+ " vnđ");
@@ -274,6 +279,9 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 if (tongtien > soDu){
                     Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
                 }else {
+                    int yearEnd = lichEnd.get(Calendar.YEAR);
+                    int monthEnd = lichEnd.get(Calendar.MONTH)+1;
+                    int dayEnd = lichEnd.get(Calendar.DAY_OF_MONTH);
                     DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
                     donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
                     donHangChiTiet.setCuahang_id(cuaHang.getId());
@@ -281,7 +289,6 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     donHangChiTiet.setTongtien(tongtien);
                     donHangChiTiet.setGianiemyet(cuaHang.getGia());
                     donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
-                    lichEnd.roll(Calendar.DAY_OF_MONTH,songay);
                     donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
                     DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
                     Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();

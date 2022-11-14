@@ -21,7 +21,7 @@ public interface CuaHangDAO {
     @Delete
     void delete(CuaHang cuaHang);
 
-    @Query("SELECT *FROM cuahang")
+    @Query("SELECT *FROM cuahang ORDER BY id DESC")
     List<CuaHang> getAll();
 
     @Query("SELECT *FROM cuahang WHERE id= :id")
