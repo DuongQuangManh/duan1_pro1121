@@ -21,11 +21,23 @@
             android:hint="Tìm kiếm"
             />
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layoutspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <Spinner
+            android:id="@+id/spn_tinhtrangthetap"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_edt"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_thetap"
-        android:layout_below="@+id/layout_search_thetap"
+        android:layout_below="@+id/layoutspinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab1_thetap"
         android:layout_width="wrap_content"
