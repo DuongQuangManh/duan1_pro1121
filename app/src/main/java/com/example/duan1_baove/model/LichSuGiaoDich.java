@@ -1,18 +1,8 @@
 package com.example.duan1_baove.model;
 
-import static androidx.room.ForeignKey.CASCADE;
 
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "lichsugiaodich",foreignKeys = {
-        @ForeignKey(entity = KhachHang.class,parentColumns = "soDienThoai",childColumns = "KhachHang_id",onDelete = CASCADE,onUpdate = CASCADE),
-        @ForeignKey(entity = DonHangChiTiet.class,parentColumns = "id",childColumns = "DonHangChiTiet_id",onDelete = CASCADE,onUpdate = CASCADE)
-})
 public class LichSuGiaoDich {
 
-    @PrimaryKey(autoGenerate = true)
     private int id;
     private String KhachHang_id;
     private String DonHangChiTiet_id;
@@ -21,8 +11,8 @@ public class LichSuGiaoDich {
 
     public LichSuGiaoDich(int id, String khachHang_id, String donHangChiTiet_id, String type, int soTien) {
         this.id = id;
-        KhachHang_id = khachHang_id;
-        DonHangChiTiet_id = donHangChiTiet_id;
+        this.KhachHang_id = khachHang_id;
+        this.DonHangChiTiet_id = donHangChiTiet_id;
         this.type = type;
         this.soTien = soTien;
     }
@@ -40,7 +30,7 @@ public class LichSuGiaoDich {
     }
 
     public void setKhachHang_id(String khachHang_id) {
-        KhachHang_id = khachHang_id;
+        this.KhachHang_id = khachHang_id;
     }
 
     public String getDonHangChiTiet_id() {
@@ -48,7 +38,7 @@ public class LichSuGiaoDich {
     }
 
     public void setDonHangChiTiet_id(String donHangChiTiet_id) {
-        DonHangChiTiet_id = donHangChiTiet_id;
+        this.DonHangChiTiet_id = donHangChiTiet_id;
     }
 
     public String getType() {
