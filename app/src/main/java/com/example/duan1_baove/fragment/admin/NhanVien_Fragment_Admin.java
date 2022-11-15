@@ -244,10 +244,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
         }
     }
 
-    public void hideSoftKeyBroad(){
-        InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
-    }
+
     public String getPathFromURI(Uri contentUri) {
         String res = null;
         String[] proj = {MediaStore.Images.Media.DATA};
@@ -258,5 +255,9 @@ public class NhanVien_Fragment_Admin extends Fragment {
         }
         cursor.close();
         return res;
+    }
+    public void hideSoftKeyBroad(){
+        InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
     }
 }

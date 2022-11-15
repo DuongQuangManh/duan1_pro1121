@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +57,16 @@ public class ThongBao_Fragment_Admin extends Fragment {
         view = inflater.inflate(R.layout.fragment_thong_bao___admin, container, false);
         initUi();
         capNhat();
+        List<Admin> listAdmin = DuAn1DataBase.getInstance(getContext()).adminDAO().checkaccount(Admin_MainActivity.user);
+        Admin admin = listAdmin.get(0);
+        if (admin.getHinhanh()==null){
+          avt_thongbao.setImageResource(R.drawable.ic_account);
+        }else {
+            String linkimg = admin.getHinhanh();
+            Log.d("adapter",linkimg+" link");
+            avt_thongbao.setImageDrawable(Drawable.createFromPath(linkimg));
+        }
+
         edt_themthongbao.setOnClickListener(v -> {
             add();
         });
@@ -179,5 +191,19 @@ public class ThongBao_Fragment_Admin extends Fragment {
     public void hideSoftKeyBroad(){
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<Admin> listAdmin = DuAn1DataBase.getInstance(getContext()).adminDAO().checkaccount(Admin_MainActivity.user);
+        Admin admin = listAdmin.get(0);
+        if (admin.getHinhanh()==null){
+            avt_thongbao.setImageResource(R.drawable.ic_account);
+        }else {
+            String linkimg = admin.getHinhanh();
+            Log.d("adapter",linkimg+" link");
+            avt_thongbao.setImageDrawable(Drawable.createFromPath(linkimg));
+        }
     }
 }
