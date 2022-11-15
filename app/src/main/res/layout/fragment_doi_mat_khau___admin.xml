@@ -1,9 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.admin.ChucVu_Fragment_Admin"
-    android:background="#5E35B1">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu hiện tại: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_eye_off"
+        app:endIconMode="custom"
+        app:hintEnabled="false"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txti_doimatkhauadmin"
+        >
+
+        <EditText
+            android:id="@+id/edt_mk_doimatkhauadmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Mật khẩu hiện tại"
+            android:background="@drawable/custom_edt"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mật khẩu mới: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_eye_off"
+        app:endIconMode="custom"
+        app:hintEnabled="false"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txti1_doimatkhauadmin"
+        >
+
+        <EditText
+            android:id="@+id/edt_mk1_doimatkhauadmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="8 kí tự"
+            android:background="@drawable/custom_edt"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhập lại mật khẩu mới: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_eye_off"
+        app:endIconMode="custom"
+        app:hintEnabled="false"
+        android:layout_marginTop="5dp"
+        android:id="@+id/txti2_doimatkhauadmin"
+        >
+
+        <EditText
+            android:id="@+id/edt_mk2_doimatkhauadmin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="8 kí tự"
+            android:background="@drawable/custom_edt"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+        <Button
+            android:id="@+id/btn_huy_doimatkhauadmin"
+            android:layout_width="80dp"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_green"
+            android:text="Huỷ"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:layout_toStartOf="@+id/btn_doimatkhauadmin"
+            android:layout_marginEnd="10dp"/>
+        <Button
+            android:id="@+id/btn_doimatkhauadmin"
+            android:layout_width="130dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_green"
+            android:text="Đổi mật khẩu"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+</LinearLayout>

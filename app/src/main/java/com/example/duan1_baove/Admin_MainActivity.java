@@ -151,7 +151,7 @@ public class Admin_MainActivity extends AppCompatActivity {
                     }
                 }else if (id == R.id.nav_quanlytaikhoan){
                     if (CurrentFragment != FRAGMENT_TAIKHOAN){
-                        replaceFragment(new TaiKhoan_Fragment_Admin());
+                        replaceFragment(new TaiKhoan_Fragment_Admin(Admin_MainActivity.this));
                         CurrentFragment = FRAGMENT_TAIKHOAN;
                     }
                 }else if (id == R.id.nav_doimatkhau){
