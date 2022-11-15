@@ -6,25 +6,32 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.L;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
+import com.example.duan1_baove.model.DonHangChiTiet;
+import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.TheTap;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder> {
+public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder> implements Filterable {
     private Context context;
     private List<TheTap> list;
+    private List<TheTap> listOld;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
@@ -36,6 +43,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     }
     public void setData(List<TheTap> list){
         this.list = list;
+        this.listOld = list;
         notifyDataSetChanged();
     }
 
@@ -81,6 +89,37 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             return list.size();
         }
         return 0;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if (strSearch.isEmpty()){
+                    list = listOld;
+                }else {
+                    List<TheTap> listnew = new ArrayList<>();
+                    for (TheTap theTap : listOld){
+                        KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0);
+                        if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())){
+                            listnew.add(theTap);
+                        }
+                    }
+                    list = listnew;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = list;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list = (List<TheTap>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

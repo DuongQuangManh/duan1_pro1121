@@ -18,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,6 +37,7 @@ import com.example.duan1_baove.model.LoaiTheTap;
 import com.example.duan1_baove.model.TheTap;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class TheTap_Fragment_Admin extends Fragment {
     private TheTapAdapter adapter;
     private TheTap theTap;
     private EditText edt_id,edt_starttime,edt_endtime;
-    private Spinner spn_khachhang,spn_loaithetap;
+    private Spinner spn_khachhang,spn_loaithetap,spn_tinhtrangthetap;
     private Button btn_add,btn_huy;
     private List<KhachHang> listKhachHang;
     private List<LoaiTheTap> listLoaiTheTap;
@@ -64,6 +66,10 @@ public class TheTap_Fragment_Admin extends Fragment {
     private String strKhachHangID;
     private int intLoaiTheTap;
     int yearEnd,monthEnd, dayEnd;
+
+    String[] tinhtrang = {"Tất cả","Sắp hết hạn"};
+    String strTinhTrang = "Tất cả";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,6 +77,26 @@ public class TheTap_Fragment_Admin extends Fragment {
 
         initUi();
         capNhat();
+
+        ArrayAdapter adapterSpntinhtrang = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,tinhtrang);
+        spn_tinhtrangthetap.setAdapter(adapterSpntinhtrang);
+        spn_tinhtrangthetap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strTinhTrang = tinhtrang[position];
+                if (strTinhTrang.equals("Tất cả")){
+                    capNhat();
+                }else if (strTinhTrang.equals("Sắp hết hạn")){
+                    sapHetHan();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         fab1.setOnClickListener(v -> {
             animateFab();
         });
@@ -105,10 +131,11 @@ public class TheTap_Fragment_Admin extends Fragment {
         rotateBackward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_backward);
         layout_search = view.findViewById(R.id.layout_search_thetap);
         edt_search = view.findViewById(R.id.edt_search_thetap);
+        spn_tinhtrangthetap = view.findViewById(R.id.spn_tinhtrangthetap);
     }
 
     private void search(String search) {
-//        adapter.getFilter().filter(search);
+        adapter.getFilter().filter(search);
     }
 
     private void animateFab() {
@@ -203,7 +230,15 @@ public class TheTap_Fragment_Admin extends Fragment {
             }
         });
     }
-
+    private void sapHetHan(){
+        list = new ArrayList<>();
+        list = DuAn1DataBase.getInstance(getContext()).theTapDAO().getHetHan();
+        adapter = new TheTapAdapter(getActivity());
+        adapter.setData(list);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+    }
 
     private void capNhat(){
         list = DuAn1DataBase.getInstance(getContext()).theTapDAO().getAll();

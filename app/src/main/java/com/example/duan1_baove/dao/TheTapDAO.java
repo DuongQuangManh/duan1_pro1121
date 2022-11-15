@@ -19,4 +19,7 @@ public interface TheTapDAO {
 
     @Query("SELECT *FROM thetap WHERE khachhang_id= :makhachang")
     List<TheTap> checkTheTap(String makhachang);
+
+    @Query("SELECT * FROM thetap WHERE (julianday(ngayHetHan)-julianday(ngayDangKy)) < 5")
+    List<TheTap> getHetHan();
 }
