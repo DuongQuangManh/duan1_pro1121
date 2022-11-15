@@ -12,6 +12,7 @@ import com.example.duan1_baove.dao.ChucVuDAO;
 import com.example.duan1_baove.dao.CuaHangDAO;
 import com.example.duan1_baove.dao.DonHangChiTietDAO;
 import com.example.duan1_baove.dao.KhachHangDAO;
+import com.example.duan1_baove.dao.LichSuGiaoDichDAO;
 import com.example.duan1_baove.dao.LoaiTheTapDAO;
 import com.example.duan1_baove.dao.TheTapDAO;
 import com.example.duan1_baove.dao.ThietBiDAO;
@@ -21,6 +22,7 @@ import com.example.duan1_baove.model.ChucVu;
 import com.example.duan1_baove.model.CuaHang;
 import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
+import com.example.duan1_baove.model.LichSuGiaoDich;
 import com.example.duan1_baove.model.LoaiTheTap;
 import com.example.duan1_baove.model.TheTap;
 import com.example.duan1_baove.model.ThietBi;
@@ -28,7 +30,7 @@ import com.example.duan1_baove.model.ThongBao;
 
 @Database(entities = {Admin.class, ChucVu.class, CuaHang.class,
         DonHangChiTiet.class, KhachHang.class, LoaiTheTap.class,
-        TheTap.class, ThietBi.class, ThongBao.class},version = 1)
+        TheTap.class, ThietBi.class, ThongBao.class, LichSuGiaoDich.class},version = 1)
 public abstract class DuAn1DataBase extends RoomDatabase {
     private static final String DATABASE_NAME= "duan1.x";
     private static DuAn1DataBase instance;
@@ -49,5 +51,6 @@ public abstract class DuAn1DataBase extends RoomDatabase {
     public abstract TheTapDAO theTapDAO();
     public abstract ThietBiDAO thietBiDAO();
     public abstract ThongBaoDAO thongBaoDAO();
+    public abstract LichSuGiaoDichDAO lichSuGiaoDichDAO();
 
 }
