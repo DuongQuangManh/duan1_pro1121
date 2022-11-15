@@ -37,6 +37,7 @@ import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.CuaHang;
 import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
+import com.example.duan1_baove.model.LichSuGiaoDich;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -74,6 +75,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     int hour = lichStart.get(Calendar.HOUR);
     int minute = lichStart.get(Calendar.MINUTE);
     int second = lichStart.get(Calendar.SECOND);
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,6 +233,14 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     CuaHang cuaHang1 = list2.get(0);
                     cuaHang1.setSoLuong(cuaHang1.getSoLuong()-soluong);
                     DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+
+                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                    lichSuGiaoDich.setSoTien(tongtien);
+                    lichSuGiaoDich.setType("Trừ");
+                    lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
+                    lichSuGiaoDich.setThoigian(format.format(new Date()));
+                    DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+
                     layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
                     capnhat();
                 }
@@ -308,6 +318,14 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     CuaHang cuaHang1 = list2.get(0);
                     cuaHang1.setSoLuong(cuaHang1.getSoLuong()-1);
                     DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+
+                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                    lichSuGiaoDich.setSoTien(tongtien);
+                    lichSuGiaoDich.setType("Trừ");
+                    lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
+                    lichSuGiaoDich.setThoigian(format.format(new Date()));
+                    DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+
                     layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
                     capnhat();
                 }

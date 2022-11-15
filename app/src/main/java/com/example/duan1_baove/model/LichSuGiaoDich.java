@@ -8,22 +8,24 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "lichsugiaodich",foreignKeys = {
         @ForeignKey(entity = KhachHang.class,parentColumns = "soDienThoai",childColumns = "khachang_id",onDelete = CASCADE,onUpdate = CASCADE),
-        @ForeignKey(entity = DonHangChiTiet.class,parentColumns = "id",childColumns = "donhangchitiet_id",onDelete = CASCADE,onUpdate = CASCADE)
 })
 public class LichSuGiaoDich {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String khachang_id;
-    private int donhangchitiet_id;
     private String type;
     private int soTien;
+    private String thoigian;
 
-    public LichSuGiaoDich(int id, String khachang_id, int donhangchitiet_id, String type, int soTien) {
+    public LichSuGiaoDich(int id, String khachang_id, String type, int soTien, String thoigian) {
         this.id = id;
         this.khachang_id = khachang_id;
-        this.donhangchitiet_id = donhangchitiet_id;
         this.type = type;
         this.soTien = soTien;
+        this.thoigian = thoigian;
+    }
+
+    public LichSuGiaoDich() {
     }
 
     public int getId() {
@@ -42,14 +44,6 @@ public class LichSuGiaoDich {
         this.khachang_id = khachang_id;
     }
 
-    public int getDonhangchitiet_id() {
-        return donhangchitiet_id;
-    }
-
-    public void setDonhangchitiet_id(int donhangchitiet_id) {
-        this.donhangchitiet_id = donhangchitiet_id;
-    }
-
     public String getType() {
         return type;
     }
@@ -64,5 +58,13 @@ public class LichSuGiaoDich {
 
     public void setSoTien(int soTien) {
         this.soTien = soTien;
+    }
+
+    public String getThoigian() {
+        return thoigian;
+    }
+
+    public void setThoigian(String thoigian) {
+        this.thoigian = thoigian;
     }
 }
