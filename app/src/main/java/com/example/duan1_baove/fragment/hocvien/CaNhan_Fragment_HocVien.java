@@ -1,5 +1,6 @@
 package com.example.duan1_baove.fragment.hocvien;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,6 +62,14 @@ public class CaNhan_Fragment_HocVien extends Fragment {
                     })
                     .setNegativeButton("No",null).show();
         });
+        tv_taikhoan.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),TaiKhoan_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+        });
+        tv_doimatkhau.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),DoiMatKhau_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+        });
         return view;
     }
 
@@ -82,6 +91,13 @@ public class CaNhan_Fragment_HocVien extends Fragment {
     public void onResume() {
         super.onResume();
         List<KhachHang> acc = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+        if (acc.get(0).getAvata()==null){
+            avt_hocvien.setImageResource(R.drawable.ic_account);
+        }else {
+            String linkimg = acc.get(0).getAvata();
+            Log.d("adapter",linkimg+" link");
+            avt_hocvien.setImageDrawable(Drawable.createFromPath(linkimg));
+        }
         tv_name.setText(acc.get(0).getHoten());
         tv_sodu.setText("Số dư: "+numberFormat.format(acc.get(0).getSoDu())+" vnđ");
     }

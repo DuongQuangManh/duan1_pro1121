@@ -82,4 +82,17 @@ public class TrangChu_Fragment_HocVien extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<KhachHang> listKhachHang = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+        tv_name.setText(listKhachHang.get(0).getHoten());
+        if (listKhachHang.get(0).getAvata()==null){
+            avt.setImageResource(R.drawable.ic_account);
+        }else {
+            String linkimg = listKhachHang.get(0).getAvata();
+            Log.d("adapter",linkimg+" link");
+            avt.setImageDrawable(Drawable.createFromPath(linkimg));
+        }
+    }
 }

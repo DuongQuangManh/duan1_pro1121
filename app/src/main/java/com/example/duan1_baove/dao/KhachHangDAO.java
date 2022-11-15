@@ -27,4 +27,7 @@ public interface KhachHangDAO {
 
     @Query("SELECT *FROM khachhang")
     List<KhachHang> getAll();
+
+    @Query("SELECT pass FROM khachhang WHERE soDienThoai= :sdt")
+    String getPass(String sdt);
 }

@@ -22,6 +22,8 @@
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
     <string name="cuahang">Cửa hàng</string>
+    <string name="thongtinhocvien">Thông tin</string>
+    <string name="doimatkhau">Đổi mật khẩu</string>
     <string name="loichao">Chúc bạn một ngày tốt lành</string>
     <string name="search">Tìm kiếm</string>
     <string name="FAB1">MENU</string>

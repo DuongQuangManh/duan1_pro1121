@@ -22,6 +22,9 @@ public interface AdminDAO {
     @Delete
     void delete(Admin admin);
 
+    @Query("SELECT pass FROM admin WHERE user= :user")
+    String getPass(String user);
+
     @Query("SELECT *FROM admin WHERE user = :user")
     List<Admin> checkaccount(String user);
 
