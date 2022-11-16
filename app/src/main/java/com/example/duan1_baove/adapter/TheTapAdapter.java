@@ -27,16 +27,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder> implements Filterable {
     private Context context;
     private List<TheTap> list;
     private List<TheTap> listOld;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat sdfvn = new SimpleDateFormat("dd-MM-yyyy");
     Calendar calendar = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH)+1;
     int day = calendar.get(Calendar.DAY_OF_MONTH);
+    long songay;
+    int yearend,monthend,dayend;
+    long day1;
 
     public TheTapAdapter(Context context) {
         this.context = context;
@@ -47,6 +52,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    Calendar lichend = Calendar.getInstance();
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,23 +69,35 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             holder.tv_loathe.setText("Loại thẻ: "+ DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(theTap.getLoaithetap_id())).get(0).getName());
             holder.tv_starttime.setText("Thời gian bắt đầu: "+theTap.getNgayDangKy());
             holder.tv_endtime.setText("Thời gian kết thúc: "+theTap.getNgayHetHan());
+
+            lichend.set(Calendar.DAY_OF_MONTH,getArrayDate(theTap.getNgayHetHan())[0]);
+            lichend.set(Calendar.MONTH,getArrayDate(theTap.getNgayHetHan())[1]);
+            lichend.set(Calendar.YEAR,getArrayDate(theTap.getNgayHetHan())[2]);
+
+            yearend = lichend.get(Calendar.YEAR);
+            monthend = lichend.get(Calendar.MONTH);
+            dayend = lichend.get(Calendar.DAY_OF_MONTH);
+
             try {
                 Date datenow = sdf.parse(year+"-"+month+"-"+day);
-                Date dateend = sdf.parse(theTap.getNgayHetHan());
-                Log.d("date",datenow.toString()+"và "+dateend.toString()+"và"+theTap.getNgayHetHan());
-                if (datenow.after(dateend)){
-                    holder.tv_trangthai.setTextColor(Color.GREEN);
-                    holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
-                    Log.d("ngay","GREEN");
-                }else {
-                    Log.d("ngay","Red");
+                Date dateend = sdf.parse(yearend+"-"+monthend+"-"+dayend);
+                Log.d("date",datenow.toString()+"và "+dateend.toString());
+                songay =  dateend.getTime() - datenow.getTime();
+                if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=0){
                     holder.tv_trangthai.setTextColor(Color.RED);
                     holder.tv_trangthai.setText("Trạng thái: hết hạn");
+                }else if(TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=5){
+                    holder.tv_trangthai.setTextColor(Color.RED);
+                    holder.tv_trangthai.setText("Trạng thái: Sắp hết hạn");
+                }else {
+                    holder.tv_trangthai.setTextColor(Color.GREEN);
+                    holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("zzzz",e.getMessage());
             }
+            holder.tv_homnay.setText("Hôm nay: "+sdfvn.format(new Date()));
+            holder.tv_songay.setText("Còn: "+ TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS));
         }
     }
 
@@ -97,13 +115,43 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String strSearch = constraint.toString();
+                Calendar lichsearch = Calendar.getInstance();
+                lichsearch.set(Calendar.DAY_OF_MONTH,getArrayDate(strSearch)[0]);
+                lichsearch.set(Calendar.MONTH,getArrayDate(strSearch)[1]);
+                lichsearch.set(Calendar.YEAR,getArrayDate(strSearch)[2]);
+
+                int daysearch = lichsearch.get(Calendar.DAY_OF_MONTH);
+                int monthsearch = lichsearch.get(Calendar.MONTH);
+                int yearsearch = lichsearch.get(Calendar.YEAR);
+
+                Calendar lichend1 = Calendar.getInstance();
                 if (strSearch.isEmpty()){
                     list = listOld;
                 }else {
                     List<TheTap> listnew = new ArrayList<>();
                     for (TheTap theTap : listOld){
+                        lichend1.set(Calendar.DAY_OF_MONTH,getArrayDate(theTap.getNgayHetHan())[0]);
+                        lichend1.set(Calendar.MONTH,getArrayDate(theTap.getNgayHetHan())[1]);
+                        lichend1.set(Calendar.YEAR,getArrayDate(theTap.getNgayHetHan())[2]);
+
+                        int yearend1 = lichend1.get(Calendar.YEAR);
+                        int monthend1 = lichend1.get(Calendar.MONTH);
+                        int dayend1 = lichend1.get(Calendar.DAY_OF_MONTH);
+
+                        try {
+                            Date datenow = sdf.parse(yearsearch+"-"+monthsearch+"-"+daysearch);
+                            Date dateend = sdf.parse(yearend1+"-"+monthend1+"-"+dayend1);
+                            day1 = dateend.getTime() - datenow.getTime();
+                            Log.v("abcd",TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)+"soos ngay");
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+
+
                         KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0);
-                        if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())){
+
+                        if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())|| TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)<=2){
                             listnew.add(theTap);
                         }
                     }
@@ -123,7 +171,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_hoten,tv_loathe,tv_starttime,tv_endtime,tv_trangthai;
+        private TextView tv_id,tv_hoten,tv_loathe,tv_starttime,tv_endtime,tv_trangthai,tv_homnay,tv_songay;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +181,20 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             tv_starttime = itemView.findViewById(R.id.tv_starttime_itemthetap);
             tv_endtime = itemView.findViewById(R.id.tv_endtime_itemthetap);
             tv_trangthai = itemView.findViewById(R.id.tv_trangthai_itemthetap);
+            tv_homnay = itemView.findViewById(R.id.tv_ngayhomnay_itemthetap);
+            tv_songay = itemView.findViewById(R.id.tv_songay_itemthetap);
         }
+    }
+    public int[] getArrayDate(String date){
+        String[] str = date.split("-");
+        int arr[] = new int[str.length];
+        try{
+            for(int i = 0;i<str.length;i++){
+                arr[i] = Integer.parseInt(str[i]);
+            }
+        }catch (NumberFormatException e){
+            return null;
+        }
+        return arr;
     }
 }
