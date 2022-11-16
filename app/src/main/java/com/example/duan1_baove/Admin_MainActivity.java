@@ -31,6 +31,7 @@ import com.example.duan1_baove.fragment.admin.LoaiTheTap_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.NapTien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.NhanVien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.TaiKhoan_Fragment_Admin;
+import com.example.duan1_baove.fragment.admin.TheTapThu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.TheTap_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.ThietBi_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.ThongBao_Fragment_Admin;
@@ -54,6 +55,7 @@ public class Admin_MainActivity extends AppCompatActivity {
     private static final int FRAGMENT_DOIMATKHAU = 11;
     private static final int FRAGMENT_NAPTIEN= 12;
     private static final int FRAGMENT_DUYETDONHANG= 13;
+    private static final int FRAGMENT_THETAPTHU= 14;
     private int CurrentFragment = FRAGMENT_THONGBAO;
 
     NavigationView navigationView;
@@ -169,6 +171,11 @@ public class Admin_MainActivity extends AppCompatActivity {
                     if (CurrentFragment != FRAGMENT_DUYETDONHANG){
                         replaceFragment(new DuyetDonHang_Fragment_Admin());
                         CurrentFragment = FRAGMENT_DUYETDONHANG;
+                    }
+                }else if (id == R.id.nav_quanlythetapthu){
+                    if (CurrentFragment != FRAGMENT_THETAPTHU){
+                        replaceFragment(new TheTapThu_Fragment_Admin());
+                        CurrentFragment = FRAGMENT_THETAPTHU;
                     }
                 }else if (id == R.id.nav_dangxuat){
                     new AlertDialog.Builder(Admin_MainActivity.this).setTitle("Đăng xuất").setMessage("Bạn có chắc chắn muốn đăng xuất?")

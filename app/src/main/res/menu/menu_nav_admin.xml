@@ -10,6 +10,9 @@
         <item android:id="@+id/nav_quanlythetap"
             android:title="@string/nav_quanlythetap_admin"
             android:icon="@drawable/ic_thetap"/>
+        <item android:id="@+id/nav_quanlythetapthu"
+            android:title="@string/nav_quanlythetapthu_admin"
+            android:icon="@drawable/ic_try"/>
     </group>
     <item android:title="">
         <menu>

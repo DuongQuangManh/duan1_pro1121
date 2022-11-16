@@ -69,7 +69,10 @@ public class KhachHang_Fragment_Admin extends Fragment {
     String gioitinh;
     KhachHang khachHang;
     String img;
-
+    Calendar datenow = Calendar.getInstance();
+    int year = datenow.get(Calendar.YEAR);
+    int month = datenow.get(Calendar.MONTH)+1;
+    int day = datenow.get(Calendar.DAY_OF_MONTH);
     KhachHangAdapter adapter;
 
 
@@ -210,6 +213,7 @@ public class KhachHang_Fragment_Admin extends Fragment {
                 khachHang.setSoDu(0);
                 khachHang.setNamSinh(edt_ngaysinh.getText().toString().trim());
                 khachHang.setPass(edt_pass.getText().toString().trim());
+                khachHang.setNgay(day+"-"+month+"-"+year);
                 khachHang.setAvata(img);
                 List<KhachHang> check = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(khachHang.getSoDienThoai());
                 if (check.size()>0){

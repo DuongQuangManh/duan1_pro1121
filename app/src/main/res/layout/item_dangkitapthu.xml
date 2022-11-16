@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tv_name_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Họ tên: Dương Quang Mạnh"
+            android:fontFamily="sans-serif-condensed-medium"
+            />
+        <TextView
+            android:id="@+id/tv_gioitinh_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Giới tính: Nam"
+            android:layout_toEndOf="@+id/tv_name_itemthetapthu"
+            android:layout_marginStart="40dp"/>
+        <TextView
+            android:id="@+id/tv_ngaysinh_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Ngày sinh: 15/02/2003"
+            android:layout_below="@+id/tv_name_itemthetapthu"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:id="@+id/tv_sodienthoai_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Liên lạc: 0987654321"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tv_ngaysinh_itemthetapthu"/>
+        <TextView
+            android:id="@+id/tv_ngaytap_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Ngày tập: 20-11-2022"
+            android:layout_below="@+id/tv_gioitinh_itemthetapthu"
+            android:layout_alignParentEnd="true"
+            android:gravity="end"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/tv_trangthai_itemthetapthu"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Trạng thái: hết hạn"
+            android:layout_below="@+id/tv_ngaytap_itemthetapthu"
+            android:layout_alignParentEnd="true"
+            android:gravity="end"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/green"
+            />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
