@@ -19,7 +19,10 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.SpinnerAdapterNapTien;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.KhachHang;
+import com.example.duan1_baove.model.LichSuGiaoDich;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NapTien_Fragment_Admin extends Fragment {
@@ -31,6 +34,8 @@ public class NapTien_Fragment_Admin extends Fragment {
     String userThanhVien;
     int soDuHientai;
     int soDuMoi;
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +64,12 @@ public class NapTien_Fragment_Admin extends Fragment {
                 KhachHang khachHang = list.get(0);
                 khachHang.setSoDu(soDuMoi);
                 DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
+                LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                lichSuGiaoDich.setSoTien(Integer.parseInt(edt_sotien.getText().toString().trim()));
+                lichSuGiaoDich.setType("Cộng");
+                lichSuGiaoDich.setKhachang_id(userThanhVien);
+                lichSuGiaoDich.setThoigian(format.format(new Date()));
+                DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
                 Toast.makeText(getContext(), "Nạp tiền thành công", Toast.LENGTH_SHORT).show();
                 edt_sotien.setText("");
             }

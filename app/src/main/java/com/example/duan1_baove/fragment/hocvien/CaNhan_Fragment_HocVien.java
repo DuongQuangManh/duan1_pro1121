@@ -70,6 +70,10 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             Intent intent = new Intent(getContext(),DoiMatKhau_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
         });
+        tv_lichsugiaodich.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),LichSuGiaoDich_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+        });
         return view;
     }
 
