@@ -231,13 +231,8 @@ public class TheTap_Fragment_Admin extends Fragment {
         });
     }
     private void sapHetHan(){
-        list = new ArrayList<>();
-        list = DuAn1DataBase.getInstance(getContext()).theTapDAO().getHetHan();
-        adapter = new TheTapAdapter(getActivity());
-        adapter.setData(list);
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        String ngay = day+"-"+month+"-"+year;
+        adapter.getFilter().filter(ngay);
     }
 
     private void capNhat(){
