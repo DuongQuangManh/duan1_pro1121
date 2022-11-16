@@ -17,16 +17,18 @@ public class KhachHang implements Serializable {
     private int soDu;
     private String avata;
     private String pass;
+    private String ngay;
 
 
-    public KhachHang(String hoten, String namSinh, String gioitinh, int soDu, String avata, String soDienThoai, String pass) {
+    public KhachHang(@NonNull String soDienThoai, String hoten, String namSinh, String gioitinh, int soDu, String avata, String pass, String ngay) {
+        this.soDienThoai = soDienThoai;
         this.hoten = hoten;
         this.namSinh = namSinh;
         this.gioitinh = gioitinh;
         this.soDu = soDu;
         this.avata = avata;
-        this.soDienThoai = soDienThoai;
         this.pass = pass;
+        this.ngay = ngay;
     }
 
     public KhachHang() {
@@ -86,5 +88,13 @@ public class KhachHang implements Serializable {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public String getNgay() {
+        return ngay;
+    }
+
+    public void setNgay(String ngay) {
+        this.ngay = ngay;
     }
 }

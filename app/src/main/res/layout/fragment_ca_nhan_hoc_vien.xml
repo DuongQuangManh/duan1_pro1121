@@ -102,6 +102,17 @@
                     android:textStyle="bold"
                     android:textSize="18sp"/>
                 <TextView
+                    android:id="@+id/tv_thetapcuatoi_canhanhocvien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thẻ tập của tôi"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#555454"
+                    android:layout_marginTop="20dp"
+                    android:drawableEnd="@drawable/ic_next"/>
+                <TextView
                     android:id="@+id/tv_taikhoan_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,6 +150,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#79B8B8B4" />
+            <LinearLayout
+                android:id="@+id/layout_dangkitapthu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ưu đãi"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/tv_dangkitapthu_canhanhocvien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Đăng kí tập thử cho người mới"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#555454"
+                    android:layout_marginTop="20dp"
+                    android:drawableEnd="@drawable/ic_next"/>
+            </LinearLayout>
+            <View
+                android:id="@+id/view_dangkitapthu"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#79B8B8B4"
+                android:visibility="gone"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

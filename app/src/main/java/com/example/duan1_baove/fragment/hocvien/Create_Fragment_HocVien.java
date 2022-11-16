@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.text.InputType;
@@ -25,10 +24,12 @@ import android.widget.Toast;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.model.KhachHang;
-import com.example.duan1_baove.service.SignInServiceHocVien;
+import com.example.duan1_baove.service.SignUpServiceHocVien;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Create_Fragment_HocVien extends Fragment {
@@ -41,6 +42,7 @@ public class Create_Fragment_HocVien extends Fragment {
     String[] gioitinh = {"Nam","Nữ"};
     String strGioitinh;
     Intent intent;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -110,7 +112,8 @@ public class Create_Fragment_HocVien extends Fragment {
                 khachHang.setSoDu(0);
                 khachHang.setSoDienThoai(edt_user.getText().toString().trim());
                 khachHang.setPass(edt_mk1.getText().toString().trim());
-                intent = new Intent(getContext(), SignInServiceHocVien.class);
+                khachHang.setNgay(simpleDateFormat.format(new Date()));
+                intent = new Intent(getContext(), SignUpServiceHocVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("object",khachHang);
                 intent.putExtras(bundle);

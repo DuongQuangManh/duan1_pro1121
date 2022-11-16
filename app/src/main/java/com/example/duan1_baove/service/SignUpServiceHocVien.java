@@ -14,7 +14,7 @@ import com.example.duan1_baove.model.KhachHang;
 
 import java.util.List;
 
-public class SignInServiceHocVien extends Service {
+public class SignUpServiceHocVien extends Service {
     public static int ACTION_SUCCESS = 0;
     @Override
     public void onCreate() {
