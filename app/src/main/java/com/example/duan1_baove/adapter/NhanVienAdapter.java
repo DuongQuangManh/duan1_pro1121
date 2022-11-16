@@ -28,6 +28,7 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ChucVu;
+import com.example.duan1_baove.model.KhachHang;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -206,7 +207,8 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
                 }else {
                     List<Admin> listnew = new ArrayList<>();
                     for (Admin admin:listOld){
-                        if (admin.getName().toLowerCase().contains(strSearch.toLowerCase())){
+                        ChucVu chucVu = DuAn1DataBase.getInstance(context).chucVuDAO().checkForId(String.valueOf(admin.getChucvu_id())).get(0);
+                        if (admin.getName().toLowerCase().contains(strSearch.toLowerCase())|| strSearch.equals(chucVu.getTenchucvu())){
                             listnew.add(admin);
                         }
                     }

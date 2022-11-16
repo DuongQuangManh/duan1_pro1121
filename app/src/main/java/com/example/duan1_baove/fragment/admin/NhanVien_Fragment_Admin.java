@@ -23,6 +23,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -56,7 +57,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
 
     CircleImageView avt;
     EditText edt_user,edt_name,edt_pass,edt_luong,edt_tennganhang,edt_stk;
-    Spinner spn_chucvu;
+    Spinner spn_chucvu,spn_locchucvu;
     Button btn_add,btn_huy;
 
     SpinnerAdapter spinerAdapter;
@@ -66,6 +67,8 @@ public class NhanVien_Fragment_Admin extends Fragment {
     Admin admin;
     String img;
 
+    String[] locchucvu = {"Tất cả","admin","PT","Quản lý thu ngân","Bảo vệ","Seller"};
+    String strLocChuVu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,7 +97,28 @@ public class NhanVien_Fragment_Admin extends Fragment {
                 return false;
             }
         });
+        ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,locchucvu);
+        spn_locchucvu.setAdapter(adapter);
+        spn_locchucvu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strLocChuVu = locchucvu[position];
+                if (strLocChuVu.equals("Tất cả")){
+                    capNhat();
+                }else{
+                    locthechucvu(strLocChuVu);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
+    }
+
+    private void locthechucvu(String loc){
+        adapter.getFilter().filter(loc);
     }
 
     private void initUi() {
@@ -108,6 +132,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
         rotateBackward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_backward);
         layout_search = view.findViewById(R.id.layout_search_nhanvien);
         edt_search = view.findViewById(R.id.edt_search_nhanvien);
+        spn_locchucvu = view.findViewById(R.id.spn_chucvu_nhanvien);
     }
 
     private void search(String search) {

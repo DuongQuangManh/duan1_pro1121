@@ -21,11 +21,26 @@
             android:hint="Tìm kiếm"
             />
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layout_spn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_below="@+id/layout_search_nhanvien"
+        >
+        <Spinner
+            android:id="@+id/spn_chucvu_nhanvien"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/custom_edt"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_nhanvien"
-        android:layout_below="@+id/layout_search_nhanvien"
+        android:layout_below="@+id/layout_spn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab1_nhanvien"
         android:layout_width="wrap_content"
