@@ -15,20 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1_BaoVe">
         <activity
-            android:name=".fragment.hocvien.LichSuGiaoDich_MainActivity_HocVien"
+            android:name=".fragment.hocvien.DangKiTapThu_MainActivity_HocVien"
             android:exported="false">
-
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
+        <activity
+            android:name=".fragment.hocvien.LichSuGiaoDich_MainActivity_HocVien"
+            android:exported="false"></activity>
         <activity
             android:name=".fragment.hocvien.TaiKhoan_MainActivity_HocVien"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".fragment.hocvien.DoiMatKhau_MainActivity_HocVien"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".fragment.hocvien.DonHangChiTiet_MainActivity_HocVien"
             android:exported="false" />
@@ -68,7 +69,7 @@
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".service.SignInServiceHocVien"
+            android:name=".service.SignUpServiceHocVien"
             android:enabled="true"
             android:exported="true" />
         <service
