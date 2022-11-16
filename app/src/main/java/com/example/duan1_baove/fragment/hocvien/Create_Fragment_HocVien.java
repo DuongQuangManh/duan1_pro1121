@@ -42,7 +42,10 @@ public class Create_Fragment_HocVien extends Fragment {
     String[] gioitinh = {"Nam","Nữ"};
     String strGioitinh;
     Intent intent;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    Calendar datenow = Calendar.getInstance();
+    int year = datenow.get(Calendar.YEAR);
+    int month = datenow.get(Calendar.MONTH)+1;
+    int day = datenow.get(Calendar.DAY_OF_MONTH);
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -112,7 +115,7 @@ public class Create_Fragment_HocVien extends Fragment {
                 khachHang.setSoDu(0);
                 khachHang.setSoDienThoai(edt_user.getText().toString().trim());
                 khachHang.setPass(edt_mk1.getText().toString().trim());
-                khachHang.setNgay(simpleDateFormat.format(new Date()));
+                khachHang.setNgay(day+"-"+month+"-"+year);
                 intent = new Intent(getContext(), SignUpServiceHocVien.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("object",khachHang);

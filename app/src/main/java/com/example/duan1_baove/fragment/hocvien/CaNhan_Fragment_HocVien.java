@@ -88,7 +88,9 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             Intent intent = new Intent(getContext(),LichSuGiaoDich_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
         });
+
         KhachHang khachHang = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0);
+
         lich.set(Calendar.DAY_OF_MONTH,getArrayDate(khachHang.getNgay())[0]);
         lich.set(Calendar.MONTH,getArrayDate(khachHang.getNgay())[1]);
         lich.set(Calendar.YEAR,getArrayDate(khachHang.getNgay())[2]);

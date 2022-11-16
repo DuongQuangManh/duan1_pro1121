@@ -12,6 +12,7 @@
     <string name="nav_quanlykhachhang_admin">Quản lý khách hàng</string>
     <string name="nav_quanlycuahang_admin">Quản lý cửa hàng</string>
     <string name="nav_quanlythetap_admin">Quản lý thẻ tập</string>
+    <string name="nav_quanlythetapthu_admin">Quản lý thẻ tập thử</string>
     <string name="nav_doimatkhau_admin">Đổi mật khẩu</string>
     <string name="nav_dangxuat_admin">Đăng xuất</string>
     <string name="nav_quanlytaikhoan_admin">Tài khoản</string>
