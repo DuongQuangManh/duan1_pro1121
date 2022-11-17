@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TheTap_Fragment_Admin extends Fragment {
     private List<TheTap> list;
@@ -89,6 +91,11 @@ public class TheTap_Fragment_Admin extends Fragment {
     int yearEnd_giahan,monthEnd_giahan, dayEnd_giahan;
     int TongTienGiaTheTap;
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar lichsearch = Calendar.getInstance();
+    Calendar lichend1 = Calendar.getInstance();
+    int daysearch,monthsearch,yearsearch;
+    int yearend1,monthend1,dayend1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -133,6 +140,7 @@ public class TheTap_Fragment_Admin extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH){
                     search(edt_search.getText().toString().trim());
+                    Log.d("testsearch",edt_search.getText().toString().trim()+" Fragment");
                     hideSoftKeyBroad();
                 }
                 return false;
@@ -253,8 +261,43 @@ public class TheTap_Fragment_Admin extends Fragment {
         });
     }
     private void sapHetHan(){
-        String ngay = day+"-"+month+"-"+year;
-        adapter.getFilter().filter(ngay);
+        daysearch = lichsearch.get(Calendar.DAY_OF_MONTH);
+        monthsearch = lichsearch.get(Calendar.MONTH)+1;
+        yearsearch = lichsearch.get(Calendar.YEAR);
+
+        List<TheTap> list1 = DuAn1DataBase.getInstance(getContext()).theTapDAO().getAll();
+        for (int i=0;i<list1.size();i++){
+            lichend1.set(Calendar.DAY_OF_MONTH,getArrayDate(list1.get(i).getNgayHetHan())[0]);
+            lichend1.set(Calendar.MONTH,getArrayDate(list1.get(i).getNgayHetHan())[1]);
+            lichend1.set(Calendar.YEAR,getArrayDate(list1.get(i).getNgayHetHan())[2]);
+
+            yearend1 = lichend1.get(Calendar.YEAR);
+            monthend1 = lichend1.get(Calendar.MONTH);
+            dayend1 = lichend1.get(Calendar.DAY_OF_MONTH);
+            try {
+                Date datenow = sdf.parse(yearsearch+"-"+monthsearch+"-"+daysearch);
+                Date dateend = sdf.parse(yearend1+"-"+monthend1+"-"+dayend1);
+                long day1 = dateend.getTime() - datenow.getTime();
+                Log.v("abcd", TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)+"soos ngay");
+                if ( TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)<=10){
+                    list = new ArrayList<>();
+                    list.add(list1.get(i));
+                    adapter = new TheTapAdapter(getActivity(), new TheTapAdapter.IClickListener() {
+                        @Override
+                        public void giahan(TheTap theTap) {
+                            opendialog(theTap);
+                        }
+                    });
+                    adapter.setData(list);
+                    LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+                    recyclerView.setLayoutManager(manager);
+                    recyclerView.setAdapter(adapter);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
     }
 
     private void capNhat(){
@@ -295,6 +338,8 @@ public class TheTap_Fragment_Admin extends Fragment {
         spn_loaithetap_giahan = dialog.findViewById(R.id.spn_loaithetap_giahanthetap);
         btn_add_giahan = dialog.findViewById(R.id.btn_luu_giahanthetap);
         btn_huy_giahan = dialog.findViewById(R.id.btn_huy_giahanthetap);
+
+        edt_name_giahan.setText(DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0).getHoten());
 
         listLoaiTheTap_giahan = DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getAll();
         SpinnerAdapterLoaiTheTap spinnerLoaiTheTapgiahan = new SpinnerAdapterLoaiTheTap(getContext(),R.layout.item_spiner_naptien,listLoaiTheTap_giahan);
@@ -367,5 +412,17 @@ public class TheTap_Fragment_Admin extends Fragment {
     public void hideSoftKeyBroad(){
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+    }
+    public int[] getArrayDate(String date){
+        String[] str = date.split("-");
+        int arr[] = new int[str.length];
+        try{
+            for(int i = 0;i<str.length;i++){
+                arr[i] = Integer.parseInt(str[i]);
+            }
+        }catch (NumberFormatException e){
+            return null;
+        }
+        return arr;
     }
 }

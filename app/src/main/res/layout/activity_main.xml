@@ -16,7 +16,7 @@
         <Toolbar
             android:id="@+id/toolbar_admin"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:background="@drawable/bg_tophocvien"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

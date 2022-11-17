@@ -54,8 +54,6 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     int day = calendar.get(Calendar.DAY_OF_MONTH);
     long songay;
     int yearend,monthend,dayend;
-    long day1;
-
 
     private EditText edt_id,edt_starttime,edt_endtime;
     private Spinner spn_khachhang,spn_loaithetap;
@@ -70,6 +68,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     String idkhachcu;
     int TongTienGiaTheTap,idloaithetapcu;
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
+    int idkhachhang;
 
 
     public TheTapAdapter(Context context,IClickListener iClickListener) {
@@ -251,6 +250,12 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
 
                             }
                         });
+                        for (int i1=0;i1<listKhachHang.size();i1++){
+                            if (listKhachHang.get(i1).getSoDienThoai().equals(theTap.getKhachhang_id())){
+                                idkhachhang = i1;
+                            }
+                        }
+                        spn_khachhang.setSelection(idkhachhang);
 
                         for (int i =0;i<listLoaiTheTap.size();i++){
                             if (listLoaiTheTap.get(i).getId()==theTap.getLoaithetap_id()){
@@ -386,40 +391,13 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String strSearch = constraint.toString();
-                Calendar lichsearch = Calendar.getInstance();
-                lichsearch.set(Calendar.DAY_OF_MONTH,getArrayDate(strSearch)[0]);
-                lichsearch.set(Calendar.MONTH,getArrayDate(strSearch)[1]);
-                lichsearch.set(Calendar.YEAR,getArrayDate(strSearch)[2]);
-
-                int daysearch = lichsearch.get(Calendar.DAY_OF_MONTH);
-                int monthsearch = lichsearch.get(Calendar.MONTH);
-                int yearsearch = lichsearch.get(Calendar.YEAR);
-
-                Calendar lichend1 = Calendar.getInstance();
                 if (strSearch.isEmpty()){
                     list = listOld;
                 }else {
                     List<TheTap> listnew = new ArrayList<>();
                     for (TheTap theTap : listOld){
-                        lichend1.set(Calendar.DAY_OF_MONTH,getArrayDate(theTap.getNgayHetHan())[0]);
-                        lichend1.set(Calendar.MONTH,getArrayDate(theTap.getNgayHetHan())[1]);
-                        lichend1.set(Calendar.YEAR,getArrayDate(theTap.getNgayHetHan())[2]);
-
-                        int yearend1 = lichend1.get(Calendar.YEAR);
-                        int monthend1 = lichend1.get(Calendar.MONTH);
-                        int dayend1 = lichend1.get(Calendar.DAY_OF_MONTH);
-
-                        try {
-                            Date datenow = sdf.parse(yearsearch+"-"+monthsearch+"-"+daysearch);
-                            Date dateend = sdf.parse(yearend1+"-"+monthend1+"-"+dayend1);
-                            day1 = dateend.getTime() - datenow.getTime();
-                            Log.v("abcd",TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)+"soos ngay");
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
                         KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0);
-
-                        if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())|| TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)<=2){
+                        if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())){
                             listnew.add(theTap);
                         }
                     }
