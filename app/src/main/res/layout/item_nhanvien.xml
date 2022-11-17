@@ -19,7 +19,8 @@
             android:layout_alignParentEnd="true"
             app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            android:layout_marginTop="10dp">
             <ImageView
                 android:id="@+id/avt_itemadmin"
                 android:layout_width="130dp"

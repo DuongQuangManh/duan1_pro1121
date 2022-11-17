@@ -51,6 +51,7 @@ public class LoginHocVien_MainActivity extends AppCompatActivity {
             tv_dangky.setBackground(this.getResources().getDrawable(R.drawable.bg_white));
             tv_dangnhap.setBackgroundColor(Color.TRANSPARENT);
         });
+
     }
 
     private void initUi(){
