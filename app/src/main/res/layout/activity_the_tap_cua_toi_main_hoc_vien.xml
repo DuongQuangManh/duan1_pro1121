@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.hocvien.TheTapCuaToi_MainActivity_HocVien"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_tophocvien"
+        android:padding="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/img_back_thetapcuatoi"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_back" />
+        <TextView
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Thẻ tập của tôi"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_toEndOf="@+id/img_back_thetapcuatoi"
+            android:layout_marginStart="10dp"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gói thẻ tập của tôi"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="16sp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcy_thetap_hocvien"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gói thẻ tập thử và ưu đãi"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="16sp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcy_thetapthu_hocvien"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -22,14 +22,17 @@ public class TheTap {
     private int loaithetap_id;
     private String ngayDangKy;
     private String ngayHetHan;
+    private int tongsotiendamuathetap;
 
-    public TheTap(int id, String khachhang_id, int loaithetap_id, String ngayDangKy, String ngayHetHan) {
+    public TheTap(int id, String khachhang_id, int loaithetap_id, String ngayDangKy, String ngayHetHan, int tongsotiendamuathetap) {
         this.id = id;
         this.khachhang_id = khachhang_id;
         this.loaithetap_id = loaithetap_id;
         this.ngayDangKy = ngayDangKy;
         this.ngayHetHan = ngayHetHan;
+        this.tongsotiendamuathetap = tongsotiendamuathetap;
     }
+
 
     public TheTap() {
     }
@@ -72,5 +75,13 @@ public class TheTap {
 
     public void setNgayHetHan(String ngayHetHan) {
         this.ngayHetHan = ngayHetHan;
+    }
+
+    public int getTongsotiendamuathetap() {
+        return tongsotiendamuathetap;
+    }
+
+    public void setTongsotiendamuathetap(int tongsotiendamuathetap) {
+        this.tongsotiendamuathetap = tongsotiendamuathetap;
     }
 }
