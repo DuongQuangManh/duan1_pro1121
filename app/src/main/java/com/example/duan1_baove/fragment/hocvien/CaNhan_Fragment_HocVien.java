@@ -119,6 +119,10 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             Intent intent = new Intent(getContext(),DangKiTapThu_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
         });
+        tv_thetapcuatoi.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),TheTapCuaToi_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+        });
         return view;
     }
 

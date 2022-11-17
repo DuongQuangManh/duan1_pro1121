@@ -1,14 +1,23 @@
 package com.example.duan1_baove.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
@@ -19,6 +28,8 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
+import com.example.duan1_baove.model.LichSuGiaoDich;
+import com.example.duan1_baove.model.LoaiTheTap;
 import com.example.duan1_baove.model.TheTap;
 
 import java.text.ParseException;
@@ -30,12 +41,14 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder> implements Filterable {
+    private IClickListener iClickListener;
     private Context context;
     private List<TheTap> list;
     private List<TheTap> listOld;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat sdfvn = new SimpleDateFormat("dd-MM-yyyy");
     Calendar calendar = Calendar.getInstance();
+    Calendar lichend = Calendar.getInstance();
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH)+1;
     int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -43,16 +56,37 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     int yearend,monthend,dayend;
     long day1;
 
-    public TheTapAdapter(Context context) {
+
+    private EditText edt_id,edt_starttime,edt_endtime;
+    private Spinner spn_khachhang,spn_loaithetap;
+    private Button btn_add,btn_huy;
+    private List<KhachHang> listKhachHang;
+    private List<LoaiTheTap> listLoaiTheTap;
+    private Calendar calendarEndTime = Calendar.getInstance();
+    private String strKhachHangID;
+    private int intLoaiTheTap;
+    int yearEnd,monthEnd, dayEnd;
+    int giagoitapcu;
+    String idkhachcu;
+    int TongTienGiaTheTap,idloaithetapcu;
+    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
+
+
+    public TheTapAdapter(Context context,IClickListener iClickListener) {
         this.context = context;
+        this.iClickListener = iClickListener;
     }
+
     public void setData(List<TheTap> list){
         this.list = list;
         this.listOld = list;
         notifyDataSetChanged();
     }
 
-    Calendar lichend = Calendar.getInstance();
+    public interface IClickListener{
+        void giahan(TheTap theTap);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,6 +98,10 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TheTap theTap = list.get(position);
         if (theTap!=null){
+            idkhachcu = theTap.getKhachhang_id();
+            giagoitapcu = DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(theTap.getLoaithetap_id())).get(0).getGia();
+            Log.v("giaca",giagoitapcu+"Gía cũ");
+            Log.v("giaca",DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(theTap.getKhachhang_id())+"Tổng tiền cũ");
             holder.tv_id.setText("Mã thẻ tập: "+theTap.getId());
             holder.tv_hoten.setText("Họ tên: "+ DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0).getHoten());
             holder.tv_loathe.setText("Loại thẻ: "+ DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(theTap.getLoaithetap_id())).get(0).getName());
@@ -86,10 +124,50 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                 if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=0){
                     holder.tv_trangthai.setTextColor(Color.RED);
                     holder.tv_trangthai.setText("Trạng thái: hết hạn");
-                }else if(TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=5){
+
+                    holder.tv_homnay.setEnabled(false);
+                    holder.tv_hoten.setEnabled(false);
+                    holder.tv_songay.setEnabled(false);
+                    holder.tv_trangthai.setEnabled(false);
+                    holder.tv_endtime.setEnabled(false);
+                    holder.tv_starttime.setEnabled(false);
+                    holder.tv_loathe.setEnabled(false);
+                    holder.tv_id.setEnabled(false);
+                    holder.layout_update.setEnabled(false);
+
+                    holder.layout_giahan.setVisibility(View.VISIBLE);
+                    holder.btn_giahan.setEnabled(true);
+                }
+                else if(TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=5){
+
+                    holder.tv_homnay.setEnabled(true);
+                    holder.tv_hoten.setEnabled(true);
+                    holder.tv_songay.setEnabled(true);
+                    holder.tv_trangthai.setEnabled(true);
+                    holder.tv_endtime.setEnabled(true);
+                    holder.tv_starttime.setEnabled(true);
+                    holder.tv_loathe.setEnabled(true);
+                    holder.tv_id.setEnabled(true);
+                    holder.layout_update.setEnabled(true);
+
+                    holder.layout_giahan.setVisibility(View.INVISIBLE);
+                    holder.btn_giahan.setEnabled(false);
+
                     holder.tv_trangthai.setTextColor(Color.RED);
                     holder.tv_trangthai.setText("Trạng thái: Sắp hết hạn");
                 }else {
+                    holder.tv_homnay.setEnabled(true);
+                    holder.tv_hoten.setEnabled(true);
+                    holder.tv_songay.setEnabled(true);
+                    holder.tv_trangthai.setEnabled(true);
+                    holder.tv_endtime.setEnabled(true);
+                    holder.tv_starttime.setEnabled(true);
+                    holder.tv_loathe.setEnabled(true);
+                    holder.tv_id.setEnabled(true);
+                    holder.layout_update.setEnabled(true);
+
+                    holder.layout_giahan.setVisibility(View.INVISIBLE);
+                    holder.btn_giahan.setEnabled(false);
                     holder.tv_trangthai.setTextColor(Color.GREEN);
                     holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
                 }
@@ -98,9 +176,160 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             }
             holder.tv_homnay.setText("Hôm nay: "+sdfvn.format(new Date()));
             holder.tv_songay.setText("Còn: "+ TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS));
+            holder.btn_giahan.setOnClickListener(v -> {
+                iClickListener.giahan(theTap);
+            });
+
+
+            holder.layout_update.setOnClickListener(v -> {
+                Calendar calendarDangKy = Calendar.getInstance();
+                calendarDangKy.set(Calendar.DAY_OF_MONTH,getArrayDate(theTap.getNgayDangKy())[0]);
+                calendarDangKy.set(Calendar.MONTH,getArrayDate(theTap.getNgayDangKy())[1]);
+                calendarDangKy.set(Calendar.YEAR,getArrayDate(theTap.getNgayDangKy())[2]);
+                int yeardangky = calendarDangKy.get(Calendar.YEAR);
+                int monthdangky = calendarDangKy.get(Calendar.MONTH);
+                int daydangky = calendarDangKy.get(Calendar.DAY_OF_MONTH);
+                try{
+                    Date datenow = sdf.parse(year+"-"+month+"-"+day);
+                    Date datedangki = sdf.parse(yeardangky+"-"+monthdangky+"-"+daydangky);
+                    Log.d("date",datenow.toString()+"và "+datedangki.toString());
+                    songay =  datenow.getTime() - datedangki.getTime();
+                    if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=2){
+                        Dialog dialog = new Dialog(context);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.dialog_addthetap);
+                        dialog.show();
+                        Window window = dialog.getWindow();
+                        if (window == null){
+                            return;
+                        }
+                        window.setBackgroundDrawable(null);
+                        edt_id = dialog.findViewById(R.id.edt_mathetap_dialogthetap);
+                        edt_starttime = dialog.findViewById(R.id.edt_starttime_dialogthetap);
+                        edt_endtime = dialog.findViewById(R.id.edt_endtime_dialogthetap);
+                        btn_add = dialog.findViewById(R.id.btn_luu_dialogthetap);
+                        btn_huy = dialog.findViewById(R.id.btn_huy_dialogthetap);
+                        spn_khachhang = dialog.findViewById(R.id.spn_tenkhachhang_dialogthetap);
+                        spn_loaithetap = dialog.findViewById(R.id.spn_loaithetap_dialogthetap);
+
+                        listKhachHang = DuAn1DataBase.getInstance(context).khachHangDAO().getAll();
+                        SpinnerAdapterNapTien spinnerKhachHang = new SpinnerAdapterNapTien(context,R.layout.item_spiner_naptien,listKhachHang);
+                        spn_khachhang.setAdapter(spinnerKhachHang);
+                        spn_khachhang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                strKhachHangID = listKhachHang.get(position).getSoDienThoai();
+                                if (DuAn1DataBase.getInstance(context).theTapDAO().checkTheTap(strKhachHangID).size()>0){
+                                    spn_khachhang.setSelection(position);
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        listLoaiTheTap = DuAn1DataBase.getInstance(context).loaiTheTapDAO().getAll();
+                        SpinnerAdapterLoaiTheTap spinnerLoaiTheTap = new SpinnerAdapterLoaiTheTap(context,R.layout.item_spiner_naptien,listLoaiTheTap);
+                        spn_loaithetap.setAdapter(spinnerLoaiTheTap);
+                        spn_loaithetap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                intLoaiTheTap = listLoaiTheTap.get(position).getId();
+                                calendarEndTime = Calendar.getInstance();
+                                calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+                                yearEnd = calendarEndTime.get(Calendar.YEAR);
+                                monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
+                                dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+                                edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                                TongTienGiaTheTap = DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
+
+                        for (int i =0;i<listLoaiTheTap.size();i++){
+                            if (listLoaiTheTap.get(i).getId()==theTap.getLoaithetap_id()){
+                                idloaithetapcu = i;
+                            }
+                        }
+                        spn_loaithetap.setSelection(idloaithetapcu);
+                        edt_starttime.setText(day+"-"+month+"-"+year);
+
+
+                        btn_huy.setOnClickListener(v1 -> {
+                            dialog.cancel();
+                        });
+                        btn_add.setOnClickListener(v1 -> {
+                            if (validate(strKhachHangID,theTap.getKhachhang_id())){
+                                theTap.setKhachhang_id(strKhachHangID);
+                                theTap.setLoaithetap_id(intLoaiTheTap);
+                                theTap.setNgayDangKy(edt_starttime.getText().toString().trim());
+                                theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
+                                if (idkhachcu.equals(strKhachHangID)){
+                                    theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(strKhachHangID)-giagoitapcu+TongTienGiaTheTap);
+
+                                    KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(strKhachHangID).get(0);
+                                    khachHang.setSoDu(DuAn1DataBase.getInstance(context).khachHangDAO().getSoDU(strKhachHangID)+giagoitapcu-TongTienGiaTheTap);
+                                    DuAn1DataBase.getInstance(context).khachHangDAO().update(khachHang);
+
+                                    LichSuGiaoDich lichSuGiaoDichcong = new LichSuGiaoDich();
+                                    lichSuGiaoDichcong.setSoTien(giagoitapcu);
+                                    lichSuGiaoDichcong.setType("Cộng");
+                                    lichSuGiaoDichcong.setKhachang_id(strKhachHangID);
+                                    lichSuGiaoDichcong.setThoigian(format.format(new Date()));
+                                    DuAn1DataBase.getInstance(context).lichSuGiaoDichDAO().insert(lichSuGiaoDichcong);
+
+                                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                                    lichSuGiaoDich.setSoTien(TongTienGiaTheTap);
+                                    lichSuGiaoDich.setType("Trừ");
+                                    lichSuGiaoDich.setKhachang_id(strKhachHangID);
+                                    lichSuGiaoDich.setThoigian(format.format(new Date()));
+                                    DuAn1DataBase.getInstance(context).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+                                }else {
+                                    theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(strKhachHangID)+TongTienGiaTheTap);
+
+                                    KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(strKhachHangID).get(0);
+                                    khachHang.setSoDu(DuAn1DataBase.getInstance(context).khachHangDAO().getSoDU(strKhachHangID)-TongTienGiaTheTap);
+                                    DuAn1DataBase.getInstance(context).khachHangDAO().update(khachHang);
+
+                                    KhachHang khachHang1 = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(idkhachcu).get(0);
+                                    khachHang1.setSoDu(DuAn1DataBase.getInstance(context).khachHangDAO().getSoDU(idkhachcu)+giagoitapcu);
+                                    DuAn1DataBase.getInstance(context).khachHangDAO().update(khachHang1);
+
+                                    LichSuGiaoDich lichSuGiaoDichcong = new LichSuGiaoDich();
+                                    lichSuGiaoDichcong.setSoTien(giagoitapcu);
+                                    lichSuGiaoDichcong.setType("Cộng");
+                                    lichSuGiaoDichcong.setKhachang_id(idkhachcu);
+                                    lichSuGiaoDichcong.setThoigian(format.format(new Date()));
+                                    DuAn1DataBase.getInstance(context).lichSuGiaoDichDAO().insert(lichSuGiaoDichcong);
+
+                                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                                    lichSuGiaoDich.setSoTien(TongTienGiaTheTap);
+                                    lichSuGiaoDich.setType("Trừ");
+                                    lichSuGiaoDich.setKhachang_id(strKhachHangID);
+                                    lichSuGiaoDich.setThoigian(format.format(new Date()));
+                                    DuAn1DataBase.getInstance(context).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+                                }
+                                DuAn1DataBase.getInstance(context).theTapDAO().update(theTap);
+                                Toast.makeText(context, "Update thẻ tập thành công", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                                Log.v("giaca",DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(theTap.getKhachhang_id())+"Tổng tiền mới");
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
+
         }
     }
-
     @Override
     public int getItemCount() {
         if (list!=null){
@@ -109,6 +338,48 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
         return 0;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView tv_id,tv_hoten,tv_loathe,tv_starttime,tv_endtime,tv_trangthai,tv_homnay,tv_songay;
+        private LinearLayout layout_giahan;
+        private RelativeLayout layout_update;
+        private Button btn_giahan;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tv_id = itemView.findViewById(R.id.tv_mathetap_itemthetap);
+            tv_hoten = itemView.findViewById(R.id.tv_tenkhachhang_itemthetap);
+            tv_loathe = itemView.findViewById(R.id.tv_tenloaithetap_itemthetap);
+            tv_starttime = itemView.findViewById(R.id.tv_starttime_itemthetap);
+            tv_endtime = itemView.findViewById(R.id.tv_endtime_itemthetap);
+            tv_trangthai = itemView.findViewById(R.id.tv_trangthai_itemthetap);
+            tv_homnay = itemView.findViewById(R.id.tv_ngayhomnay_itemthetap);
+            tv_songay = itemView.findViewById(R.id.tv_songay_itemthetap);
+            layout_giahan = itemView.findViewById(R.id.layout_giahan_thetap);
+            btn_giahan = itemView.findViewById(R.id.btn_giahan_thetap);
+            layout_update = itemView.findViewById(R.id.layout_update_itemthetap);
+        }
+    }
+    private boolean validate(String str,String strCu){
+        List<TheTap> list = DuAn1DataBase.getInstance(context).theTapDAO().checkTheTap(str);
+        if (list.size()<=0|| str.equals(strCu)){
+            return true;
+        }else {
+            Toast.makeText(context, "Người dùng đã đăng kí", Toast.LENGTH_SHORT).show();
+            return false;
+
+        }
+    }
+    public int[] getArrayDate(String date){
+        String[] str = date.split("-");
+        int arr[] = new int[str.length];
+        try{
+            for(int i = 0;i<str.length;i++){
+                arr[i] = Integer.parseInt(str[i]);
+            }
+        }catch (NumberFormatException e){
+            return null;
+        }
+        return arr;
+    }
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -146,9 +417,6 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                         }catch (Exception e){
                             e.printStackTrace();
                         }
-
-
-
                         KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0);
 
                         if (khachHang.getHoten().toLowerCase().contains(strSearch.toLowerCase())|| TimeUnit.DAYS.convert(day1, TimeUnit.MILLISECONDS)<=2){
@@ -168,33 +436,5 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                 notifyDataSetChanged();
             }
         };
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_hoten,tv_loathe,tv_starttime,tv_endtime,tv_trangthai,tv_homnay,tv_songay;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tv_id = itemView.findViewById(R.id.tv_mathetap_itemthetap);
-            tv_hoten = itemView.findViewById(R.id.tv_tenkhachhang_itemthetap);
-            tv_loathe = itemView.findViewById(R.id.tv_tenloaithetap_itemthetap);
-            tv_starttime = itemView.findViewById(R.id.tv_starttime_itemthetap);
-            tv_endtime = itemView.findViewById(R.id.tv_endtime_itemthetap);
-            tv_trangthai = itemView.findViewById(R.id.tv_trangthai_itemthetap);
-            tv_homnay = itemView.findViewById(R.id.tv_ngayhomnay_itemthetap);
-            tv_songay = itemView.findViewById(R.id.tv_songay_itemthetap);
-        }
-    }
-    public int[] getArrayDate(String date){
-        String[] str = date.split("-");
-        int arr[] = new int[str.length];
-        try{
-            for(int i = 0;i<str.length;i++){
-                arr[i] = Integer.parseInt(str[i]);
-            }
-        }catch (NumberFormatException e){
-            return null;
-        }
-        return arr;
     }
 }

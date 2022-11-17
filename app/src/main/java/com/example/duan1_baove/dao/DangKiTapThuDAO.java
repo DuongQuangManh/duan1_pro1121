@@ -19,4 +19,5 @@ public interface DangKiTapThuDAO{
 
     @Query("SELECT *FROM dangkitapthu")
     List<DangKiTapThu> getAll();
+
 }

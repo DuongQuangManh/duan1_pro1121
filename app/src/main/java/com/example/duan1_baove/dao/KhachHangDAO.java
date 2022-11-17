@@ -30,4 +30,6 @@ public interface KhachHangDAO {
 
     @Query("SELECT pass FROM khachhang WHERE soDienThoai= :sdt")
     String getPass(String sdt);
+    @Query("SELECT soDu FROM khachhang WHERE soDienThoai= :sdt")
+    int getSoDU(String sdt);
 }

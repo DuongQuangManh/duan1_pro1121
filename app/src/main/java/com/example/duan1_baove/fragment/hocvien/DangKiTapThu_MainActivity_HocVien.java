@@ -77,6 +77,7 @@ public class DangKiTapThu_MainActivity_HocVien extends AppCompatActivity {
             dangKiTapThu.setNgaydangki(daynow+"-"+monthnow+"-"+yearnow+", "+lichnow.get(Calendar.HOUR)+":"+lichnow.get(Calendar.MINUTE)+":"+lichnow.get(Calendar.SECOND));
             DuAn1DataBase.getInstance(this).dangKiTapThuDAO().insert(dangKiTapThu);
             Toast.makeText(this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+            onBackPressed();
         });
     }
 

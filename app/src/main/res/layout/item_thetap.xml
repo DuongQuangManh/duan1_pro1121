@@ -10,94 +10,122 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:padding="10dp"
-        android:id="@+id/layout_update_itemloaithetap"
+        android:id="@+id/layout_update_itemthetap"
         android:background="@drawable/backgroud">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#83000000"
+            android:gravity="center"
+            android:id="@+id/layout_giahan_thetap"
+            android:visibility="invisible">
+            <Button
+                android:id="@+id/btn_giahan_thetap"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Gia Hạn Gói Tập"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_green"
+                android:enabled="false"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/tv_mathetap_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã thẻ tập: 1"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="15sp"
+                android:layout_alignParentEnd="true"
+                android:enabled="false"/>
 
-        <TextView
-            android:id="@+id/tv_mathetap_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mã thẻ tập: 1"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textSize="15sp"
-            android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/tv_tenkhachhang_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:text="Họ tên: Dương Quang Mạnh"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/tv_tenloaithetap_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tenkhachhang_itemthetap"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:text="Loại thẻ: 1 tháng"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/tv_starttime_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_tenloaithetap_itemthetap"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:text="Từ ngày: 15-02-2003"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/tv_endtime_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_starttime_itemthetap"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:text="Đến ngày: 15-02-2003"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:enabled="false"/>
+            <TextView
+                android:id="@+id/tv_trangthai_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_songay_itemthetap"
+                android:layout_centerVertical="true"
+                android:text="Trạng thái: hết hạn"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textColor="@color/green"
+                android:layout_alignParentEnd="true"
+                android:enabled="false"
+                />
+            <TextView
+                android:id="@+id/tv_songay_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_ngayhomnay_itemthetap"
+                android:text="Còn: 220 ngày"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:layout_alignParentEnd="true"
+                android:enabled="false"
+                />
+            <TextView
+                android:id="@+id/tv_ngayhomnay_itemthetap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_mathetap_itemthetap"
+                android:text="Hôm nay: 15/11/2022"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="60dp"
+                android:enabled="false"
+                />
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_tenkhachhang_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_centerVertical="true"
-            android:text="Họ tên: Dương Quang Mạnh"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-        <TextView
-            android:id="@+id/tv_tenloaithetap_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_tenkhachhang_itemthetap"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:text="Loại thẻ: 1 tháng"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-        <TextView
-            android:id="@+id/tv_starttime_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_tenloaithetap_itemthetap"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:text="Từ ngày: 15-02-2003"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-        <TextView
-            android:id="@+id/tv_endtime_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_starttime_itemthetap"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="20dp"
-            android:text="Đến ngày: 15-02-2003"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"/>
-        <TextView
-            android:id="@+id/tv_trangthai_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_songay_itemthetap"
-            android:layout_centerVertical="true"
-            android:text="Trạng thái: hết hạn"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textColor="@color/green"
-            android:layout_alignParentEnd="true"
-            />
-        <TextView
-            android:id="@+id/tv_songay_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_ngayhomnay_itemthetap"
-            android:text="Còn: 220 ngày"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:layout_alignParentEnd="true"
-            />
-        <TextView
-            android:id="@+id/tv_ngayhomnay_itemthetap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_mathetap_itemthetap"
-            android:text="Hôm nay: 15/11/2022"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="60dp"
-            />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
