@@ -34,7 +34,7 @@ import com.example.duan1_baove.model.ThongBao;
         DonHangChiTiet.class, KhachHang.class, LoaiTheTap.class,
         TheTap.class, ThietBi.class, ThongBao.class, LichSuGiaoDich.class, DangKiTapThu.class},version = 1)
 public abstract class DuAn1DataBase extends RoomDatabase {
-    private static final String DATABASE_NAME= "duan1.d";
+    private static final String DATABASE_NAME= "duan1.s";
     private static DuAn1DataBase instance;
 
     public static synchronized DuAn1DataBase getInstance(Context context){

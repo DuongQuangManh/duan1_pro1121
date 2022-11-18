@@ -14,16 +14,20 @@ public class ThietBi{
     private int soLuong;
     private String hangSanXuat;
     private String hinhanh;
-    private String tinhTrang;
+    private String thoigianmua;
+    private String thoigianbaotrigannhat;
+    private int tongchiphibaotri;
 
-    public ThietBi(int id, String name, String loai, int soLuong, String hangSanXuat, String hinhanh, String tinhTrang) {
+    public ThietBi(int id, String name, String loai, int soLuong, String hangSanXuat, String hinhanh, String thoigianmua, String thoigianbaotrigannhat, int tongchiphibaotri) {
         this.id = id;
         this.name = name;
         this.loai = loai;
         this.soLuong = soLuong;
         this.hangSanXuat = hangSanXuat;
         this.hinhanh = hinhanh;
-        this.tinhTrang = tinhTrang;
+        this.thoigianmua = thoigianmua;
+        this.thoigianbaotrigannhat = thoigianbaotrigannhat;
+        this.tongchiphibaotri = tongchiphibaotri;
     }
 
     public ThietBi() {
@@ -77,11 +81,27 @@ public class ThietBi{
         this.hinhanh = hinhanh;
     }
 
-    public String getTinhTrang() {
-        return tinhTrang;
+    public String getThoigianmua() {
+        return thoigianmua;
     }
 
-    public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
+    public void setThoigianmua(String thoigianmua) {
+        this.thoigianmua = thoigianmua;
+    }
+
+    public String getThoigianbaotrigannhat() {
+        return thoigianbaotrigannhat;
+    }
+
+    public void setThoigianbaotrigannhat(String thoigianbaotrigannhat) {
+        this.thoigianbaotrigannhat = thoigianbaotrigannhat;
+    }
+
+    public int getTongchiphibaotri() {
+        return tongchiphibaotri;
+    }
+
+    public void setTongchiphibaotri(int tongchiphibaotri) {
+        this.tongchiphibaotri = tongchiphibaotri;
     }
 }

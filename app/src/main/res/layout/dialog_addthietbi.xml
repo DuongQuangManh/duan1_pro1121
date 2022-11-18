@@ -22,7 +22,7 @@
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="520dp"
+            android:layout_height="wrap_content"
             android:padding="20dp"
             android:orientation="vertical"
             android:background="#FFFFFF"
@@ -34,7 +34,6 @@
                 android:background="@drawable/custom_edt"
                 android:hint="Mã thiết bị"
                 android:paddingStart="10dp"
-                android:layout_marginTop="20dp"
                 android:enabled="false"/>
             <EditText
                 android:id="@+id/edt_ten_dialogthietbi"
@@ -90,12 +89,44 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"/>
             </LinearLayout>
-            <Spinner
-                android:id="@+id/spn_tinhtrang_dialogthietbi"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/custom_edt"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_lich"
+                app:endIconMode="custom"
+                app:hintEnabled="false"
+                android:layout_marginTop="10dp"
+                android:id="@+id/txti_ngaymua_dialogthietbi"
+                >
+
+                <EditText
+                    android:id="@+id/edt_ngaymua_dialogthietbi"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Ngày mua"
+                    android:background="@drawable/custom_edt"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="5dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_lich"
+                app:endIconMode="custom"
+                app:hintEnabled="false"
+                android:layout_marginTop="10dp"
+                android:id="@+id/txti_ngaybaotrigannhat_dialogthietbi"
+                >
+
+                <EditText
+                    android:id="@+id/edt_ngaybaotrigannhat_dialogthietbi"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="Ngày bảo trì gần nhất"
+                    android:background="@drawable/custom_edt"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="5dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

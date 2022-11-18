@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="230dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:id="@+id/layout_update_itemthietbi">
 
@@ -19,7 +19,8 @@
             android:layout_alignParentEnd="true"
             app:cardCornerRadius="15dp"
             app:cardElevation="5dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            android:id="@+id/cardview_img">
             <ImageView
                 android:id="@+id/avt_itemthietbi"
                 android:layout_width="130dp"
@@ -78,18 +79,45 @@
             android:text="Hãng sản xuất: Mỹ"
             android:textSize="15sp"
             />
+
         <TextView
-            android:id="@+id/tv_tinhtrang_itemadmin"
+            android:id="@+id/tv_tinhtrang_itemthietbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ngaybaotrigannhat_itemthietbi"
+            android:layout_marginTop="10dp"
+            android:text="Tình trạng: tốt"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/tv_ngaymua_itemthietbi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_hangsanxuat_itemthietbi"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:layout_marginTop="10dp"
-            android:text="Tình trạng: tốt"
+            android:text="Ngày mua: 15/02/2003"
             android:textSize="15sp"
             />
-
+        <TextView
+            android:id="@+id/tv_ngaybaotrigannhat_itemthietbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ngaymua_itemthietbi"
+            android:layout_marginTop="10dp"
+            android:text="Ngày bảo trì gần nhất: 15/02/2003"
+            android:textSize="15sp"
+            />
+        <Button
+            android:id="@+id/btn_baotri_itemthietbi"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_gray"
+            android:text="Đã bảo trì"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/cardview_img"
+            android:layout_marginEnd="20dp"
+            android:enabled="false"/>
     </RelativeLayout>
 
 
