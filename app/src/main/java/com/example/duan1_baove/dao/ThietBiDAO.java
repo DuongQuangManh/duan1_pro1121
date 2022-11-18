@@ -24,4 +24,10 @@ public interface ThietBiDAO {
 
     @Delete
     void delete(ThietBi thietBi);
+
+    @Query("SELECT *FROM thietbi WHERE id= :id")
+    ThietBi getThietBiById(String id);
+
+    @Query("SELECT tongchiphibaotri FROM thietbi WHERE id= :id")
+    int getTongSoTienBaoTri(String id);
 }
