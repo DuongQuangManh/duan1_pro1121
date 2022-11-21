@@ -1,32 +1,15 @@
 package com.example.duan1_baove.login;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.activityload.LoadHocVien_MainActivity;
 import com.example.duan1_baove.adapter.ViewPagerAdapter;
-import com.example.duan1_baove.fragment.hocvien.Create_Fragment_HocVien;
-import com.example.duan1_baove.fragment.hocvien.Login_Fragment_HocVien;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginHocVien_MainActivity extends AppCompatActivity {
     TextView tv_dangnhap,tv_dangky;
@@ -58,5 +41,12 @@ public class LoginHocVien_MainActivity extends AppCompatActivity {
         tv_dangnhap = findViewById(R.id.tv_dangnhap_hocvien);
         tv_dangky = findViewById(R.id.tv_dangky_hocvien);
         viewPager2 = findViewById(R.id.viewpager_hocvien);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(LoginHocVien_MainActivity.this);
+
     }
 }

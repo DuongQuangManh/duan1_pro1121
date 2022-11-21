@@ -31,32 +31,152 @@
             android:layout_toEndOf="@+id/img_back_thetapcuatoi"
             android:layout_marginStart="10dp"/>
     </RelativeLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gói thẻ tập của tôi"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textSize="16sp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_thetap_hocvien"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gói thẻ tập thử và ưu đãi"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:textSize="16sp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcy_thetapthu_hocvien"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_datlichtap_thetapcuatoi"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Đặt lịch tập"
+                    android:background="@drawable/custom_btn"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/white"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gói thẻ tập của tôi"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="16sp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcy_thetap_hocvien"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lịch sử đặt lịch tập"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="16sp"/>
+            <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="Name"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            />
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="Ngày đặt lịch"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:text="Ngày đi tập"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:text="Giờ đi tập"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:text="Giờ nghỉ"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:text="PT"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            />
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:background="#D3737373"/>
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:text="Trạng thái"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="#B59F9F9F"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy_lichtap_hocvien"
+                        android:layout_width="fill_parent"
+                        android:layout_height="280dp"/>
+                </LinearLayout>
 
+            </HorizontalScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gói thẻ tập thử và ưu đãi"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="16sp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcy_thetapthu_hocvien"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

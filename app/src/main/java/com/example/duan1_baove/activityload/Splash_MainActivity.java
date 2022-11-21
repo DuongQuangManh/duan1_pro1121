@@ -3,10 +3,10 @@ package com.example.duan1_baove.activityload;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.login.Screen_MainActivity;
@@ -39,6 +39,7 @@ public class Splash_MainActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(Splash_MainActivity.this, Screen_MainActivity.class);
                 startActivity(intent);
+                Animatoo.INSTANCE.animateZoom(Splash_MainActivity.this);
             }
         },2000);
 

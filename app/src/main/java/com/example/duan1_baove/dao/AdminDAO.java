@@ -31,6 +31,15 @@ public interface AdminDAO {
     @Query("SELECT name FROM admin WHERE user = :user")
     String getName(String user);
 
+    @Query("SELECT *FROM admin WHERE user = :user")
+    Admin getObject(String user);
+
     @Query("SELECT *FROM admin")
     List<Admin> getAll();
+
+    @Query("SELECT COUNT(user) FROM admin JOIN chucvu ON admin.chucvu_id = chucvu.id WHERE tenchucvu= :string")
+    int getSoluongPT(String string);
+
+    @Query("SELECT *FROM admin JOIN chucvu ON admin.chucvu_id = chucvu.id WHERE tenchucvu= :string")
+    List<Admin> getPT(String string);
 }

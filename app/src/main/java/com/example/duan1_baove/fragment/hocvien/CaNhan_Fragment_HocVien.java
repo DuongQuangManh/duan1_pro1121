@@ -1,6 +1,5 @@
 package com.example.duan1_baove.fragment.hocvien;
 
-import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.DebugUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.duan1_baove.Admin_MainActivity;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.activityload.Splash_MainActivity;
@@ -72,6 +70,7 @@ public class CaNhan_Fragment_HocVien extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getContext(), Splash_MainActivity.class);
                             startActivity(intent);
+                            Animatoo.INSTANCE.animateSlideDown(getContext());
                         }
                     })
                     .setNegativeButton("No",null).show();
@@ -79,14 +78,18 @@ public class CaNhan_Fragment_HocVien extends Fragment {
         tv_taikhoan.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),TaiKhoan_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
+
         });
         tv_doimatkhau.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),DoiMatKhau_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
         tv_lichsugiaodich.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),LichSuGiaoDich_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
 
         KhachHang khachHang = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0);
@@ -118,10 +121,12 @@ public class CaNhan_Fragment_HocVien extends Fragment {
         tv_dangkitapthu.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),DangKiTapThu_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
         tv_thetapcuatoi.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(),TheTapCuaToi_MainActivity_HocVien.class);
             getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
         return view;
     }

@@ -17,15 +17,11 @@ import com.example.duan1_baove.model.LichSuGiaoDich;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class LichSuGiaoDichAdapter extends RecyclerView.Adapter<LichSuGiaoDichAdapter.ViewHolder> {
     private Context context;
     private List<LichSuGiaoDich> list;
-    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
 
     public LichSuGiaoDichAdapter(Context context) {

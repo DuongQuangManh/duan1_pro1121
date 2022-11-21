@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.login.Screen_MainActivity;
 
 public class LoadHocVien_MainActivity extends AppCompatActivity {
 
@@ -24,6 +24,7 @@ public class LoadHocVien_MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoadHocVien_MainActivity.this, HocVien_MainActivity.class);
                 intent.putExtra("user",user);
                 startActivity(intent);
+                Animatoo.INSTANCE.animateZoom(LoadHocVien_MainActivity.this);
             }
         },2000);
     }

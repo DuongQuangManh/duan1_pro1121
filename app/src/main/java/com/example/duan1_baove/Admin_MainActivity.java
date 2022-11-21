@@ -19,10 +19,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.activityload.Splash_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.fragment.admin.ChucVu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.CuaHang_Fragment_Admin;
+import com.example.duan1_baove.fragment.admin.DanhSachDayHocVien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.DoanhThu_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.DoiMatKhau_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.DuyetDonHang_Fragment_Admin;
@@ -56,6 +58,7 @@ public class Admin_MainActivity extends AppCompatActivity {
     private static final int FRAGMENT_NAPTIEN= 12;
     private static final int FRAGMENT_DUYETDONHANG= 13;
     private static final int FRAGMENT_THETAPTHU= 14;
+    private static final int FRAGMENT_LICHDAYHOCVIEN= 15;
     private int CurrentFragment = FRAGMENT_THONGBAO;
 
     NavigationView navigationView;
@@ -92,6 +95,14 @@ public class Admin_MainActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_quanlychucvu).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_quanlyadmin).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_naptien).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_danhsachlichtap).setVisible(false);
+        }else if (action == LoginService.ACTION_LOGINSUCCESSPT){
+            navigationView.getMenu().findItem(R.id.nav_doanhthu).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_quanlychucvu).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_quanlyadmin).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_naptien).setVisible(false);
+        }else {
+            navigationView.getMenu().findItem(R.id.nav_danhsachlichtap).setVisible(false);
         }
 
         toolbar.setNavigationIcon(R.drawable.ic_menu);
@@ -177,6 +188,11 @@ public class Admin_MainActivity extends AppCompatActivity {
                         replaceFragment(new TheTapThu_Fragment_Admin());
                         CurrentFragment = FRAGMENT_THETAPTHU;
                     }
+                }else if (id == R.id.nav_danhsachlichtap){
+                    if (CurrentFragment != FRAGMENT_LICHDAYHOCVIEN){
+                        replaceFragment(new DanhSachDayHocVien_Fragment_Admin());
+                        CurrentFragment = FRAGMENT_LICHDAYHOCVIEN;
+                    }
                 }else if (id == R.id.nav_dangxuat){
                     new AlertDialog.Builder(Admin_MainActivity.this).setTitle("Đăng xuất").setMessage("Bạn có chắc chắn muốn đăng xuất?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -184,6 +200,7 @@ public class Admin_MainActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(getApplicationContext(), Splash_MainActivity.class);
                                     startActivity(intent);
+                                    Animatoo.INSTANCE.animateSlideDown(Admin_MainActivity.this);
                                 }
                             })
                             .setNegativeButton("No",null).show();

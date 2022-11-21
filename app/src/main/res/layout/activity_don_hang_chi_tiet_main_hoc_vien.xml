@@ -25,6 +25,7 @@
             android:text="Đơn hàng"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:layout_toEndOf="@+id/img_back_donhanghocvien"
             android:layout_marginLeft="10dp"/>
     </RelativeLayout>

@@ -16,16 +16,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.activityload.LoadAdmin_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
-import com.example.duan1_baove.model.ChucVu;
 import com.example.duan1_baove.service.LoginService;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
-import java.util.Locale;
 
 public class LoginAdmin_MainActivity extends AppCompatActivity {
     private EditText edt_sdt,edt_mk;
@@ -41,11 +40,12 @@ public class LoginAdmin_MainActivity extends AppCompatActivity {
             if (intent.getAction().equals("sendActionToLoginAdminMain")){
                  action = intent.getIntExtra("action",-1);
                  user = intent.getStringExtra("user");
-                 if (action== LoginService.ACTION_LOGINSUCCESSADMIN || action == LoginService.ACTION_LOGINSUCCESSNHANVIEN){
+                 if (action== LoginService.ACTION_LOGINSUCCESSADMIN || action == LoginService.ACTION_LOGINSUCCESSNHANVIEN || action == LoginService.ACTION_LOGINSUCCESSPT){
                      Intent intent1 = new Intent(LoginAdmin_MainActivity.this, LoadAdmin_MainActivity.class);
                      intent1.putExtra("action",action);
                      intent1.putExtra("user",user);
                      startActivity(intent1);
+                     Animatoo.INSTANCE.animateFade(LoginAdmin_MainActivity.this);
                      List<Admin> adminList = DuAn1DataBase.getInstance(getApplicationContext()).adminDAO().checkaccount(user);
                      rememberUser(adminList.get(0).getUser(),adminList.get(0).getPass(),checkBox.isChecked());
                  }
@@ -148,4 +148,10 @@ public class LoginAdmin_MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(LoginAdmin_MainActivity.this);
+
+    }
 }

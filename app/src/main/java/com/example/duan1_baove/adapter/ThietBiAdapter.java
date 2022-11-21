@@ -2,20 +2,16 @@ package com.example.duan1_baove.adapter;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.Notification;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.util.DebugUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,18 +19,15 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ThietBi;
 import com.google.android.material.textfield.TextInputLayout;
 

@@ -54,6 +54,9 @@
     <item android:title="">
         <menu>
             <group android:checkableBehavior="single">
+                <item android:id="@+id/nav_danhsachlichtap"
+                    android:title="@string/nav_quanlyhocviencuapt_admin"
+                    android:icon="@drawable/ic_lichdayhocvien"/>
                 <item android:id="@+id/nav_quanlytaikhoan"
                     android:title="@string/nav_quanlytaikhoan_admin"
                     android:icon="@drawable/ic_quanlyaccount"/>

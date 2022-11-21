@@ -24,12 +24,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.CuaHangHocVienAdapter;
@@ -42,7 +42,6 @@ import com.example.duan1_baove.model.LichSuGiaoDich;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -121,6 +120,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),DonHangChiTiet_MainActivity_HocVien.class);
                 getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                Animatoo.INSTANCE.animateFade(getContext());
             }
         });
         return view;

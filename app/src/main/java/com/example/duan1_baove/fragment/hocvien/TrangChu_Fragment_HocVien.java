@@ -1,14 +1,9 @@
 package com.example.duan1_baove.fragment.hocvien;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +17,6 @@ import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.ThongBaoAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.fragment.admin.ThongBao_Fragment_Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.ThongBao;
 

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +36,8 @@ import android.widget.Toast;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.CuaHangAdapter;
-import com.example.duan1_baove.adapter.ThietBiAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.CuaHang;
-import com.example.duan1_baove.model.ThietBi;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -164,6 +164,7 @@ public class CuaHang_Fragment_Admin extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strTheloai = theloai[position];
                 if (strTheloai.equals("Dịch vụ")){
+                    edt_name.addTextChangedListener(textWatcher);
                     edt_hangsanxuat.setEnabled(false);
                     edt_hangsanxuat.setVisibility(View.GONE);
                     edt_trongluong.setEnabled(false);
@@ -277,4 +278,23 @@ public class CuaHang_Fragment_Admin extends Fragment {
         cursor.close();
         return res;
     }
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (edt_name.getText().toString().trim().equals("PT")){
+                edt_soluong.setText(DuAn1DataBase.getInstance(getContext()).adminDAO().getSoluongPT(edt_name.getText().toString().trim())+"");
+                edt_soluong.setEnabled(false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }

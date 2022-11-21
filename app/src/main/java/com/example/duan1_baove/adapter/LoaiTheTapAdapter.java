@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.ChucVu;
 import com.example.duan1_baove.model.LoaiTheTap;
 
 import java.text.DecimalFormat;

@@ -16,6 +16,7 @@
     <string name="nav_doimatkhau_admin">Đổi mật khẩu</string>
     <string name="nav_dangxuat_admin">Đăng xuất</string>
     <string name="nav_quanlytaikhoan_admin">Tài khoản</string>
+    <string name="nav_quanlyhocviencuapt_admin">Lịch dạy học viên</string>
     <string name="nav_quanlydoanhthu_admin">Doanh thu</string>
     <string name="nav_naptien_admin">Nạp tiền</string>
     <string name="nav_duyetdonhang_admin">Duyệt đơn hàng</string>

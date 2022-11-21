@@ -20,7 +20,8 @@
             android:layout_centerVertical="true"
             android:text="@string/cuahang"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <ImageView
             android:id="@+id/img_shop_cuahanghocvien"

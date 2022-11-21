@@ -1,33 +1,23 @@
 package com.example.duan1_baove.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.util.DebugUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.ThongBao;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,14 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ThongBaoAdapter extends RecyclerView.Adapter<ThongBaoAdapter.ViewHolder> {
     private Context context;
     private List<ThongBao> list;
-
-    private EditText edt_id,edt_title,edt_content;
-    private Button btn_add,btn_huy;
-
     private MyOnclick myOnclick;
-
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy,HH:mm:ss", Locale.getDefault());
-    String currentDateandTime = sdf.format(new Date());
 
     public ThongBaoAdapter(Context context,MyOnclick myOnclick) {
         this.context = context;

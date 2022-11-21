@@ -19,20 +19,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.L;
+
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.LichSuGiaoDich;
 import com.example.duan1_baove.model.LoaiTheTap;
 import com.example.duan1_baove.model.TheTap;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
