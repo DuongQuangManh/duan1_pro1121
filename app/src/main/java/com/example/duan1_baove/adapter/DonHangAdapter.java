@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.CuaHang;
 import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
@@ -24,6 +23,7 @@ import com.example.duan1_baove.model.KhachHang;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHolder> implements Filterable {
@@ -32,6 +32,8 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     private List<DonHangChiTiet> listOld;
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private IClickListener iClickListener;
+    Calendar start = Calendar.getInstance();
+    Calendar end = Calendar.getInstance();
 
     public DonHangAdapter(Context context, IClickListener iClickListener) {
         this.context = context;
@@ -116,7 +118,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
                 holder.tv_strarttime.setText("Thời gian bắt đầu: "+donHangChiTiet.getStarttime());
                 holder.tv_endtime.setText("Thời gian kết thúc: "+donHangChiTiet.getEndtime());
                 Log.d("zzzzzz","dịch vụ");
-
             }
             holder.tv_tongtien.setText("Tổng tiền: "+numberFormat.format(donHangChiTiet.getTongtien())+ " vnđ");
             holder.tv_tinhtrang.setText("Tình trạng: "+donHangChiTiet.getTinhTrang());
@@ -151,5 +152,17 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
             tv_thoigiandathang = itemView.findViewById(R.id.tv_thoigianmua_donhangchitiet);
             layout_update = itemView.findViewById(R.id.layout_update_donhangchitiet);
         }
+    }
+    public int[] getArrayDate(String date){
+        String[] str = date.split("-");
+        int arr[] = new int[str.length];
+        try{
+            for(int i = 0;i<str.length;i++){
+                arr[i] = Integer.parseInt(str[i]);
+            }
+        }catch (NumberFormatException e){
+            return null;
+        }
+        return arr;
     }
 }

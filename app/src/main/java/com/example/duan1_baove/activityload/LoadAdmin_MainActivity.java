@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.login.Screen_MainActivity;
 
 public class LoadAdmin_MainActivity extends AppCompatActivity {
 
@@ -29,6 +29,7 @@ public class LoadAdmin_MainActivity extends AppCompatActivity {
                 intent.putExtra("action",action);
                 intent.putExtra("user",user);
                 startActivity(intent);
+                Animatoo.INSTANCE.animateZoom(LoadAdmin_MainActivity.this);
             }
         },2000);
     }

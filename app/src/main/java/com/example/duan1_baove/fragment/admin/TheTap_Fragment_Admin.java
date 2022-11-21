@@ -30,12 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.adapter.NhanVienAdapter;
 import com.example.duan1_baove.adapter.SpinnerAdapterLoaiTheTap;
 import com.example.duan1_baove.adapter.SpinnerAdapterNapTien;
 import com.example.duan1_baove.adapter.TheTapAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.fragment.hocvien.TheTapCuaToi_MainActivity_HocVien;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.LichSuGiaoDich;
 import com.example.duan1_baove.model.LoaiTheTap;

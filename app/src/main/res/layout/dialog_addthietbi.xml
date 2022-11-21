@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Thiết bị"
             android:background="@drawable/custom_header_dialog"
             android:textColor="@color/white"
@@ -46,7 +46,7 @@
             <EditText
                 android:id="@+id/edt_loai_dialogthietbi"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:hint="Loại"
                 android:background="@drawable/custom_edt"
                 android:paddingStart="10dp"
@@ -55,7 +55,7 @@
             <EditText
                 android:id="@+id/edt_soLuong_dialogthietbi"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:hint="Số lượng"
                 android:background="@drawable/custom_edt"
                 android:paddingStart="10dp"
@@ -79,7 +79,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="Chọn ảnh"/>
+                    android:text="Chọn ảnh"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:background="@drawable/custom_btn"/>
                 <ImageView
                     android:id="@+id/avt_dialogthietbi"
                     android:layout_width="0dp"
@@ -102,7 +105,7 @@
                 <EditText
                     android:id="@+id/edt_ngaymua_dialogthietbi"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:hint="Ngày mua"
                     android:background="@drawable/custom_edt"
                     android:paddingStart="10dp"
@@ -121,7 +124,7 @@
                 <EditText
                     android:id="@+id/edt_ngaybaotrigannhat_dialogthietbi"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:hint="Ngày bảo trì gần nhất"
                     android:background="@drawable/custom_edt"
                     android:paddingStart="10dp"
@@ -131,22 +134,23 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#8E24AA"/>
+            android:background="#868487"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:gravity="center"
+            android:layout_marginTop="10dp"
             >
 
             <Button
                 android:id="@+id/btn_luu_dialogthietbi"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="50dp"
                 android:layout_toStartOf="@+id/btn_huy_dialogthietbi"
-                android:background="@drawable/bg_green"
+                android:background="@drawable/custom_btn"
                 android:paddingStart="2dp"
                 android:text="Lưu"
                 android:textColor="@color/white" />
@@ -154,9 +158,9 @@
             <Button
                 android:id="@+id/btn_huy_dialogthietbi"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/bg_green"
+                android:background="@drawable/custom_btn"
                 android:text="Huỷ"
                 android:textColor="@color/white" />
 

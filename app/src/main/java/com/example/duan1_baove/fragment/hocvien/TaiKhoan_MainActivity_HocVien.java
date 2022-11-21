@@ -21,10 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -215,4 +215,9 @@ public class TaiKhoan_MainActivity_HocVien extends AppCompatActivity {
         return res;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(TaiKhoan_MainActivity_HocVien.this);
+    }
 }

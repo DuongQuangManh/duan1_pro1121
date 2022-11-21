@@ -15,13 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1_BaoVe">
         <activity
-            android:name=".fragment.hocvien.TheTapCuaToi_MainActivity_HocVien"
+            android:name=".fragment.hocvien.DatLichTap_MainActivity_HocVien"
             android:exported="false">
         </activity>
         <activity
+            android:name=".fragment.hocvien.TheTapCuaToi_MainActivity_HocVien"
+            android:exported="false"></activity>
+        <activity
             android:name=".fragment.hocvien.DangKiTapThu_MainActivity_HocVien"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".fragment.hocvien.LichSuGiaoDich_MainActivity_HocVien"
             android:exported="false" />

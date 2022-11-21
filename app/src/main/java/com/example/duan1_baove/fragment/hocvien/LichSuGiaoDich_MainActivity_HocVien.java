@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.LichSuGiaoDichAdapter;
@@ -44,5 +44,12 @@ public class LichSuGiaoDich_MainActivity_HocVien extends AppCompatActivity {
     private void initUi() {
         recyclerView = findViewById(R.id.rcy_lichsugiaodich);
         img_back = findViewById(R.id.img_back_lichsugiaodichhocvien);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(LichSuGiaoDich_MainActivity_HocVien.this);
+
     }
 }

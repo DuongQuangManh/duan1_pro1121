@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.CuaHang;
-import com.example.duan1_baove.model.ThietBi;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

@@ -12,7 +12,7 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:text="Khách hàng"
             android:background="@drawable/custom_header_dialog"
             android:textColor="@color/white"
@@ -36,7 +36,7 @@
             <EditText
                 android:id="@+id/edt_tk_dialogkhachhang"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@drawable/custom_edt"
                 android:hint="Email hoặc số điệnt thoại"
                 android:paddingStart="10dp"
@@ -44,7 +44,7 @@
             <EditText
                 android:id="@+id/edt_name_dialogkhachhang"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@drawable/custom_edt"
                 android:hint="Họ tên"
                 android:paddingStart="10dp"
@@ -62,7 +62,7 @@
                 <EditText
                     android:id="@+id/edt_ngaysinh_dialogkhachhang"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:hint="Ngày sinh"
                     android:background="@drawable/custom_edt"
                     android:paddingStart="10dp"
@@ -72,7 +72,7 @@
             <Spinner
                 android:id="@+id/spn_gioitinh_dialogkhachhang"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:background="@drawable/custom_edt"
                 android:layout_marginTop="10dp"/>
 
@@ -89,7 +89,7 @@
                 <EditText
                     android:id="@+id/edt_mk1_dialogkhachhang"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:hint="8 kí tự"
                     android:inputType="textPassword"
                     android:background="@drawable/custom_edt"
@@ -100,22 +100,23 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#8E24AA"/>
+            android:background="#868487"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:gravity="center"
+            android:layout_marginTop="10dp"
             >
 
             <Button
                 android:id="@+id/btn_luu_dialogkhachhang"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="50dp"
                 android:layout_toStartOf="@+id/btn_huy_dialogkhachhang"
-                android:background="@drawable/bg_green"
+                android:background="@drawable/custom_btn"
                 android:paddingStart="2dp"
                 android:text="Lưu"
                 android:textColor="@color/white" />
@@ -123,9 +124,9 @@
             <Button
                 android:id="@+id/btn_huy_dialogkhachhang"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/bg_green"
+                android:background="@drawable/custom_btn"
                 android:text="Huỷ"
                 android:textColor="@color/white"/>
         </RelativeLayout>

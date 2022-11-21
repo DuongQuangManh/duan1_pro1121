@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -20,12 +19,10 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.duan1_baove.Admin_MainActivity;
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.adapter.ChucVuAdapter;
 import com.example.duan1_baove.adapter.ThongBaoAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;

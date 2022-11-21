@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.CustomAdapterViTri;
 import com.example.duan1_baove.model.ViTri;
@@ -34,9 +35,11 @@ public class Screen_MainActivity extends AppCompatActivity {
                 if(position == 0){
                     Intent intent = new Intent(Screen_MainActivity.this, LoginAdmin_MainActivity.class);
                     startActivity(intent);
+                    Animatoo.INSTANCE.animateSwipeLeft(Screen_MainActivity.this);
                 }else  if (position == 1){
                     Intent intent = new Intent(Screen_MainActivity.this, LoginHocVien_MainActivity.class);
                     startActivity(intent);
+                    Animatoo.INSTANCE.animateSwipeLeft(Screen_MainActivity.this);
                 }
             }
         });

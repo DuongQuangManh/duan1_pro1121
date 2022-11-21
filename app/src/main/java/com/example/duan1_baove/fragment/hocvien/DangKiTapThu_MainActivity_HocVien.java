@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
@@ -91,5 +92,11 @@ public class DangKiTapThu_MainActivity_HocVien extends AppCompatActivity {
         btn_huy = findViewById(R.id.btn_huy_dangkitapthu);
         btn_dangki = findViewById(R.id.btn_dangki_dangkitapthu);
         img_back = findViewById(R.id.img_back_dangkitapthu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(DangKiTapThu_MainActivity_HocVien.this);
     }
 }

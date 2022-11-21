@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +25,6 @@ import com.example.duan1_baove.model.ChucVu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ChucVuAdapter extends RecyclerView.Adapter<ChucVuAdapter.ViewHolder> implements Filterable {
     private Context context;

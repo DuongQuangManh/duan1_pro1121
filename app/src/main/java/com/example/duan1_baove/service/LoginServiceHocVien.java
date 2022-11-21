@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.KhachHang;
 
 import java.util.List;

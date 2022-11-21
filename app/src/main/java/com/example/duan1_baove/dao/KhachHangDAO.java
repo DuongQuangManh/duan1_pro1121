@@ -25,6 +25,9 @@ public interface KhachHangDAO {
     @Query("SELECT *FROM khachhang WHERE soDienThoai= :sdt")
     List<KhachHang> checkAcc(String sdt);
 
+    @Query("SELECT *FROM khachhang WHERE soDienThoai= :sdt")
+    KhachHang getObject(String sdt);
+
     @Query("SELECT *FROM khachhang")
     List<KhachHang> getAll();
 
@@ -32,4 +35,7 @@ public interface KhachHangDAO {
     String getPass(String sdt);
     @Query("SELECT soDu FROM khachhang WHERE soDienThoai= :sdt")
     int getSoDU(String sdt);
+
+    @Query("SELECT hoten FROM khachhang WHERE soDienThoai= :id")
+    String getName(String id);
 }

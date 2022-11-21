@@ -10,14 +10,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
-import com.example.duan1_baove.model.ChucVu;
-
 import java.util.List;
 
 public class LoginService extends Service {
     String user;
     public static int ACTION_LOGINSUCCESSADMIN = 0;
     public static int ACTION_LOGINSUCCESSNHANVIEN = 1;
+    public static int ACTION_LOGINSUCCESSPT =2;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -42,6 +41,8 @@ public class LoginService extends Service {
                 String chucvu =  DuAn1DataBase.getInstance(this).chucVuDAO().chechChucVu(String.valueOf(list.get(0).getChucvu_id()));
                 if (chucvu.equals("admin")){
                     sendActionToLoginAdminMain(ACTION_LOGINSUCCESSADMIN);
+                }else if (chucvu.equals("PT")){
+                    sendActionToLoginAdminMain(ACTION_LOGINSUCCESSPT);
                 }else {
                     sendActionToLoginAdminMain(ACTION_LOGINSUCCESSNHANVIEN);
                 }

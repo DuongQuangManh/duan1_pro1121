@@ -28,7 +28,6 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ChucVu;
-import com.example.duan1_baove.model.KhachHang;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

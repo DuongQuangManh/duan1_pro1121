@@ -1,13 +1,10 @@
 package com.example.duan1_baove.adapter;
 
 import android.content.Context;
-import android.content.IntentFilter;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;

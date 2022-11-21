@@ -27,9 +27,8 @@ import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.service.SignUpServiceHocVien;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Create_Fragment_HocVien extends Fragment {

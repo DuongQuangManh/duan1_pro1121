@@ -20,13 +20,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
-import com.example.duan1_baove.activityload.LoadAdmin_MainActivity;
 import com.example.duan1_baove.activityload.LoadHocVien_MainActivity;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.login.LoginAdmin_MainActivity;
-import com.example.duan1_baove.login.LoginHocVien_MainActivity;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.service.LoginServiceHocVien;
 import com.google.android.material.textfield.TextInputLayout;
@@ -53,6 +50,7 @@ public class Login_Fragment_HocVien extends Fragment {
                     Intent intent1 = new Intent(getActivity(), LoadHocVien_MainActivity.class);
                     intent1.putExtra("user",user);
                     startActivity(intent1);
+                    Animatoo.INSTANCE.animateFade(getContext());
                     List<KhachHang> hangList = DuAn1DataBase.getInstance(getActivity()).khachHangDAO().checkAcc(user);
                     rememberUser(hangList.get(0).getSoDienThoai(),hangList.get(0).getPass(),checkBox.isChecked());
                 }

@@ -11,11 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.duan1_baove.Admin_MainActivity;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.KhachHang;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -136,4 +135,10 @@ public class DoiMatKhau_MainActivity_HocVien extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(DoiMatKhau_MainActivity_HocVien.this);
+    }
 }

@@ -28,7 +28,8 @@
             android:layout_toEndOf="@+id/avt_trangchu_hocvien"
             android:text="@string/app_name"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tv_chuc_trangchu_hocvien"

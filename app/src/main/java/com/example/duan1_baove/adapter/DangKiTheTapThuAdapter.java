@@ -16,7 +16,6 @@ import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.DangKiTapThu;
 import com.example.duan1_baove.model.KhachHang;
-import com.example.duan1_baove.model.LoaiTheTap;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

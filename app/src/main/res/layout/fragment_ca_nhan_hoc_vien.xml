@@ -24,7 +24,8 @@
             android:layout_marginTop="10dp"
             android:text="Cá nhân"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
         <ImageView
             android:id="@+id/img_naptien_canhanhocvien"

@@ -1,13 +1,13 @@
 package com.example.duan1_baove.fragment.hocvien;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.DonHangAdapter;
@@ -51,4 +51,9 @@ public class DonHangChiTiet_MainActivity_HocVien extends AppCompatActivity {
         recyclerView = findViewById(R.id.rcy_donhang_donhangchitiet);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.INSTANCE.animateSlideRight(DonHangChiTiet_MainActivity_HocVien.this);
+    }
 }
