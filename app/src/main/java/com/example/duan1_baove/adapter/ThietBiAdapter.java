@@ -193,6 +193,8 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                 edt_baotrigannhat = dialog.findViewById(R.id.edt_ngaybaotrigannhat_dialogthietbi);
                 edt_ngaymua = dialog.findViewById(R.id.edt_ngaymua_dialogthietbi);
 
+
+
                 edt_id.setText(thietBi.getId()+"");
                 edt_name.setText(thietBi.getName());
                 edt_loai.setText(thietBi.getLoai());
@@ -241,7 +243,7 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                         thietBi.setLoai(edt_loai.getText().toString().trim());
                         thietBi.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
                         thietBi.setThoigianmua(edt_ngaymua.getText().toString().trim());
-                        thietBi.setThoigianbaotrigannhat(edt_ngaymua.getText().toString().trim());
+                        thietBi.setThoigianbaotrigannhat(edt_baotrigannhat.getText().toString().trim());
                         DuAn1DataBase.getInstance(context).thietBiDAO().update(thietBi);
                         Toast.makeText(context, "Update thiết bị thành công", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
