@@ -30,4 +30,7 @@ public interface ThietBiDAO {
 
     @Query("SELECT tongchiphibaotri FROM thietbi WHERE id= :id")
     int getTongSoTienBaoTri(String id);
+
+    @Query("SELECT COUNT(id) FROM thietbi")
+    int getCount();
 }

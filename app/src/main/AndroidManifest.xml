@@ -20,10 +20,10 @@
         </activity>
         <activity
             android:name=".fragment.hocvien.TheTapCuaToi_MainActivity_HocVien"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".fragment.hocvien.DangKiTapThu_MainActivity_HocVien"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".fragment.hocvien.LichSuGiaoDich_MainActivity_HocVien"
             android:exported="false" />

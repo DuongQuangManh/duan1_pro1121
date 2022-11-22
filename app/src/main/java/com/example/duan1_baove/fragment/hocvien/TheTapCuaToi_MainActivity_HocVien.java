@@ -83,7 +83,7 @@ public class TheTapCuaToi_MainActivity_HocVien extends AppCompatActivity {
         btn_datlichtap.setOnClickListener(v -> {
             Intent intent = new Intent(TheTapCuaToi_MainActivity_HocVien.this,DatLichTap_MainActivity_HocVien.class);
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-            Animatoo.INSTANCE.animateZoom(this);
+            Animatoo.INSTANCE.animateSwipeLeft(TheTapCuaToi_MainActivity_HocVien.this);
         });
 
     }

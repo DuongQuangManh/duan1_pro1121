@@ -42,4 +42,10 @@ public interface AdminDAO {
 
     @Query("SELECT *FROM admin JOIN chucvu ON admin.chucvu_id = chucvu.id WHERE tenchucvu= :string")
     List<Admin> getPT(String string);
+
+    @Query("SELECT SUM(luong) FROM admin")
+    int getTongLuong();
+
+    @Query("SELECT COUNT(user) FROM admin")
+    int getCount();
 }

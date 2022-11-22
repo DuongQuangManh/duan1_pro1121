@@ -41,7 +41,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
 
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
 
-    private EditText edt_id,edt_name,edt_gia,
+    private EditText edt_id,edt_name,edt_giaban,edt_gianhap,
             edt_tinhtrang,edt_soluong,
             edt_trongluong,edt_hangsanxuat;
     private Button btn_chonanh,btn_add,btn_huy;
@@ -84,11 +84,14 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             if (cuaHang.getTheloai().equals("Dịch vụ")){
                 holder.tv_trongluong.setVisibility(View.GONE);
                 holder.tv_hangsanxuat.setVisibility(View.GONE);
+                holder.tv_gianhap.setVisibility(View.GONE);
             }else if (cuaHang.getTheloai().equals("Món hàng")){
                 holder.tv_hangsanxuat.setVisibility(View.VISIBLE);
                 holder.tv_trongluong.setVisibility(View.VISIBLE);
+                holder.tv_gianhap.setVisibility(View.VISIBLE);
                 holder.tv_trongluong.setText("Trọng lượng: "+cuaHang.getTrongLuong()+ " kg");
                 holder.tv_hangsanxuat.setText("Hãng sản xuất: "+cuaHang.getHangSanXuat());
+                holder.tv_gianhap.setText("Giá nhập: "+numberFormat.format(cuaHang.getGianhap()) + " vnđ");
             }
 
             if (cuaHang.getImg()==null){
@@ -127,7 +130,8 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                 window.setBackgroundDrawable(null);
                 edt_id = dialog.findViewById(R.id.edt_id_dialogcuahang);
                 edt_name = dialog.findViewById(R.id.edt_ten_dialogcuahang);
-                edt_gia = dialog.findViewById(R.id.edt_gia_dialogcuahang);
+                edt_giaban = dialog.findViewById(R.id.edt_giaban_dialogcuahang);
+                edt_gianhap = dialog.findViewById(R.id.edt_gianhap_dialogcuahang);
                 edt_tinhtrang = dialog.findViewById(R.id.edt_tinhtrang_dialogcuahang);
                 edt_soluong = dialog.findViewById(R.id.edt_soLuong_dialogcuahang);
                 edt_trongluong = dialog.findViewById(R.id.edt_trongluong_dialogcuahang);
@@ -150,11 +154,15 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                             edt_hangsanxuat.setVisibility(View.GONE);
                             edt_trongluong.setEnabled(false);
                             edt_trongluong.setVisibility(View.GONE);
+                            edt_gianhap.setEnabled(false);
+                            edt_gianhap.setVisibility(View.GONE);
                         }else if (strTheloai.equals("Món hàng")){
                             edt_hangsanxuat.setEnabled(true);
                             edt_hangsanxuat.setVisibility(View.VISIBLE);
                             edt_trongluong.setEnabled(true);
                             edt_trongluong.setVisibility(View.VISIBLE);
+                            edt_gianhap.setEnabled(true);
+                            edt_gianhap.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -171,7 +179,8 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
 
                 edt_id.setText(cuaHang.getId()+"");
                 edt_name.setText(cuaHang.getName());
-                edt_gia.setText(cuaHang.getGia()+"");
+                edt_giaban.setText(cuaHang.getGia()+"");
+                edt_gianhap.setText(cuaHang.getGianhap()+"");
                 edt_soluong.setText(cuaHang.getSoLuong()+"");
                 edt_trongluong.setText(cuaHang.getTrongLuong()+"");
                 edt_hangsanxuat.setText(cuaHang.getHangSanXuat());
@@ -190,11 +199,12 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                 btn_add.setOnClickListener(v1 -> {
                     if (validate()){
                         cuaHang.setName(edt_name.getText().toString().trim());
-                        cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
+                        cuaHang.setGia(Integer.parseInt(edt_giaban.getText().toString().trim()));
                         cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
                         if (strTheloai.equals("Món hàng")){
                             cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
                             cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                            cuaHang.setGianhap(Integer.parseInt(edt_gianhap.getText().toString().trim()));
                         }else if (strTheloai.equals("Dịch vụ")){
                             cuaHang.setTrongLuong(0);
                             cuaHang.setHangSanXuat("");
@@ -253,13 +263,14 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
         };
     }
     private boolean validate(){
-        if (edt_gia.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty()){
+        if (edt_giaban.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty() || edt_gianhap.getText().toString().trim().isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
-                Integer.parseInt(edt_gia.getText().toString().trim());
+                Integer.parseInt(edt_giaban.getText().toString().trim());
+                Integer.parseInt(edt_gianhap.getText().toString().trim());
                 if (!edt_trongluong.getText().toString().trim().isEmpty()){
                     Float.parseFloat(edt_trongluong.getText().toString().trim());
                 }
@@ -271,7 +282,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
         }
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_name,tv_gia,tv_soluong,tv_trongluong,tv_hangsanxuat,tv_tinhtrang,tv_theloai;
+        private TextView tv_id,tv_name,tv_gia,tv_soluong,tv_trongluong,tv_hangsanxuat,tv_tinhtrang,tv_theloai,tv_gianhap;
         private ImageView img_cuahang;
         private RelativeLayout layout_update;
         public ViewHolder(@NonNull View itemView) {
@@ -286,6 +297,7 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
             img_cuahang = itemView.findViewById(R.id.avt_itemcuahang);
             layout_update = itemView.findViewById(R.id.layout_update_itemcuahang);
             tv_theloai = itemView.findViewById(R.id.tv_theloai_itemcuahang);
+            tv_gianhap = itemView.findViewById(R.id.tv_gianhap_itemcuahang);
 
         }
     }
