@@ -193,7 +193,7 @@ public class ThietBi_Fragment_Admin extends Fragment {
                 thietBi.setHinhanh(img);
                 thietBi.setTongchiphibaotri(0);
                 thietBi.setThoigianmua(edt_ngaymua.getText().toString().trim());
-                thietBi.setThoigianbaotrigannhat(edt_ngaymua.getText().toString().trim());
+                thietBi.setThoigianbaotrigannhat(edt_baotrigannhat.getText().toString().trim());
                 DuAn1DataBase.getInstance(getContext()).thietBiDAO().insert(thietBi);
                 Toast.makeText(getContext(), "Insert thiết bị thành công", Toast.LENGTH_SHORT).show();
                 capNhat();

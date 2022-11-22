@@ -232,16 +232,16 @@ public class CuaHang_Fragment_Admin extends Fragment {
         recyclerView.setAdapter(adapter);
     }
     private boolean validate(){
-        if (edt_giaban.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty() || edt_gianhap.getText().toString().trim().isEmpty()){
+        if (edt_giaban.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty()){
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
                 Integer.parseInt(edt_giaban.getText().toString().trim());
-                Integer.parseInt(edt_gianhap.getText().toString().trim());
-                if (!edt_trongluong.getText().toString().trim().isEmpty()){
+                if (!edt_trongluong.getText().toString().trim().isEmpty() && !edt_gianhap.getText().toString().trim().isEmpty()){
                     Float.parseFloat(edt_trongluong.getText().toString().trim());
+                    Integer.parseInt(edt_gianhap.getText().toString().trim());
                 }
                 return true;
             }catch (Exception e){
