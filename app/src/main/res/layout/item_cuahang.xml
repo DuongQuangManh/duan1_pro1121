@@ -46,10 +46,20 @@
             android:text="Tên thiêt bị: Dương Quang Mạnh"
             android:textSize="15sp"/>
         <TextView
-            android:id="@+id/tv_gia_itemcuahang"
+            android:id="@+id/tv_gianhap_itemcuahang"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_name_itemcuahang"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:text="Gía nhập: 120101"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/tv_gia_itemcuahang"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gianhap_itemcuahang"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="10dp"

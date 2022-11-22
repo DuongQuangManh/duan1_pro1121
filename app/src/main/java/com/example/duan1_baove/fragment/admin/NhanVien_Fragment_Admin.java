@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.ChucVu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -59,6 +61,7 @@ public class NhanVien_Fragment_Admin extends Fragment {
     EditText edt_user,edt_name,edt_pass,edt_luong,edt_tennganhang,edt_stk;
     Spinner spn_chucvu,spn_locchucvu;
     Button btn_add,btn_huy;
+    TextInputLayout txt;
 
     SpinnerAdapter spinerAdapter;
     List<ChucVu> chucVuList;
@@ -178,6 +181,11 @@ public class NhanVien_Fragment_Admin extends Fragment {
         btn_add = dialog.findViewById(R.id.btn_luu_dialognhanvien);
         btn_huy = dialog.findViewById(R.id.btn_huy_dialognhanvien);
         spn_chucvu = dialog.findViewById(R.id.spinner_chucvu_dialognhanvien);
+        txt = dialog.findViewById(R.id.texti_dialognhanvien);
+
+        txt.setEndIconOnClickListener(v -> {
+            showpass();
+        });
 
         chucVuList = DuAn1DataBase.getInstance(getContext()).chucVuDAO().getAll();
         spinerAdapter = new SpinnerAdapter(getContext(),R.layout.item_spiner,chucVuList);
@@ -268,7 +276,17 @@ public class NhanVien_Fragment_Admin extends Fragment {
 
         }
     }
-
+    private void showpass() {
+        if(edt_pass.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+            edt_pass.setInputType( InputType.TYPE_CLASS_TEXT |
+                    InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            txt.setEndIconDrawable(R.drawable.ic_eye_off);
+        }else {
+            edt_pass.setInputType( InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD );
+            txt.setEndIconDrawable(R.drawable.ic_eye);
+        }
+        edt_pass.setSelection(edt_pass.getText().length());
+    }
 
     public String getPathFromURI(Uri contentUri) {
         String res = null;

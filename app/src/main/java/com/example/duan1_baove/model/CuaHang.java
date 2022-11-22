@@ -9,6 +9,7 @@ public class CuaHang {
     private int id;
     private String name;
     private int gia;
+    private int gianhap;
     private String img;
     private String tinhTrang;
     private int soLuong;
@@ -16,10 +17,11 @@ public class CuaHang {
     private String hangSanXuat;
     private String theloai;
 
-    public CuaHang(int id, String name, int gia, String img, String tinhTrang, int soLuong, float trongLuong, String hangSanXuat, String theloai) {
+    public CuaHang(int id, String name, int gia, int gianhap, String img, String tinhTrang, int soLuong, float trongLuong, String hangSanXuat, String theloai) {
         this.id = id;
         this.name = name;
         this.gia = gia;
+        this.gianhap = gianhap;
         this.img = img;
         this.tinhTrang = tinhTrang;
         this.soLuong = soLuong;
@@ -101,5 +103,13 @@ public class CuaHang {
 
     public void setTheloai(String theloai) {
         this.theloai = theloai;
+    }
+
+    public int getGianhap() {
+        return gianhap;
+    }
+
+    public void setGianhap(int gianhap) {
+        this.gianhap = gianhap;
     }
 }

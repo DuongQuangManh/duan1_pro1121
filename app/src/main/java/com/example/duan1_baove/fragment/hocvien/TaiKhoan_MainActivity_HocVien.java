@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -60,11 +61,26 @@ public class TaiKhoan_MainActivity_HocVien extends AppCompatActivity {
 
         list = DuAn1DataBase.getInstance(this).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
         khachHang = list.get(0);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,gioitinh);
+        spn_gioitinh.setAdapter(adapter);
+        spn_gioitinh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strGioitinh = gioitinh[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         for (int i=0;i<gioitinh.length;i++){
             if (khachHang.getGioitinh().equals(gioitinh[i])){
                 idgioitinh = i;
+                Log.d("abcas",i+"");
             }
         }
+
         if (khachHang.getAvata()==null){
             avt.setImageResource(R.drawable.ic_account);
         }else {
@@ -108,19 +124,7 @@ public class TaiKhoan_MainActivity_HocVien extends AppCompatActivity {
             },year,month,day).show();
         });
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,gioitinh);
-        spn_gioitinh.setAdapter(adapter);
-        spn_gioitinh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                strGioitinh = gioitinh[position];
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         img_back.setOnClickListener(v -> {
             onBackPressed();
         });

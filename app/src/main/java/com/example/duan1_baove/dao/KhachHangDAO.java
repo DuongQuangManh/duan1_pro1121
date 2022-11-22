@@ -38,4 +38,7 @@ public interface KhachHangDAO {
 
     @Query("SELECT hoten FROM khachhang WHERE soDienThoai= :id")
     String getName(String id);
+
+    @Query("SELECT COUNT(soDienThoai) FROM KHACHHANG")
+    int getCount();
 }

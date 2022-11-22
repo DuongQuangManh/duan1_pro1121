@@ -53,7 +53,7 @@ public class CuaHang_Fragment_Admin extends Fragment {
     private Animation fab_open,fab_close,rotateForward,rotateBackward;
     boolean isOpen;
 
-    private EditText edt_id,edt_name,edt_gia,
+    private EditText edt_id,edt_name,edt_gianhap,edt_giaban,
             edt_tinhtrang,edt_soluong,
             edt_trongluong,edt_hangsanxuat;
     private Button btn_chonanh,btn_add,btn_huy;
@@ -145,7 +145,8 @@ public class CuaHang_Fragment_Admin extends Fragment {
         window.setBackgroundDrawable(null);
         edt_id = dialog.findViewById(R.id.edt_id_dialogcuahang);
         edt_name = dialog.findViewById(R.id.edt_ten_dialogcuahang);
-        edt_gia = dialog.findViewById(R.id.edt_gia_dialogcuahang);
+        edt_gianhap = dialog.findViewById(R.id.edt_gianhap_dialogcuahang);
+        edt_giaban = dialog.findViewById(R.id.edt_giaban_dialogcuahang);
         edt_tinhtrang = dialog.findViewById(R.id.edt_tinhtrang_dialogcuahang);
         edt_soluong = dialog.findViewById(R.id.edt_soLuong_dialogcuahang);
         edt_trongluong = dialog.findViewById(R.id.edt_trongluong_dialogcuahang);
@@ -169,11 +170,15 @@ public class CuaHang_Fragment_Admin extends Fragment {
                     edt_hangsanxuat.setVisibility(View.GONE);
                     edt_trongluong.setEnabled(false);
                     edt_trongluong.setVisibility(View.GONE);
+                    edt_gianhap.setEnabled(false);
+                    edt_gianhap.setVisibility(View.GONE);
                 }else if (strTheloai.equals("Món hàng")){
                     edt_hangsanxuat.setEnabled(true);
                     edt_hangsanxuat.setVisibility(View.VISIBLE);
                     edt_trongluong.setEnabled(true);
                     edt_trongluong.setVisibility(View.VISIBLE);
+                    edt_gianhap.setEnabled(true);
+                    edt_gianhap.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -194,11 +199,12 @@ public class CuaHang_Fragment_Admin extends Fragment {
             if (validate()){
                 cuaHang = new CuaHang();
                 cuaHang.setName(edt_name.getText().toString().trim());
-                cuaHang.setGia(Integer.parseInt(edt_gia.getText().toString().trim()));
+                cuaHang.setGia(Integer.parseInt(edt_giaban.getText().toString().trim()));
                 cuaHang.setSoLuong(Integer.parseInt(edt_soluong.getText().toString().trim()));
                 if (strTheloai.equals("Món hàng")){
                     cuaHang.setTrongLuong(Float.parseFloat(edt_trongluong.getText().toString().trim()));
                     cuaHang.setHangSanXuat(edt_hangsanxuat.getText().toString().trim());
+                    cuaHang.setGianhap(Integer.parseInt(edt_gianhap.getText().toString().trim()));
                 }else if (strTheloai.equals("Dịch vụ")){
                     cuaHang.setTrongLuong(0);
                     cuaHang.setHangSanXuat("");
@@ -226,13 +232,14 @@ public class CuaHang_Fragment_Admin extends Fragment {
         recyclerView.setAdapter(adapter);
     }
     private boolean validate(){
-        if (edt_gia.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty()){
+        if (edt_giaban.getText().toString().trim().isEmpty() || edt_name.getText().toString().trim().isEmpty() || edt_soluong.getText().toString().trim().isEmpty() || edt_gianhap.getText().toString().trim().isEmpty()){
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }else {
             try {
                 Integer.parseInt(edt_soluong.getText().toString().trim());
-                Integer.parseInt(edt_gia.getText().toString().trim());
+                Integer.parseInt(edt_giaban.getText().toString().trim());
+                Integer.parseInt(edt_gianhap.getText().toString().trim());
                 if (!edt_trongluong.getText().toString().trim().isEmpty()){
                     Float.parseFloat(edt_trongluong.getText().toString().trim());
                 }

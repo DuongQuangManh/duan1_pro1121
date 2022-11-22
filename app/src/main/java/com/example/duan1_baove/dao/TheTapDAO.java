@@ -27,4 +27,6 @@ public interface TheTapDAO {
     @Query("SELECT tongsotiendamuathetap FROM thetap WHERE khachhang_id= :makhachhang")
     int getTongSoTien(String makhachhang);
 
+    @Query("SELECT COUNT(id) FROM thetap")
+    int getCount();
 }

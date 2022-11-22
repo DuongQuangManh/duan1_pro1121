@@ -56,7 +56,7 @@
                 app:endIconMode="custom"
                 app:hintEnabled="false"
                 android:layout_marginTop="10dp"
-                android:id="@+id/textinput_loginadmin"
+                android:id="@+id/texti_dialognhanvien"
                 >
 
                 <EditText
