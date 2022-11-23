@@ -29,4 +29,7 @@ public interface TheTapDAO {
 
     @Query("SELECT COUNT(id) FROM thetap")
     int getCount();
+
+    @Query("SELECT SUM(tongsotiendamuathetap) FROM thetap")
+    int getDoanhThuTuTheTap();
 }

@@ -22,8 +22,79 @@
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/piechart_doanhthu"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"/>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginTop="20dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                   >
+                    <TextView
+                        android:id="@+id/tv_thetap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng doanh thu từ thẻ tập: "
+                        android:textColor="#11FF00"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tv_tongtienthetap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100.000.000 vnđ"
+                        android:layout_toEndOf="@+id/tv_thetap"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    >
+                    <TextView
+                        android:id="@+id/tv_dichvu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng doanh thu từ dịch vụ: "
+                        android:textColor="#11FF00"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tv_tongtiendichvu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100.000.000 vnđ"
+                        android:layout_toEndOf="@+id/tv_dichvu"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    >
+                    <TextView
+                        android:id="@+id/tv_cuahang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng doanh thu từ cửa hàng: "
+                        android:textColor="#11FF00"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/tv_tongtiencuahang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100.000.000 vnđ"
+                        android:layout_toEndOf="@+id/tv_cuahang"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
