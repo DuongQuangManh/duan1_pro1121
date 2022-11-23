@@ -1,13 +1,11 @@
 package com.example.duan1_baove.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
-import com.example.duan1_baove.model.Admin;
 import com.example.duan1_baove.model.DatLichTap;
-;
 import java.util.Calendar;
 import java.util.List;
 
@@ -64,7 +60,9 @@ public class DatLichTapAdapter extends RecyclerView.Adapter<DatLichTapAdapter.Vi
             holder.tv_gionghi.setText(datLichTap.getGionghi());
             if (datLichTap.getAdmin_id().equals("admin")){
                 holder.tv_pt.setText("Không");
+                holder.tv_pt.setEnabled(false);
             }else {
+                holder.tv_pt.setEnabled(true);
                 holder.tv_pt.setText(DuAn1DataBase.getInstance(context).adminDAO().getName(datLichTap.getAdmin_id()));
             }
             lichtap.set(Calendar.DAY_OF_MONTH,getArrayDate(datLichTap.getNgaytap())[0]);

@@ -58,10 +58,122 @@
                 android:text="Gói thẻ tập của tôi"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:textSize="16sp"/>
-            <androidx.recyclerview.widget.RecyclerView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/rcy_thetap_hocvien"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"/>
+                android:layout_height="190dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/backgroud"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#C8000000"
+                        android:gravity="center"
+                        android:id="@+id/layout_giahan_thetapcuatoi"
+                        android:visibility="invisible">
+                        <Button
+                            android:id="@+id/btn_giahan_thetapcuatoi"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:text="Gia Hạn Gói Tập"
+                            android:textColor="@color/white"
+                            android:background="@drawable/bg_green"
+                            android:enabled="false"/>
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+                        <TextView
+                            android:id="@+id/tv_mathetap_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mã thẻ tập: 1"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:textSize="15sp"
+                            android:layout_alignParentEnd="true"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tenkhachhang_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerVertical="true"
+                            android:text="Họ tên: Dương Quang Mạnh"
+                            android:textSize="18sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            />
+                        <TextView
+                            android:id="@+id/tv_starttime_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_tenkhachhang_thetapcuatoi"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="20dp"
+                            android:text="Từ ngày: 15-02-2003"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            />
+                        <TextView
+                            android:id="@+id/tv_endtime_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_starttime_thetapcuatoi"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="20dp"
+                            android:text="Đến ngày: 15-02-2003"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            />
+                        <TextView
+                            android:id="@+id/tv_trangthai_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_songay_thetapcuatoi"
+                            android:layout_centerVertical="true"
+                            android:text="Trạng thái: hết hạn"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:textColor="@color/green"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_songay_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_ngayhomnay_thetapcuatoi"
+                            android:text="Còn: 220 ngày"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_ngayhomnay_thetapcuatoi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_mathetap_thetapcuatoi"
+                            android:text="Hôm nay: 15/11/2022"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="20dp"
+                            />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

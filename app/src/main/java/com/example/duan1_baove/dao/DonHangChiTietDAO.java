@@ -44,6 +44,11 @@ public interface DonHangChiTietDAO {
     @Query("SELECT SUM(tongtien) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ'")
     int getTongSoTienKiemDuocTuDichVu();
 
+    @Query("SELECT SUM(tongtien) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' GROUP BY cuahang_id")
+    int getTongSoTienKiemDuocTuMonHang();
+
+    @Query("SELECT SUM(cuahang.gianhap*donhangchitiet.soLuong) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' GROUP BY cuahang.id")
+    int getTongSoTienNhapMonHang();
 
     @Query("SELECT SUM(tongtien) FROM donhangchitiet WHERE starttime LIKE :date")
     int getTongSoTienTrongThang(String date);
