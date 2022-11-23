@@ -58,6 +58,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     private ImageView img_shop,img_close,img_tru,img_cong,img_avt_monhang;
     private TextView tv_gia_layoutmuahang,tv_soluong_layoutmuahang,tv_tongtien_layoutmuahang;
     private Button btn_muangay;
+    private TextView tv_muathetap;
     String[] theloai = {"Tất cả","Món hàng","Dịch vụ"};
     String strTheloai = "Tất cả",strHanSuDung = "1 tuần";
     String[] hansudung = {"1 tuần","1 tháng","3 tháng","6 tháng","1 năm","3 năm","5 năm"};
@@ -119,9 +120,14 @@ public class CuaHang_Fragment_HocVien extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),DonHangChiTiet_MainActivity_HocVien.class);
-                getActivity().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                getActivity().startActivity(intent);
                 Animatoo.INSTANCE.animateFade(getContext());
             }
+        });
+        tv_muathetap.setOnClickListener(v1 -> {
+            Intent intent = new Intent(getContext(),MuaTheTap_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateFade(getContext());
         });
         return view;
     }
@@ -143,6 +149,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
         tv_soluong_layoutmuahang = view.findViewById(R.id.tv_soluong_layoutmuahang);
         btn_muangay = view.findViewById(R.id.btn_muangay_layoutmuahang);
         tv_tongtien_layoutmuahang = view.findViewById(R.id.tv_tongtien_layoutmuahang);
+        tv_muathetap = view.findViewById(R.id.tv_muathetap_cuahanghocvien);
     }
     private void search(String strSearch) {
         adapter.getFilter().filter(strSearch);
