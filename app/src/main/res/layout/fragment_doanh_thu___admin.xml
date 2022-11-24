@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.admin.ChucVu_Fragment_Admin">
 
     <ScrollView
@@ -26,8 +27,235 @@
                 >
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Khách hàng"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/user"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongkhachhang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
 
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nhân viên"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/staff"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongnhanvien"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Thẻ tập"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/card"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongthetap"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Đơn hàng"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/donhang"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongdonhang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Thiết bị"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/thietbi"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongthietbi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Personal trainer"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="20sp"/>
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/imgpt"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"/>
+                            <TextView
+                                android:id="@+id/tv_soluongpt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:text="2.000"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:textSize="25sp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="10dp"/>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </HorizontalScrollView>
             <TextView
