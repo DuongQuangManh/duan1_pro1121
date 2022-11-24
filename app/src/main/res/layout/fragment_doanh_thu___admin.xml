@@ -12,14 +12,32 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thống kê số lượng"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"/>
             <HorizontalScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="200dp">
-                <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="200dp"
+                >
+                <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent"/>
-            </HorizontalScrollView>
+                    android:layout_height="match_parent">
 
+                </LinearLayout>
+            </HorizontalScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thống kê doanh thu"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/piechart_doanhthu"
                 android:layout_width="300dp"
@@ -41,8 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng doanh thu từ thẻ tập: "
-                        android:textColor="#11FF00"
-                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"/>
                     <TextView
                         android:id="@+id/tv_tongtienthetap"
@@ -50,7 +67,8 @@
                         android:layout_height="wrap_content"
                         android:text="100.000.000 vnđ"
                         android:layout_toEndOf="@+id/tv_thetap"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:textColor="#05C10D"/>
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -62,14 +80,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng doanh thu từ dịch vụ: "
-                        android:textColor="#11FF00"
-                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"/>
                     <TextView
                         android:id="@+id/tv_tongtiendichvu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100.000.000 vnđ"
+                        android:textColor="#05C10D"
                         android:layout_toEndOf="@+id/tv_dichvu"
                         android:textSize="16sp"/>
                 </RelativeLayout>
@@ -83,13 +101,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng doanh thu từ cửa hàng: "
-                        android:textColor="#11FF00"
-                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-condensed-medium"
                         android:textSize="16sp"/>
                     <TextView
                         android:id="@+id/tv_tongtiencuahang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#05C10D"
                         android:text="100.000.000 vnđ"
                         android:layout_toEndOf="@+id/tv_cuahang"
                         android:textSize="16sp"/>

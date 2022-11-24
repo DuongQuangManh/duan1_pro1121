@@ -32,4 +32,7 @@ public interface TheTapDAO {
 
     @Query("SELECT SUM(tongsotiendamuathetap) FROM thetap")
     int getDoanhThuTuTheTap();
+
+    @Query("SELECT SUM(tongsotiendamuathetap) FROM thetap WHERE ngayDangKy LIKE :date")
+    int getDoanhThu (String date);
 }
