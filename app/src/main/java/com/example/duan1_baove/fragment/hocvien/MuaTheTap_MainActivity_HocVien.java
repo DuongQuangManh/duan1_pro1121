@@ -34,12 +34,15 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
     Spinner spn_loaithetap;
     Button btn_luu_dialogthetap,btn_huy_dialogthetap;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy, hh:mm-ss");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 
     private List<KhachHang> listKhachHang;
     KhachHang khachHang;
     TheTap theTap;
 
-    private int intLoaiTheTap;
+    private List<TheTap> theTapList;
+
+    private int intLoaiTheTap =0;
     private Calendar calendar = Calendar.getInstance();
     private Calendar calendarEndTime = Calendar.getInstance();
     int yearEnd,monthEnd, dayEnd;
@@ -48,6 +51,9 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
     int year = calendar.get(Calendar.YEAR);
     int month = calendar.get(Calendar.MONTH)+1;
     int day = calendar.get(Calendar.DAY_OF_MONTH);
+    //int day,month,year;
+
+    String endtimenew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +94,18 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
         Animatoo.INSTANCE.animateSlideRight(MuaTheTap_MainActivity_HocVien.this);
     }
     private void showTT(){
+        List<TheTap> listTT = DuAn1DataBase.getInstance(this).theTapDAO().checkTheTap(HocVien_MainActivity.userHocVien);
+        if (listTT.size()<=0){
+            endtimenew = day+"-"+month+"-"+year;
+            Log.d("abcd","chưa có thẻ tập");
+        }else {
+            endtimenew = listTT.get(0).getNgayHetHan();
+            for(int i=1;i<listTT.size();i++){
+                endtimenew = getMax(endtimenew,listTT.get(i).getNgayHetHan());
+            }
+            Log.d("abcd"," có thẻ tập");
+
+        }
         edt_tenkhachhang_dialogthetap.setText(khachHang.getHoten());
         listLoaiTheTap = DuAn1DataBase.getInstance(getApplicationContext()).loaiTheTapDAO().getAll();
         SpinnerAdapterLoaiTheTap spinnerLoaiTheTap = new SpinnerAdapterLoaiTheTap(getApplicationContext(),R.layout.item_spiner_naptien,listLoaiTheTap);
@@ -97,11 +115,23 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 intLoaiTheTap = listLoaiTheTap.get(position).getId();
                 calendarEndTime = Calendar.getInstance();
-                calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
-                yearEnd = calendarEndTime.get(Calendar.YEAR);
-                monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
-                dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
-                edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                if (listTT.size()>0){
+                    calendarEndTime.set(Calendar.DAY_OF_MONTH,getArrayDate(endtimenew)[0]);
+                    calendarEndTime.set(Calendar.MONTH,getArrayDate(endtimenew)[1]);
+                    calendarEndTime.set(Calendar.YEAR,getArrayDate(endtimenew)[2]);
+                    calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+                    yearEnd = calendarEndTime.get(Calendar.YEAR);
+                    monthEnd = calendarEndTime.get(Calendar.MONTH);
+                    dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+                    edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                }else {
+                    calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+                    yearEnd = calendarEndTime.get(Calendar.YEAR);
+                    monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
+                    dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+                    edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                }
+
             }
 
             @Override
@@ -114,10 +144,12 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
     }
     private void add(){
         if (checksodu(DuAn1DataBase.getInstance(this).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)))){
+
+            Log.d("date",endtimenew);
             theTap = new TheTap();
             theTap.setKhachhang_id(HocVien_MainActivity.userHocVien);
             theTap.setLoaithetap_id(intLoaiTheTap);
-            theTap.setNgayDangKy(edt_starttime.getText().toString().trim());
+            theTap.setNgayDangKy(endtimenew);
             theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
             theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getApplicationContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getApplicationContext()).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia());
             DuAn1DataBase.getInstance(this).theTapDAO().insert(theTap);
@@ -130,7 +162,7 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
             lichSuGiaoDich.setThoigian(sdf.format(new Date()));
             lichSuGiaoDich.setSoTien(DuAn1DataBase.getInstance(this).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)));
             DuAn1DataBase.getInstance(this).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
-            Toast.makeText(this, "Insert thẻ tập thành công", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mua thẻ tập thành công", Toast.LENGTH_SHORT).show();
         }
     }
     private boolean checksodu(int giagoitap){
@@ -139,6 +171,43 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
             return false;
         }else {
             return true;
+        }
+    }
+    public int[] getArrayDate(String date){
+        String[] str = date.split("-");
+        int arr[] = new int[str.length];
+        try{
+            for(int i = 0;i<str.length;i++){
+                arr[i] = Integer.parseInt(str[i]);
+            }
+        }catch (NumberFormatException e){
+            return null;
+        }
+        return arr;
+    }
+    public String getMax(String date1,String date2){
+        int day1 = getArrayDate(date1)[0];
+        int month1 = getArrayDate(date1)[1];
+        int year1 = getArrayDate(date1)[2];
+
+        int day2 = getArrayDate(date2)[0];
+        int month2 = getArrayDate(date2)[1];
+        int year2 = getArrayDate(date2)[2];
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        calendar1.set(Calendar.DAY_OF_MONTH,day1);
+        calendar1.set(Calendar.MONTH,month1);
+        calendar1.set(Calendar.YEAR,year1);
+
+        calendar2.set(Calendar.DAY_OF_MONTH,day2);
+        calendar2.set(Calendar.MONTH,month2);
+        calendar2.set(Calendar.YEAR,year2);
+
+        if (calendar1.after(calendar2)){
+            return date1;
+        }else {
+            return date2;
         }
     }
 }
