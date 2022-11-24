@@ -31,4 +31,36 @@
             android:layout_marginStart="10dp"
             android:textColor="@color/white"/>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:padding="10dp"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/img_giam_thongkethetap"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_back"/>
+        <EditText
+            android:id="@+id/edt_year_thongkethetap"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="8"
+            android:background="@drawable/bg_stroke"
+            android:text="2022"
+            android:gravity="center" />
+        <ImageView
+            android:id="@+id/img_tang_thongkethetap"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_next1" />
+    </LinearLayout>
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barchar_thongkethetap"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
 </LinearLayout>
