@@ -128,6 +128,11 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             getActivity().startActivity(intent);
             Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
+        img_naptien.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),ChucNangNapTien_MainActivity_HocVien.class);
+            getActivity().startActivity(intent);
+            Animatoo.INSTANCE.animateSwipeLeft(getContext());
+        });
         return view;
     }
 
