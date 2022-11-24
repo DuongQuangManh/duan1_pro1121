@@ -1,4 +1,5 @@
 package com.example.duan1_baove.fragment.admin;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.github.mikephil.charting.charts.PieChart;
@@ -82,7 +84,20 @@ public class DoanhThu_Fragment_Admin extends Fragment {
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Toast.makeText(getContext(), ((PieEntry)e).getLabel(), Toast.LENGTH_SHORT).show();
+                String label = ((PieEntry)e).getLabel();
+                if (label.equals("Thẻ tập")){
+                    Intent intent = new Intent(getContext(),ThongKeTheTap_MainActivity_Admin.class);
+                    getActivity().startActivity(intent);
+                    Animatoo.INSTANCE.animateSwipeLeft(getContext());
+                }else if (label.equals("Cửa hàng")){
+                    Intent intent = new Intent(getContext(),ThongKeCuaHang_MainActivity_Admin.class);
+                    getActivity().startActivity(intent);
+                    Animatoo.INSTANCE.animateSwipeLeft(getContext());
+                }else if (label.equals("Dịch vụ")){
+                    Intent intent = new Intent(getContext(),ThongKeDichVu_MainActivity_Admin.class);
+                    getActivity().startActivity(intent);
+                    Animatoo.INSTANCE.animateSwipeLeft(getContext());
+                }
             }
 
             @Override
