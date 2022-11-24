@@ -15,12 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuAn1_BaoVe">
         <activity
-            android:name=".fragment.hocvien.ChucNangNapTien_MainActivity_HocVien"
+            android:name=".fragment.admin.ThongKeCuaHang_MainActivity_Admin"
             android:exported="false">
         </activity>
         <activity
+            android:name=".fragment.admin.ThongKeDichVu_MainActivity_Admin"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".fragment.admin.ThongKeTheTap_MainActivity_Admin"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".fragment.hocvien.ChucNangNapTien_MainActivity_HocVien"
+            android:exported="false" />
+        <activity
             android:name=".fragment.hocvien.MuaTheTap_MainActivity_HocVien"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".fragment.hocvien.DatLichTap_MainActivity_HocVien"
             android:exported="false" />
