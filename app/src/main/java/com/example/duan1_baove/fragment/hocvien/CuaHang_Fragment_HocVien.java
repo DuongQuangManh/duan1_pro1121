@@ -227,7 +227,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     donHangChiTiet.setCuahang_id(cuaHang.getId());
                     donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart+", "+hour+":"+minute+":"+second);
                     donHangChiTiet.setTongtien(tongtien);
-                    donHangChiTiet.setGianiemyet(cuaHang.getGia());
+                    donHangChiTiet.setGianiemyet(cuaHang.getGianhap());
                     donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
                     DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
                     Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();

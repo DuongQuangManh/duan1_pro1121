@@ -33,4 +33,5 @@ public interface ThietBiDAO {
 
     @Query("SELECT COUNT(id) FROM thietbi")
     int getCount();
+
 }

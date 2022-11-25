@@ -38,26 +38,62 @@
         android:weightSum="10"
         android:padding="10dp"
         android:gravity="center">
-        <ImageView
-            android:id="@+id/img_giam_thongkedichvu"
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_back"/>
-        <EditText
-            android:id="@+id/edt_year_thongkedichvu"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/img_giam_thongkedichvu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back"
+                    android:layout_marginStart="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="8"
-            android:background="@drawable/bg_stroke"
-            android:text="2022"
-            android:gravity="center" />
-        <ImageView
-            android:id="@+id/img_tang_thongkedichvu"
+            android:layout_height="wrap_content"
+            android:layout_weight="7.4"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:id="@+id/edt_year_thongkedichvu"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="2022"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_next1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/img_tang_thongkedichvu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_next1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchar_thongkedichvu"

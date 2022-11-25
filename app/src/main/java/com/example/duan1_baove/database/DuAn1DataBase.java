@@ -15,6 +15,7 @@ import com.example.duan1_baove.dao.DonHangChiTietDAO;
 import com.example.duan1_baove.dao.KhachHangDAO;
 import com.example.duan1_baove.dao.LichSuGiaoDichDAO;
 import com.example.duan1_baove.dao.LoaiTheTapDAO;
+import com.example.duan1_baove.dao.SoTienBaoTriThietBiDAO;
 import com.example.duan1_baove.dao.TheTapDAO;
 import com.example.duan1_baove.dao.ThietBiDAO;
 import com.example.duan1_baove.dao.ThongBaoDAO;
@@ -27,15 +28,17 @@ import com.example.duan1_baove.model.DonHangChiTiet;
 import com.example.duan1_baove.model.KhachHang;
 import com.example.duan1_baove.model.LichSuGiaoDich;
 import com.example.duan1_baove.model.LoaiTheTap;
+import com.example.duan1_baove.model.SoTienBaoTriThietBi;
 import com.example.duan1_baove.model.TheTap;
 import com.example.duan1_baove.model.ThietBi;
 import com.example.duan1_baove.model.ThongBao;
 
 @Database(entities = {Admin.class, ChucVu.class, CuaHang.class,
         DonHangChiTiet.class, KhachHang.class, LoaiTheTap.class,
-        TheTap.class, ThietBi.class, ThongBao.class, LichSuGiaoDich.class, DangKiTapThu.class, DatLichTap.class},version = 1)
+        TheTap.class, ThietBi.class, ThongBao.class, LichSuGiaoDich.class,
+        DangKiTapThu.class, DatLichTap.class, SoTienBaoTriThietBi.class},version = 1)
 public abstract class DuAn1DataBase extends RoomDatabase {
-    private static final String DATABASE_NAME= "duan1.4";
+    private static final String DATABASE_NAME= "duan1.5";
     private static DuAn1DataBase instance;
 
     public static synchronized DuAn1DataBase getInstance(Context context){
@@ -57,6 +60,7 @@ public abstract class DuAn1DataBase extends RoomDatabase {
     public abstract LichSuGiaoDichDAO lichSuGiaoDichDAO();
     public abstract DangKiTapThuDAO dangKiTapThuDAO();
     public abstract DatLichTapDAO datLichTapDAO();
+    public abstract SoTienBaoTriThietBiDAO soTienBaoTriThietBiDAO();
 
 
 }
