@@ -1,7 +1,10 @@
 package com.example.duan1_baove.fragment.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +13,10 @@ import android.widget.ImageView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
+import com.example.duan1_baove.adapter.TopAdapter;
+import com.example.duan1_baove.adapter.TopLoaiTheTapAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
+import com.example.duan1_baove.model.ThongKe;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -32,12 +38,16 @@ public class ThongKeTheTap_MainActivity_Admin extends AppCompatActivity {
     ImageView img_tang,img_giam;
     int year = 2022;
     String[] months = {"","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"};
+    RecyclerView recyclerView;
+    TopLoaiTheTapAdapter adapter;
+    List<ThongKe> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_ke_the_tap_main_admin);
         initUi();
         setUpView();
+        capnhat();
         img_back.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -45,12 +55,26 @@ public class ThongKeTheTap_MainActivity_Admin extends AppCompatActivity {
             year++;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
         img_giam.setOnClickListener(v -> {
             year--;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
+    }
+    public void capnhat(){
+        list = new ArrayList<>();
+        Cursor cursor = DuAn1DataBase.getInstance(this).theTapDAO().getTop10("%-%-"+year+"%");
+        while (cursor.moveToNext()){
+            list.add(new ThongKe(cursor.getInt(0),cursor.getString(1)));
+        }
+        adapter = new TopLoaiTheTapAdapter(this);
+        adapter.setData(list);
+        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
     }
     private void initUi() {
         img_back = findViewById(R.id.img_back_thongkethetap);
@@ -58,6 +82,7 @@ public class ThongKeTheTap_MainActivity_Admin extends AppCompatActivity {
         edt_year = findViewById(R.id.edt_year_thongkethetap);
         img_giam = findViewById(R.id.img_giam_thongkethetap);
         img_tang = findViewById(R.id.img_tang_thongkethetap);
+        recyclerView = findViewById(R.id.rcy_topthetap);
     }
     public void setUpView(){
         List<BarEntry> list = new ArrayList<>();

@@ -29,4 +29,10 @@ public interface CuaHangDAO {
 
     @Query("SELECT *FROM cuahang WHERE theloai= :type")
     List<CuaHang> retrieveByType(String type);
+
+    @Query("SELECT gia FROM cuahang WHERE id= :id")
+    int getGiaBan(String id);
+
+    @Query("SELECT name FROM cuahang WHERE id= :id")
+    String getName(String id);
 }

@@ -1,7 +1,10 @@
 package com.example.duan1_baove.fragment.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
@@ -9,7 +12,9 @@ import android.widget.ImageView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
+import com.example.duan1_baove.adapter.TopAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
+import com.example.duan1_baove.model.ThongKe;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -31,12 +36,16 @@ public class ThongKeDichVu_MainActivity_Admin extends AppCompatActivity {
     ImageView img_tang,img_giam;
     int year = 2022;
     String[] months = {"","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"};
+    RecyclerView recyclerView;
+    TopAdapter adapter;
+    List<ThongKe> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_ke_dich_vu_main_admin);
         initUi();
         setUpView();
+        capnhat();
         img_back.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -44,12 +53,26 @@ public class ThongKeDichVu_MainActivity_Admin extends AppCompatActivity {
             year++;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
         img_giam.setOnClickListener(v -> {
             year--;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
+    }
+    public void capnhat(){
+        list = new ArrayList<>();
+        Cursor cursor = DuAn1DataBase.getInstance(this).donHangChiTietDAO().getTop10DichVu("%-%-"+year+"%");
+        while (cursor.moveToNext()){
+            list.add(new ThongKe(cursor.getInt(0),cursor.getString(1)));
+        }
+        adapter = new TopAdapter(this);
+        adapter.setData(list);
+        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
     }
     private void initUi() {
         img_back = findViewById(R.id.img_back_thongkedichvu);
@@ -57,6 +80,7 @@ public class ThongKeDichVu_MainActivity_Admin extends AppCompatActivity {
         edt_year = findViewById(R.id.edt_year_thongkedichvu);
         img_giam = findViewById(R.id.img_giam_thongkedichvu);
         img_tang = findViewById(R.id.img_tang_thongkedichvu);
+        recyclerView = findViewById(R.id.rcy_topdichvu);
     }
 
     public void setUpView(){

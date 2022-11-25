@@ -31,4 +31,7 @@ public interface LoaiTheTapDAO {
 
     @Query("SELECT gia FROM loaithetap WHERE id= :id")
     int getGia(String id);
+
+    @Query("SELECT name FROM loaithetap WHERE id= :id ")
+    String getName(String id);
 }
