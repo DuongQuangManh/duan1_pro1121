@@ -48,4 +48,5 @@ public interface AdminDAO {
 
     @Query("SELECT COUNT(user) FROM admin")
     int getCount();
+
 }

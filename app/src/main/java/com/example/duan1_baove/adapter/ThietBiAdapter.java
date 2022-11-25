@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.database.DuAn1DataBase;
+import com.example.duan1_baove.model.SoTienBaoTriThietBi;
 import com.example.duan1_baove.model.ThietBi;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -143,9 +144,13 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                                     Toast.makeText(context, "Vui lòng nhập đúng số tiền", Toast.LENGTH_SHORT).show();
                                 }
                                 thietBi.setTongchiphibaotri(DuAn1DataBase.getInstance(context).thietBiDAO().getTongSoTienBaoTri(String.valueOf(thietBi.getId()))+chiphi);
-                                Date datetest= new Date();
-                                thietBi.setThoigianbaotrigannhat(sdfvn.format(datetest));
+                                thietBi.setThoigianbaotrigannhat(sdfvn.format(new Date()));
                                 DuAn1DataBase.getInstance(context).thietBiDAO().update(thietBi);
+                                SoTienBaoTriThietBi soTienBaoTriThietBi = new SoTienBaoTriThietBi();
+                                soTienBaoTriThietBi.setDate(sdfvn.format(new Date()));
+                                soTienBaoTriThietBi.setSotien(chiphi);
+                                soTienBaoTriThietBi.setThietbi_id(thietBi.getId());
+                                DuAn1DataBase.getInstance(context).soTienBaoTriThietBiDAO().insert(soTienBaoTriThietBi);
                                 notifyDataSetChanged();
                             }
                         })
@@ -192,7 +197,6 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                 txt_ngaybaotri =dialog.findViewById(R.id.txti_ngaybaotrigannhat_dialogthietbi);
                 edt_baotrigannhat = dialog.findViewById(R.id.edt_ngaybaotrigannhat_dialogthietbi);
                 edt_ngaymua = dialog.findViewById(R.id.edt_ngaymua_dialogthietbi);
-
 
 
                 edt_id.setText(thietBi.getId()+"");
