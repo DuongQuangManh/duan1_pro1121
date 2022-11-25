@@ -29,6 +29,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.duan1_baove.HocVien_MainActivity;
 import com.example.duan1_baove.R;
 import com.example.duan1_baove.adapter.SpinnerAdapterLoaiTheTap;
 import com.example.duan1_baove.adapter.SpinnerAdapterNapTien;
@@ -92,6 +93,8 @@ public class TheTap_Fragment_Admin extends Fragment {
     Calendar lichsearch;
     Calendar lichend1;
     long day1;
+    String endtimenew;
+    List<TheTap> listTT;
 
 
     @Override
@@ -207,6 +210,18 @@ public class TheTap_Fragment_Admin extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 strKhachHangID = listKhachHang.get(position).getSoDienThoai();
+                spn_loaithetap.setSelection(0);
+                listTT = DuAn1DataBase.getInstance(getContext()).theTapDAO().checkTheTap(strKhachHangID);
+                if (listTT.size()<=0){
+                    endtimenew = day+"-"+month+"-"+year;
+                    Log.d("abcd","chưa có thẻ tập");
+                }else {
+                    endtimenew = listTT.get(0).getNgayHetHan();
+                    for(int i=1;i<listTT.size();i++){
+                        endtimenew = getMax(endtimenew,listTT.get(i).getNgayHetHan());
+                    }
+                    Log.d("abcd"," có thẻ tập");
+                }
             }
 
             @Override
@@ -214,7 +229,6 @@ public class TheTap_Fragment_Admin extends Fragment {
 
             }
         });
-
         listLoaiTheTap = DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getAll();
         SpinnerAdapterLoaiTheTap spinnerLoaiTheTap = new SpinnerAdapterLoaiTheTap(getContext(),R.layout.item_spiner_naptien,listLoaiTheTap);
         spn_loaithetap.setAdapter(spinnerLoaiTheTap);
@@ -223,11 +237,7 @@ public class TheTap_Fragment_Admin extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 intLoaiTheTap = listLoaiTheTap.get(position).getId();
                 calendarEndTime = Calendar.getInstance();
-                calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
-                yearEnd = calendarEndTime.get(Calendar.YEAR);
-                monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
-                dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
-                edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                tinhsongay(position);
             }
 
             @Override
@@ -246,7 +256,7 @@ public class TheTap_Fragment_Admin extends Fragment {
             theTap = new TheTap();
             theTap.setKhachhang_id(strKhachHangID);
             theTap.setLoaithetap_id(intLoaiTheTap);
-            theTap.setNgayDangKy(edt_starttime.getText().toString().trim());
+            theTap.setNgayDangKy(endtimenew);
             theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
             theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia());
             DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
@@ -254,6 +264,24 @@ public class TheTap_Fragment_Admin extends Fragment {
             capNhat();
             dialog.dismiss();
         });
+    }
+    private void tinhsongay(int position){
+        if (listTT.size()>0){
+            calendarEndTime.set(Calendar.DAY_OF_MONTH,getArrayDate(endtimenew)[0]);
+            calendarEndTime.set(Calendar.MONTH,getArrayDate(endtimenew)[1]);
+            calendarEndTime.set(Calendar.YEAR,getArrayDate(endtimenew)[2]);
+            calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+            yearEnd = calendarEndTime.get(Calendar.YEAR);
+            monthEnd = calendarEndTime.get(Calendar.MONTH);
+            dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+            edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+        }else {
+            calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+            yearEnd = calendarEndTime.get(Calendar.YEAR);
+            monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
+            dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+            edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+        }
     }
     private void sapHetHan(){
         list = new ArrayList<>();
@@ -297,91 +325,7 @@ public class TheTap_Fragment_Admin extends Fragment {
         recyclerView.setAdapter(adapter);
     }
     private void opendialog(TheTap theTap) {
-        Dialog dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_giahangoitap);
-        dialog.show();
-        Window window = dialog.getWindow();
-        if (window==null){
-            return;
-        }
-        window.setBackgroundDrawable(null);
-        edt_name_giahan = dialog.findViewById(R.id.edt_name_giahanthetap);
-        edt_endtime_giahan = dialog.findViewById(R.id.edt_endtime_giahanthetap);
-        edt_starttime_giahan = dialog.findViewById(R.id.edt_starttime_giahanthetap);
-        spn_loaithetap_giahan = dialog.findViewById(R.id.spn_loaithetap_giahanthetap);
-        btn_add_giahan = dialog.findViewById(R.id.btn_luu_giahanthetap);
-        btn_huy_giahan = dialog.findViewById(R.id.btn_huy_giahanthetap);
-
-        edt_name_giahan.setText(DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0).getHoten());
-
-        listLoaiTheTap_giahan = DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getAll();
-        SpinnerAdapterLoaiTheTap spinnerLoaiTheTapgiahan = new SpinnerAdapterLoaiTheTap(getContext(),R.layout.item_spiner_naptien,listLoaiTheTap_giahan);
-        spn_loaithetap_giahan.setAdapter(spinnerLoaiTheTapgiahan);
-        spn_loaithetap_giahan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                idloaithetap = listLoaiTheTap_giahan.get(position).getId();
-                calendarEndTime_giahan = Calendar.getInstance();
-                calendarEndTime_giahan.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap_giahan.get(position).getHanSuDung()));
-                yearEnd_giahan = calendarEndTime_giahan.get(Calendar.YEAR);
-                monthEnd_giahan = calendarEndTime_giahan.get(Calendar.MONTH)+1;
-                dayEnd_giahan = calendarEndTime_giahan.get(Calendar.DAY_OF_MONTH);
-                edt_endtime_giahan.setText(dayEnd_giahan+"-"+monthEnd_giahan+"-"+yearEnd_giahan);
-                TongTienGiaTheTap = DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(idloaithetap)).get(0).getGia();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        edt_starttime_giahan.setText(day_giahan+"-"+month_giahan+"-"+year_giahan);
-
-
-        btn_huy_giahan.setOnClickListener(v -> {
-            dialog.cancel();
-        });
-        btn_add_giahan.setOnClickListener(v -> {
-            EditText editText = new EditText(getContext());
-            editText.setBackground(getContext().getDrawable(R.drawable.custom_edt));
-            new AlertDialog.Builder(getContext()).setTitle("Mật khẩu")
-                    .setMessage("Vui lòng nhập mật khẩu")
-                    .setView(editText)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog1, int which) {
-                            if (editText.getText().toString().trim().equals(DuAn1DataBase.getInstance(getContext()).khachHangDAO().getPass(theTap.getKhachhang_id()))){
-                                if (TongTienGiaTheTap > DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0).getSoDu()){
-                                    Toast.makeText(getContext(), "Số dư không đủ vui lòng kiểm tra lại tài khoản", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    theTap.setLoaithetap_id(idloaithetap);
-                                    theTap.setNgayDangKy(edt_starttime_giahan.getText().toString().trim());
-                                    theTap.setNgayHetHan(edt_endtime_giahan.getText().toString().trim());
-                                    theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(theTap.getKhachhang_id())+
-                                    DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(idloaithetap)).get(0).getGia());
-                                    DuAn1DataBase.getInstance(getContext()).theTapDAO().update(theTap);
-                                    Toast.makeText(getContext(), "Gia hạn thẻ tập thành công", Toast.LENGTH_SHORT).show();
-                                    KhachHang khachHang = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0);
-                                    khachHang.setSoDu(khachHang.getSoDu()-TongTienGiaTheTap);
-                                    DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
-                                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
-                                    lichSuGiaoDich.setSoTien(TongTienGiaTheTap);
-                                    lichSuGiaoDich.setType("Trừ");
-                                    lichSuGiaoDich.setKhachang_id(theTap.getKhachhang_id());
-                                    lichSuGiaoDich.setThoigian(format.format(new Date()));
-                                    DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
-                                    capNhat();
-                                    dialog.dismiss();
-                                }
-                            }else {
-                                Toast.makeText(getContext(), "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    })
-                    .setNegativeButton("No",null).show();
-        });
+        Toast.makeText(getContext(), "Vui lòng mua thêm thẻ tập", Toast.LENGTH_SHORT).show();
     }
     public void hideSoftKeyBroad(){
         InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -398,5 +342,30 @@ public class TheTap_Fragment_Admin extends Fragment {
             return null;
         }
         return arr;
+    }
+    public String getMax(String date1,String date2){
+        int day1 = getArrayDate(date1)[0];
+        int month1 = getArrayDate(date1)[1];
+        int year1 = getArrayDate(date1)[2];
+
+        int day2 = getArrayDate(date2)[0];
+        int month2 = getArrayDate(date2)[1];
+        int year2 = getArrayDate(date2)[2];
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        calendar1.set(Calendar.DAY_OF_MONTH,day1);
+        calendar1.set(Calendar.MONTH,month1);
+        calendar1.set(Calendar.YEAR,year1);
+
+        calendar2.set(Calendar.DAY_OF_MONTH,day2);
+        calendar2.set(Calendar.MONTH,month2);
+        calendar2.set(Calendar.YEAR,year2);
+
+        if (calendar1.after(calendar2)){
+            return date1;
+        }else {
+            return date2;
+        }
     }
 }

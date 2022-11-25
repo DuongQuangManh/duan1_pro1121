@@ -61,6 +61,13 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
     int TongTienGiaTheTap,idloaithetapcu;
     int idkhachhang;
     Calendar calendarDangKy;
+    String endtimenew;
+
+    List<TheTap> listTT;
+    private Calendar calendar1 = Calendar.getInstance();
+    int year = calendar1.get(Calendar.YEAR);
+    int month = calendar1.get(Calendar.MONTH)+1;
+    int day = calendar1.get(Calendar.DAY_OF_MONTH);
 
 
     public TheTapAdapter(Context context,IClickListener iClickListener) {
@@ -91,13 +98,13 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
         if (theTap!=null){
             idkhachcu = theTap.getKhachhang_id();
             giagoitapcu = DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(theTap.getLoaithetap_id())).get(0).getGia();
-            Log.v("giaca",giagoitapcu+"Gía cũ");
-            Log.v("giaca",DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(theTap.getKhachhang_id())+"Tổng tiền cũ");
+
             holder.tv_id.setText("Mã thẻ tập: "+theTap.getId());
             holder.tv_hoten.setText("Họ tên: "+ DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(theTap.getKhachhang_id()).get(0).getHoten());
             holder.tv_loathe.setText("Loại thẻ: "+ DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(theTap.getLoaithetap_id())).get(0).getName());
             holder.tv_starttime.setText("Thời gian bắt đầu: "+theTap.getNgayDangKy());
             holder.tv_endtime.setText("Thời gian kết thúc: "+theTap.getNgayHetHan());
+
             calendar = Calendar.getInstance();
             lichend = Calendar.getInstance();
             lichend.set(Calendar.DAY_OF_MONTH,getArrayDate(theTap.getNgayHetHan())[0]);
@@ -187,6 +194,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                     spn_khachhang = dialog.findViewById(R.id.spn_tenkhachhang_dialogthetap);
                     spn_loaithetap = dialog.findViewById(R.id.spn_loaithetap_dialogthetap);
 
+
                     listKhachHang = DuAn1DataBase.getInstance(context).khachHangDAO().getAll();
                     SpinnerAdapterNapTien spinnerKhachHang = new SpinnerAdapterNapTien(context,R.layout.item_spiner_naptien,listKhachHang);
                     spn_khachhang.setAdapter(spinnerKhachHang);
@@ -194,8 +202,17 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             strKhachHangID = listKhachHang.get(position).getSoDienThoai();
-                            if (DuAn1DataBase.getInstance(context).theTapDAO().checkTheTap(strKhachHangID).size()>0){
-                                spn_khachhang.setSelection(position);
+                            spn_loaithetap.setSelection(0);
+                            listTT = DuAn1DataBase.getInstance(context).theTapDAO().checkTheTap(strKhachHangID);
+                            if (listTT.size()<=0){
+                                endtimenew = day+"-"+month+"-"+year;
+                                Log.d("abcd","chưa có thẻ tập");
+                            }else {
+                                endtimenew = listTT.get(0).getNgayHetHan();
+                                for(int i=1;i<listTT.size();i++){
+                                    endtimenew = getMax(endtimenew,listTT.get(i).getNgayHetHan());
+                                }
+                                Log.d("abcd"," có thẻ tập");
                             }
                         }
 
@@ -213,12 +230,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             intLoaiTheTap = listLoaiTheTap.get(position).getId();
                             calendarEndTime = Calendar.getInstance();
-                            calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
-                            yearEnd = calendarEndTime.get(Calendar.YEAR);
-                            monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
-                            dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
-                            edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
-                            TongTienGiaTheTap = DuAn1DataBase.getInstance(context).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia();
+                            tinhsongay(position);
                         }
 
                         @Override
@@ -226,6 +238,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
 
                         }
                     });
+
                     for (int i1=0;i1<listKhachHang.size();i1++){
                         if (listKhachHang.get(i1).getSoDienThoai().equals(theTap.getKhachhang_id())){
                             idkhachhang = i1;
@@ -248,7 +261,7 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                     btn_add.setOnClickListener(v1 -> {
                         theTap.setKhachhang_id(strKhachHangID);
                         theTap.setLoaithetap_id(intLoaiTheTap);
-                        theTap.setNgayDangKy(edt_starttime.getText().toString().trim());
+                        theTap.setNgayDangKy(endtimenew);
                         theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
                         if (idkhachcu.equals(strKhachHangID)){
                             theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(context).theTapDAO().getTongSoTien(strKhachHangID)-giagoitapcu+TongTienGiaTheTap);
@@ -271,6 +284,24 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
             return list.size();
         }
         return 0;
+    }
+    private void tinhsongay(int position){
+        if (listTT.size()>0){
+            calendarEndTime.set(Calendar.DAY_OF_MONTH,getArrayDate(endtimenew)[0]);
+            calendarEndTime.set(Calendar.MONTH,getArrayDate(endtimenew)[1]);
+            calendarEndTime.set(Calendar.YEAR,getArrayDate(endtimenew)[2]);
+            calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+            yearEnd = calendarEndTime.get(Calendar.YEAR);
+            monthEnd = calendarEndTime.get(Calendar.MONTH);
+            dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+            edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+        }else {
+            calendarEndTime.add(Calendar.MONTH,Integer.parseInt(listLoaiTheTap.get(position).getHanSuDung()));
+            yearEnd = calendarEndTime.get(Calendar.YEAR);
+            monthEnd = calendarEndTime.get(Calendar.MONTH)+1;
+            dayEnd = calendarEndTime.get(Calendar.DAY_OF_MONTH);
+            edt_endtime.setText(dayEnd+"-"+monthEnd+"-"+yearEnd);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -334,5 +365,30 @@ public class TheTapAdapter extends RecyclerView.Adapter<TheTapAdapter.ViewHolder
                 notifyDataSetChanged();
             }
         };
+    }
+    public String getMax(String date1,String date2){
+        int day1 = getArrayDate(date1)[0];
+        int month1 = getArrayDate(date1)[1];
+        int year1 = getArrayDate(date1)[2];
+
+        int day2 = getArrayDate(date2)[0];
+        int month2 = getArrayDate(date2)[1];
+        int year2 = getArrayDate(date2)[2];
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        calendar1.set(Calendar.DAY_OF_MONTH,day1);
+        calendar1.set(Calendar.MONTH,month1);
+        calendar1.set(Calendar.YEAR,year1);
+
+        calendar2.set(Calendar.DAY_OF_MONTH,day2);
+        calendar2.set(Calendar.MONTH,month2);
+        calendar2.set(Calendar.YEAR,year2);
+
+        if (calendar1.after(calendar2)){
+            return date1;
+        }else {
+            return date2;
+        }
     }
 }
