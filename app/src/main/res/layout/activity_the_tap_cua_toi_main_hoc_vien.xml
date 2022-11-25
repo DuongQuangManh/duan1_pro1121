@@ -73,7 +73,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#C8000000"
+                        android:background="#6E6D6D"
                         android:gravity="center"
                         android:id="@+id/layout_giahan_thetapcuatoi"
                         android:visibility="invisible">
@@ -81,7 +81,7 @@
                             android:id="@+id/btn_giahan_thetapcuatoi"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="Gia Hạn Gói Tập"
+                            android:text="Hết hạn"
                             android:textColor="@color/white"
                             android:background="@drawable/bg_green"
                             android:enabled="false"/>
