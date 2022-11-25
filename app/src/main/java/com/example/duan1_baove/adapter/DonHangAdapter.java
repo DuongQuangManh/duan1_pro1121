@@ -104,7 +104,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
             holder.tv_name.setText("Tên đơn hàng: "+list.get(0).getName());
 
             if (list.get(0).getTheloai().equals("Món hàng")){
-                holder.tv_gia.setText("Giá: "+numberFormat.format(donHangChiTiet.getGianiemyet())+" vnđ/sp");
+                holder.tv_gia.setText("Giá: "+numberFormat.format(DuAn1DataBase.getInstance(context).cuaHangDAO().getGiaBan(String.valueOf(donHangChiTiet.getCuahang_id())))+" vnđ/sp");
                 holder.tv_strarttime.setVisibility(View.GONE);
                 holder.tv_endtime.setVisibility(View.GONE);
                 holder.tv_soluong.setVisibility(View.VISIBLE);

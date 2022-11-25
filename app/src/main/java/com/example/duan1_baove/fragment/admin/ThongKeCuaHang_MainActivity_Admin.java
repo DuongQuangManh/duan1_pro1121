@@ -1,7 +1,10 @@
 package com.example.duan1_baove.fragment.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +13,11 @@ import android.widget.ImageView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.duan1_baove.R;
+import com.example.duan1_baove.adapter.TopAdapter;
 import com.example.duan1_baove.database.DuAn1DataBase;
 import com.example.duan1_baove.fragment.hocvien.LichSuGiaoDich_MainActivity_HocVien;
+import com.example.duan1_baove.model.CuaHang;
+import com.example.duan1_baove.model.ThongKe;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -33,12 +39,17 @@ public class ThongKeCuaHang_MainActivity_Admin extends AppCompatActivity {
     ImageView img_tang,img_giam;
     int year = 2022;
     String[] months = {"","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"};
+    RecyclerView recyclerView;
+    TopAdapter adapter;
+    List<ThongKe> list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_ke_cua_hang_main_admin);
         initUi();
         setUpView();
+        capnhat();
         img_back.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -46,12 +57,15 @@ public class ThongKeCuaHang_MainActivity_Admin extends AppCompatActivity {
             year++;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
         img_giam.setOnClickListener(v -> {
             year--;
             edt_year.setText(year+"");
             setUpView();
+            capnhat();
         });
+
     }
 
     private void initUi() {
@@ -60,6 +74,20 @@ public class ThongKeCuaHang_MainActivity_Admin extends AppCompatActivity {
         edt_year = findViewById(R.id.edt_year_thongkecuahang);
         img_giam = findViewById(R.id.img_giam_thongkecuahang);
         img_tang = findViewById(R.id.img_tang_thongkecuahang);
+        recyclerView = findViewById(R.id.rcy_topcuahang);
+    }
+
+    public void capnhat(){
+        list = new ArrayList<>();
+        Cursor cursor = DuAn1DataBase.getInstance(this).donHangChiTietDAO().getTop10("%-%-"+year+"%");
+        while (cursor.moveToNext()){
+            list.add(new ThongKe(cursor.getInt(0),cursor.getString(1)));
+        }
+        adapter = new TopAdapter(this);
+        adapter.setData(list);
+        LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
     }
 
     public void setUpView(){

@@ -1,5 +1,7 @@
 package com.example.duan1_baove.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -35,4 +37,7 @@ public interface TheTapDAO {
 
     @Query("SELECT SUM(tongsotiendamuathetap) FROM thetap WHERE ngayDangKy LIKE :date")
     int getDoanhThu (String date);
+
+    @Query("SELECT COUNT(loaithetap_id),loaithetap_id FROM thetap WHERE ngayDangKy LIKE :date GROUP BY loaithetap_id ORDER BY COUNT(loaithetap_id) DESC LIMIT 10")
+    Cursor getTop10(String date);
 }

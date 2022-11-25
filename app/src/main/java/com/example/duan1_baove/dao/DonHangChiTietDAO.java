@@ -1,10 +1,13 @@
 package com.example.duan1_baove.dao;
 
+import android.database.Cursor;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.duan1_baove.model.CuaHang;
 import com.example.duan1_baove.model.DonHangChiTiet;
 
 import java.util.List;
@@ -58,4 +61,10 @@ public interface DonHangChiTietDAO {
 
     @Query("SELECT SUM(tongtien)FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ' AND starttime LIKE :date GROUP BY cuahang_id")
     int getDoanhThuDichVuByMonth(String date);
+
+    @Query("SELECT SUM(donhangchitiet.soLuong),cuahang_id FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' AND starttime LIKE :date GROUP BY cuahang.id ORDER BY SUM(donhangchitiet.soLuong) DESC LIMIT 10")
+    Cursor getTop10(String date);
+
+    @Query("SELECT COUNT(cuahang_id),cuahang_id FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ' AND starttime LIKE :date GROUP BY cuahang.id ORDER BY SUM(cuahang_id) DESC LIMIT 10")
+    Cursor getTop10DichVu(String date);
 }
