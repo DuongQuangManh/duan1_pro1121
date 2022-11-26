@@ -114,6 +114,7 @@ public class Admin_MainActivity extends AppCompatActivity {
         });
         replaceFragment(new ThongBao_Fragment_Admin());
         navigationView.getMenu().findItem(R.id.nav_quanlythongbao).setChecked(true);
+        toolbar.setTitle(R.string.nav_quanlythongbao_admin);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -121,76 +122,91 @@ public class Admin_MainActivity extends AppCompatActivity {
                 if (id == R.id.nav_quanlythongbao){
                     if (CurrentFragment != FRAGMENT_THONGBAO){
                         replaceFragment(new ThongBao_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlythongbao_admin);
                         CurrentFragment = FRAGMENT_THONGBAO;
                     }
                 }else if (id == R.id.nav_quanlykhachhang){
                     if (CurrentFragment != FRAGMENT_KHACHHANG){
                         replaceFragment(new KhachHang_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlykhachhang_admin);
                         CurrentFragment = FRAGMENT_KHACHHANG;
                     }
                 }else if (id == R.id.nav_quanlythetap){
                     if (CurrentFragment != FRAGMENT_THETAP){
                         replaceFragment(new TheTap_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlythetap_admin);
                         CurrentFragment = FRAGMENT_THETAP;
                     }
                 }else if (id == R.id.nav_quanlycuahang){
                     if (CurrentFragment != FRAGMENT_CUAHANG){
                         replaceFragment(new CuaHang_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlycuahang_admin);
                         CurrentFragment = FRAGMENT_CUAHANG;
                     }
                 }else if (id == R.id.nav_quanlythietbi){
                     if (CurrentFragment != FRAGMENT_THIETBI){
                         replaceFragment(new ThietBi_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlythietbi_admin);
                         CurrentFragment = FRAGMENT_THIETBI;
                     }
                 }else if (id == R.id.nav_quanlyloaithetap){
                     if (CurrentFragment != FRAGMENT_LOAITHETAP){
                         replaceFragment(new LoaiTheTap_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlythetap_admin);
                         CurrentFragment = FRAGMENT_LOAITHETAP;
                     }
                 }else if (id == R.id.nav_quanlychucvu){
                     if (CurrentFragment != FRAGMENT_CHUCVU){
                         replaceFragment(new ChucVu_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlychucvu_admin);
                         CurrentFragment = FRAGMENT_CHUCVU;
                     }
                 }else if (id == R.id.nav_quanlyadmin){
                     if (CurrentFragment != FRAGMENT_NHANVIEN){
                         replaceFragment(new NhanVien_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlyadmin_admin);
                         CurrentFragment = FRAGMENT_NHANVIEN;
                     }
                 }else if (id == R.id.nav_doanhthu){
                     if (CurrentFragment != FRAGMENT_DOANHTHU){
                         replaceFragment(new DoanhThu_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlydoanhthu_admin);
                         CurrentFragment = FRAGMENT_DOANHTHU;
                     }
                 }else if (id == R.id.nav_quanlytaikhoan){
                     if (CurrentFragment != FRAGMENT_TAIKHOAN){
                         replaceFragment(new TaiKhoan_Fragment_Admin(Admin_MainActivity.this));
+                        toolbar.setTitle(R.string.nav_quanlytaikhoan_admin);
                         CurrentFragment = FRAGMENT_TAIKHOAN;
                     }
                 }else if (id == R.id.nav_doimatkhau){
                     if (CurrentFragment != FRAGMENT_DOIMATKHAU){
                         replaceFragment(new DoiMatKhau_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_doimatkhau_admin);
                         CurrentFragment = FRAGMENT_DOIMATKHAU;
                     }
                 }else if (id == R.id.nav_naptien){
                     if (CurrentFragment != FRAGMENT_NAPTIEN){
                         replaceFragment(new NapTien_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_naptien_admin);
                         CurrentFragment = FRAGMENT_NAPTIEN;
                     }
                 }else if (id == R.id.nav_duyetdonhang){
                     if (CurrentFragment != FRAGMENT_DUYETDONHANG){
                         replaceFragment(new DuyetDonHang_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_duyetdonhang_admin);
                         CurrentFragment = FRAGMENT_DUYETDONHANG;
                     }
                 }else if (id == R.id.nav_quanlythetapthu){
                     if (CurrentFragment != FRAGMENT_THETAPTHU){
                         replaceFragment(new TheTapThu_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlythetapthu_admin);
                         CurrentFragment = FRAGMENT_THETAPTHU;
                     }
                 }else if (id == R.id.nav_danhsachlichtap){
                     if (CurrentFragment != FRAGMENT_LICHDAYHOCVIEN){
                         replaceFragment(new DanhSachDayHocVien_Fragment_Admin());
+                        toolbar.setTitle(R.string.nav_quanlyhocviencuapt_admin);
                         CurrentFragment = FRAGMENT_LICHDAYHOCVIEN;
                     }
                 }else if (id == R.id.nav_dangxuat){
