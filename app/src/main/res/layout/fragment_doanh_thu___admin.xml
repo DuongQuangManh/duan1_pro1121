@@ -439,12 +439,22 @@
                         android:id="@+id/barchar_doanhthu"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"/>
+                    <TextView
+                        android:id="@+id/tv_thang_doanhthu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tháng 11"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:gravity="center"
+                        android:layout_marginTop="20dp"
+                        />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:padding="10dp"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="10dp">
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="30dp"

@@ -62,6 +62,7 @@ public class DoanhThu_Fragment_Admin extends Fragment {
     int year = 2022;
     String[] months = {"","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"};
     int month = Calendar.getInstance().get(Calendar.MONTH)+1;
+    TextView tv_thang;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class DoanhThu_Fragment_Admin extends Fragment {
         setUpViewBarChart();
         Log.v("1003",month+"");
         setUpDoanhThuByMonth(month,year);
+        tv_thang.setText("Tháng "+month);
         img_tang.setOnClickListener(v -> {
             year++;
             edt_year.setText(year+"");
@@ -133,6 +135,7 @@ public class DoanhThu_Fragment_Admin extends Fragment {
         tv_luongnhanvien_thang = view.findViewById(R.id.tv_luongnhanvien_thang);
         tv_tienbaotri_thang =view.findViewById(R.id.tv_tienbaotri_thang);
         tv_tongdoanhthu_thang = view.findViewById(R.id.tv_tongdoanhthu_thang);
+        tv_thang = view.findViewById(R.id.tv_thang_doanhthu);
     }
 
 
@@ -187,6 +190,7 @@ public class DoanhThu_Fragment_Admin extends Fragment {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 setUpDoanhThuByMonth((int)e.getX(),year);
+                tv_thang.setText("Tháng "+(int)e.getX());
                 Toast.makeText(getContext(), (int)e.getX()+"", Toast.LENGTH_SHORT).show();
             }
 
