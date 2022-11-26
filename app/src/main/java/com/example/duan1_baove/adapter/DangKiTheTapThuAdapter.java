@@ -29,9 +29,8 @@ public class DangKiTheTapThuAdapter extends RecyclerView.Adapter<DangKiTheTapThu
     private Context context;
     private List<DangKiTapThu> list;
     private List<DangKiTapThu> listOld;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Calendar lich = Calendar.getInstance();
-    int year,month,day;
+    Calendar lichnow;
     long songay;
 
     public DangKiTheTapThuAdapter(Context context) {
@@ -67,23 +66,15 @@ public class DangKiTheTapThuAdapter extends RecyclerView.Adapter<DangKiTheTapThu
             lich.set(Calendar.MONTH,getArrayDate(dangKiTapThu.getNgayTap())[1]);
             lich.set(Calendar.YEAR,getArrayDate(dangKiTapThu.getNgayTap())[2]);
 
-            year = lich.get(Calendar.YEAR);
-            month = lich.get(Calendar.MONTH);
-            day = lich.get(Calendar.DAY_OF_MONTH);
-
-            try {
-                Date date = simpleDateFormat.parse(year+"-"+month+"-"+day);
-                Date datenow = new Date();
-                songay =  date.getTime() - datenow.getTime();
-                if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=0){
-                    holder.tv_trangthai.setTextColor(Color.RED);
-                    holder.tv_trangthai.setText("Trạng thái: Hết hạn");
-                }else {
-                    holder.tv_trangthai.setTextColor(Color.GREEN);
-                    holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
+            lichnow = Calendar.getInstance();
+            lichnow.add(Calendar.MONTH,1);
+            songay =  lich.getTime().getTime() - lichnow.getTime().getTime();
+            if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=0){
+                holder.tv_trangthai.setTextColor(Color.RED);
+                holder.tv_trangthai.setText("Trạng thái: Hết hạn");
+            }else {
+                holder.tv_trangthai.setTextColor(Color.GREEN);
+                holder.tv_trangthai.setText("Trạng thái: Chưa hết hạn");
             }
         }
     }
