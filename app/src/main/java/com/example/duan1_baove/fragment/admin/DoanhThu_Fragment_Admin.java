@@ -204,6 +204,11 @@ public class DoanhThu_Fragment_Admin extends Fragment {
         tv_tongtienthetap.setText(format.format(doanhthuthetap)+" vnđ");
         tv_tongtiencuahang.setText(format.format(doanhthucuahang)+" vnđ");
         tv_tongtiendichvu.setText(format.format(doanhthudichvu)+" vnđ");
+        Log.d("805","tongsotiennhap "+format.format(tongsotiennhap)+" vnd");
+        Log.d("805","doanhthucuahang "+format.format(doanhthucuahang)+" vnd");
+        Log.d("805","doanhthudichvu "+format.format(doanhthudichvu)+" vnd");
+        Log.d("805","doanhthuthetap "+format.format(doanhthuthetap)+" vnd");
+
 
         tongdoanhthu = doanhthudichvu+doanhthuthetap+doanhthucuahang;
         if (tongdoanhthu==0){

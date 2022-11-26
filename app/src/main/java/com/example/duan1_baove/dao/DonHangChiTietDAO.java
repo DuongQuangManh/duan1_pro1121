@@ -47,19 +47,19 @@ public interface DonHangChiTietDAO {
     @Query("SELECT SUM(tongtien) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ'")
     int getTongSoTienKiemDuocTuDichVu();
 
-    @Query("SELECT SUM(tongtien) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' GROUP BY cuahang_id")
+    @Query("SELECT SUM(tongtien) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng'")
     int getTongSoTienKiemDuocTuMonHang();
 
-    @Query("SELECT SUM(cuahang.gianhap*donhangchitiet.soLuong) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' GROUP BY cuahang.id")
+    @Query("SELECT SUM(cuahang.gianhap*donhangchitiet.soLuong) FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng'")
     int getTongSoTienNhapMonHang();
 
     @Query("SELECT SUM(tongtien) FROM donhangchitiet WHERE starttime LIKE :date")
     int getTongSoTienTrongThang(String date);
 
-    @Query("SELECT SUM(tongtien)  - SUM(donhangchitiet.gianiemyet*donhangchitiet.soLuong) AS doanhthu FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' AND starttime LIKE :date GROUP BY cuahang_id")
+    @Query("SELECT SUM(tongtien)  - SUM(donhangchitiet.gianiemyet*donhangchitiet.soLuong) AS doanhthu FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' AND starttime LIKE :date")
     int getDoanhThuByMonth(String date);
 
-    @Query("SELECT SUM(tongtien)FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ' AND starttime LIKE :date GROUP BY cuahang_id")
+    @Query("SELECT SUM(tongtien)FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Dịch vụ' AND starttime LIKE :date")
     int getDoanhThuDichVuByMonth(String date);
 
     @Query("SELECT SUM(donhangchitiet.soLuong),cuahang_id FROM donhangchitiet JOIN cuahang ON donhangchitiet.cuahang_id = cuahang.id WHERE theloai= 'Món hàng' AND starttime LIKE :date GROUP BY cuahang.id ORDER BY SUM(donhangchitiet.soLuong) DESC LIMIT 10")

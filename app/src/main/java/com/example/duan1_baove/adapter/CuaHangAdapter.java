@@ -102,22 +102,6 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
                 holder.img_cuahang.setImageDrawable(Drawable.createFromPath(linkimg));
             }
 
-            holder.layout_update.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(context).setTitle("Xoá món hàng ?")
-                        .setMessage("Bạn có chắc chắn muốn xoá món hàng ?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                DuAn1DataBase.getInstance(context).cuaHangDAO().delete(cuaHang);
-                                list.remove(cuaHang);
-                                notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("No",null)
-                        .show();
-                return true;
-            });
-
             holder.layout_update.setOnClickListener(v -> {
                 Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

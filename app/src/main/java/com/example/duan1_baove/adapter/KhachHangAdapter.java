@@ -90,25 +90,6 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
                 Log.d("adapter",linkimg+" link");
                 holder.img.setImageDrawable(Drawable.createFromPath(linkimg));
             }
-            holder.layout_update.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    new AlertDialog.Builder(context).setTitle("Xoá khách hàng ?")
-                            .setMessage("Bạn có chắc chắn muốn xoá khách hàng ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    DuAn1DataBase.getInstance(context).khachHangDAO().delete(khachHang);
-                                    Toast.makeText(context, "Delete khách hàng thành công", Toast.LENGTH_SHORT).show();
-                                    list.remove(khachHang);
-                                    notifyDataSetChanged();
-                                }
-                            })
-                            .setNegativeButton("No",null)
-                            .show();
-                    return true;
-                }
-            });
             holder.layout_update.setOnClickListener(v -> {
                 Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
