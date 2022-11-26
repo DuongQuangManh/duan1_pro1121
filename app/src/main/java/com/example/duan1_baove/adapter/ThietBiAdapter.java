@@ -157,24 +157,6 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                         .setNegativeButton("No",null)
                         .show();
             });
-            holder.layout_update.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    new AlertDialog.Builder(context).setTitle("Xoá thiết bị ?")
-                            .setMessage("Bạn có chắc chắn muốn xoá thiết bị ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    DuAn1DataBase.getInstance(context).thietBiDAO().delete(thietBi);
-                                    list.remove(thietBi);
-                                    notifyDataSetChanged();
-                                }
-                            })
-                            .setNegativeButton("No",null)
-                            .show();
-                    return true;
-                }
-            });
             holder.layout_update.setOnClickListener(v -> {
                 Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -89,28 +89,6 @@ public class NhanVienAdapter extends RecyclerView.Adapter<NhanVienAdapter.ViewHo
                 Log.d("adapter",linkimg+" link");
                 holder.avt.setImageDrawable(Drawable.createFromPath(linkimg));
             }
-            holder.update.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    new AlertDialog.Builder(context).setTitle("Xoá nhân viên ?")
-                            .setMessage("Bạn có chắc chắn muốn xoá nhân viên ?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (!DuAn1DataBase.getInstance(context).chucVuDAO().chechChucVu(String.valueOf(admin.getChucvu_id())).equals("admin")){
-                                        DuAn1DataBase.getInstance(context).adminDAO().delete(admin);
-                                        list.remove(admin);
-                                        notifyDataSetChanged();
-                                    }else {
-                                        Toast.makeText(context, "Không thể xoá admin", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            })
-                            .setNegativeButton("No",null)
-                            .show();
-                    return true;
-                }
-            });
             holder.update.setOnClickListener(v -> {
                 Dialog dialog = new Dialog(context);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
