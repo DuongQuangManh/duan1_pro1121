@@ -2,6 +2,7 @@ package com.example.duan1_baove.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,10 @@ public class DangKiTheTapThuAdapter extends RecyclerView.Adapter<DangKiTheTapThu
     private Context context;
     private List<DangKiTapThu> list;
     private List<DangKiTapThu> listOld;
-    Calendar lich = Calendar.getInstance();
+    Calendar lich;
     Calendar lichnow;
     long songay;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     public DangKiTheTapThuAdapter(Context context) {
         this.context = context;
     }
@@ -54,6 +55,7 @@ public class DangKiTheTapThuAdapter extends RecyclerView.Adapter<DangKiTheTapThu
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         DangKiTapThu dangKiTapThu = list.get(position);
         if (dangKiTapThu!=null){
+            lich = Calendar.getInstance();
             KhachHang khachHang = DuAn1DataBase.getInstance(context).khachHangDAO().checkAcc(dangKiTapThu.getKhachhang_id()).get(0);
             if (khachHang!=null){
                 holder.tv_name.setText("Họ tên: "+khachHang.getHoten());
@@ -68,8 +70,11 @@ public class DangKiTheTapThuAdapter extends RecyclerView.Adapter<DangKiTheTapThu
 
             lichnow = Calendar.getInstance();
             lichnow.add(Calendar.MONTH,1);
-            songay =  lich.getTime().getTime() - lichnow.getTime().getTime();
-            if (TimeUnit.DAYS.convert(songay, TimeUnit.MILLISECONDS)<=0){
+            Log.d("314",lichnow.get(Calendar.DAY_OF_MONTH)+"-"+lichnow.get(Calendar.MONTH)+"-"+lichnow.get(Calendar.YEAR));
+            Log.d("314",lich.get(Calendar.DAY_OF_MONTH)+"-"+lich.get(Calendar.MONTH)+"-"+lich.get(Calendar.YEAR));
+
+            songay =  lichnow.getTime().getTime() - lich.getTime().getTime();
+            if (songay>0){
                 holder.tv_trangthai.setTextColor(Color.RED);
                 holder.tv_trangthai.setText("Trạng thái: Hết hạn");
             }else {
