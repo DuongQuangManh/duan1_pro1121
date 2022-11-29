@@ -253,14 +253,40 @@ public class TheTap_Fragment_Admin extends Fragment {
             dialog.cancel();
         });
         btn_add.setOnClickListener(v -> {
-            theTap = new TheTap();
-            theTap.setKhachhang_id(strKhachHangID);
-            theTap.setLoaithetap_id(intLoaiTheTap);
-            theTap.setNgayDangKy(endtimenew);
-            theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
-            theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia());
-            DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
-            Toast.makeText(getContext(), "Insert thẻ tập thành công", Toast.LENGTH_SHORT).show();
+            if (DuAn1DataBase.getInstance(getContext()).theTapDAO().checkTheTap(strKhachHangID).size()<=0){
+                theTap = new TheTap();
+                theTap.setKhachhang_id(strKhachHangID);
+                theTap.setLoaithetap_id(intLoaiTheTap);
+                theTap.setNgayDangKy(endtimenew);
+                theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
+                theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia());
+                DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
+                Toast.makeText(getContext(), "Mua thẻ tập thành công", Toast.LENGTH_SHORT).show();
+            }else {
+                EditText editText = new EditText(getContext());
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Vui lòng nhập mật khẩu !")
+                        .setView(editText)
+                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (DuAn1DataBase.getInstance(getContext()).khachHangDAO().getSoDU(strKhachHangID)<DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap))){
+                                    Toast.makeText(getContext(), "Số dư không đủ !", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    theTap = new TheTap();
+                                    theTap.setKhachhang_id(strKhachHangID);
+                                    theTap.setLoaithetap_id(intLoaiTheTap);
+                                    theTap.setNgayDangKy(endtimenew);
+                                    theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
+                                    theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)));
+                                    DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
+                                    Toast.makeText(getContext(), "Insert thẻ tập thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setPositiveButton("No", null)
+                        .show();
+            }
             capNhat();
             dialog.dismiss();
         });
