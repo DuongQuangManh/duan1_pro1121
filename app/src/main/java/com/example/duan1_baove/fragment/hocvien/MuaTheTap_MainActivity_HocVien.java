@@ -144,7 +144,6 @@ public class MuaTheTap_MainActivity_HocVien extends AppCompatActivity {
     }
     private void add(){
         if (checksodu(DuAn1DataBase.getInstance(this).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)))){
-
             Log.d("date",endtimenew);
             theTap = new TheTap();
             theTap.setKhachhang_id(HocVien_MainActivity.userHocVien);
