@@ -143,12 +143,12 @@ public class ThietBiAdapter extends RecyclerView.Adapter<ThietBiAdapter.ViewHold
                                     e.printStackTrace();
                                     Toast.makeText(context, "Vui lòng nhập đúng số tiền", Toast.LENGTH_SHORT).show();
                                 }
-                                thietBi.setTongchiphibaotri(DuAn1DataBase.getInstance(context).thietBiDAO().getTongSoTienBaoTri(String.valueOf(thietBi.getId()))+chiphi);
+                                thietBi.setTongchiphibaotri(DuAn1DataBase.getInstance(context).thietBiDAO().getTongSoTienBaoTri(String.valueOf(thietBi.getId()))+(chiphi*thietBi.getSoLuong()));
                                 thietBi.setThoigianbaotrigannhat(sdfvn.format(new Date()));
                                 DuAn1DataBase.getInstance(context).thietBiDAO().update(thietBi);
                                 SoTienBaoTriThietBi soTienBaoTriThietBi = new SoTienBaoTriThietBi();
                                 soTienBaoTriThietBi.setDate(sdfvn.format(new Date()));
-                                soTienBaoTriThietBi.setSotien(chiphi);
+                                soTienBaoTriThietBi.setSotien(chiphi*thietBi.getSoLuong());
                                 soTienBaoTriThietBi.setThietbi_id(thietBi.getId());
                                 DuAn1DataBase.getInstance(context).soTienBaoTriThietBiDAO().insert(soTienBaoTriThietBi);
                                 notifyDataSetChanged();
