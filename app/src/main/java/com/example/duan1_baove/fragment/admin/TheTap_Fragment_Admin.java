@@ -77,18 +77,6 @@ public class TheTap_Fragment_Admin extends Fragment {
     String[] tinhtrang = {"Tất cả","Sắp hết hạn"};
     String strTinhTrang = "Tất cả";
 
-    private EditText edt_name_giahan,edt_starttime_giahan,edt_endtime_giahan;
-    private Spinner spn_loaithetap_giahan;
-    private Button btn_add_giahan,btn_huy_giahan;
-    private List<LoaiTheTap> listLoaiTheTap_giahan;
-    int idloaithetap;
-    private Calendar calendar_giahan = Calendar.getInstance();
-    int year_giahan = calendar_giahan.get(Calendar.YEAR);
-    int month_giahan = calendar_giahan.get(Calendar.MONTH)+1;
-    int day_giahan = calendar_giahan.get(Calendar.DAY_OF_MONTH);
-    private Calendar calendarEndTime_giahan = Calendar.getInstance();
-    int yearEnd_giahan,monthEnd_giahan, dayEnd_giahan;
-    int TongTienGiaTheTap;
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
     Calendar lichsearch;
     Calendar lichend1;
@@ -262,34 +250,51 @@ public class TheTap_Fragment_Admin extends Fragment {
                 theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getByID(String.valueOf(intLoaiTheTap)).get(0).getGia());
                 DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
                 Toast.makeText(getContext(), "Mua thẻ tập thành công", Toast.LENGTH_SHORT).show();
+                capNhat();
             }else {
                 EditText editText = new EditText(getContext());
                 new AlertDialog.Builder(getContext())
                         .setTitle("Vui lòng nhập mật khẩu !")
                         .setView(editText)
-                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (DuAn1DataBase.getInstance(getContext()).khachHangDAO().getSoDU(strKhachHangID)<DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap))){
-                                    Toast.makeText(getContext(), "Số dư không đủ !", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    theTap = new TheTap();
-                                    theTap.setKhachhang_id(strKhachHangID);
-                                    theTap.setLoaithetap_id(intLoaiTheTap);
-                                    theTap.setNgayDangKy(endtimenew);
-                                    theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
-                                    theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)));
-                                    DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
-                                    Toast.makeText(getContext(), "Insert thẻ tập thành công", Toast.LENGTH_SHORT).show();
+                                if (checkPass(editText.getText().toString().trim(),DuAn1DataBase.getInstance(getContext()).khachHangDAO().getPass(strKhachHangID))){
+                                    if (DuAn1DataBase.getInstance(getContext()).khachHangDAO().getSoDU(strKhachHangID)<DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap))){
+                                        Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        theTap = new TheTap();
+                                        theTap.setKhachhang_id(strKhachHangID);
+                                        theTap.setLoaithetap_id(intLoaiTheTap);
+                                        theTap.setNgayDangKy(endtimenew);
+                                        theTap.setNgayHetHan(edt_endtime.getText().toString().trim());
+                                        theTap.setTongsotiendamuathetap(DuAn1DataBase.getInstance(getContext()).theTapDAO().getTongSoTien(strKhachHangID)+DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)));
+                                        DuAn1DataBase.getInstance(getContext()).theTapDAO().insert(theTap);
+                                        LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                                        lichSuGiaoDich.setType("Trừ");
+                                        lichSuGiaoDich.setKhachang_id(strKhachHangID);
+                                        lichSuGiaoDich.setSoTien(DuAn1DataBase.getInstance(getContext()).loaiTheTapDAO().getGia(String.valueOf(intLoaiTheTap)));
+                                        lichSuGiaoDich.setThoigian(format.format(new Date()));
+                                        DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+                                        Toast.makeText(getContext(), "Insert thẻ tập thành công", Toast.LENGTH_SHORT).show();
+                                        capNhat();
+                                    }
                                 }
                             }
                         })
-                        .setPositiveButton("No", null)
+                        .setNegativeButton("No", null)
                         .show();
             }
-            capNhat();
             dialog.dismiss();
         });
+    }
+    private boolean checkPass(String edt,String pass){
+        if (edt.equals(pass)){
+            return true;
+        }else {
+            Toast.makeText(getContext(), "Mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
     private void tinhsongay(int position){
         if (listTT.size()>0){
