@@ -32,8 +32,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     private List<DonHangChiTiet> listOld;
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private IClickListener iClickListener;
-    Calendar start = Calendar.getInstance();
-    Calendar end = Calendar.getInstance();
 
     public DonHangAdapter(Context context, IClickListener iClickListener) {
         this.context = context;
@@ -121,6 +119,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
             }
             holder.tv_tongtien.setText("Tổng tiền: "+numberFormat.format(donHangChiTiet.getTongtien())+ " vnđ");
             holder.tv_tinhtrang.setText("Tình trạng: "+donHangChiTiet.getTinhTrang());
+            holder.tv_hinhthucthanhtoan.setText("HTTT: "+donHangChiTiet.getHinhthucthanhtoan());
             holder.layout_update.setOnClickListener(v -> {
                 iClickListener.duyet(donHangChiTiet);
             });
@@ -136,7 +135,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_id,tv_nameuser,tv_name,tv_gia,tv_soluong,tv_strarttime,tv_endtime,tv_tongtien,tv_tinhtrang,tv_thoigiandathang;
+        private TextView tv_id,tv_nameuser,tv_name,tv_gia,tv_soluong,tv_strarttime,tv_endtime,tv_tongtien,tv_tinhtrang,tv_thoigiandathang,tv_hinhthucthanhtoan;
         private RelativeLayout layout_update;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -151,6 +150,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
             tv_tinhtrang = itemView.findViewById(R.id.tv_tinhtrang_donhangchitiet);
             tv_thoigiandathang = itemView.findViewById(R.id.tv_thoigianmua_donhangchitiet);
             layout_update = itemView.findViewById(R.id.layout_update_donhangchitiet);
+            tv_hinhthucthanhtoan = itemView.findViewById(R.id.tv_hinhthucthanhtoan_donhangchitiet);
         }
     }
     public int[] getArrayDate(String date){

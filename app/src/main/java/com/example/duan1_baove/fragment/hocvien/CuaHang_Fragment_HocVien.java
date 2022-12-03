@@ -71,12 +71,13 @@ public class CuaHang_Fragment_HocVien extends Fragment {
     int yearStart = lichStart.get(Calendar.YEAR);
     int monthStart = lichStart.get(Calendar.MONTH)+1;
     int dayStart = lichStart.get(Calendar.DAY_OF_MONTH);
-
     int hour = lichStart.get(Calendar.HOUR);
     int minute = lichStart.get(Calendar.MINUTE);
     int second = lichStart.get(Calendar.SECOND);
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy, hh:mm:ss");
-
+    Spinner spn_hinhthucthanhtoan;
+    String[] hinhthuc = {"Thanh toán bằng tiền trong tài khoản","Thanh toán khi nhận hàng"};
+    String strhinhthuc;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -129,6 +130,20 @@ public class CuaHang_Fragment_HocVien extends Fragment {
             getActivity().startActivity(intent);
             Animatoo.INSTANCE.animateFade(getContext());
         });
+
+        ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_dropdown_item,hinhthuc);
+        spn_hinhthucthanhtoan.setAdapter(adapter1);
+        spn_hinhthucthanhtoan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strhinhthuc = hinhthuc[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
     }
     private void initUi() {
@@ -150,6 +165,7 @@ public class CuaHang_Fragment_HocVien extends Fragment {
         btn_muangay = view.findViewById(R.id.btn_muangay_layoutmuahang);
         tv_tongtien_layoutmuahang = view.findViewById(R.id.tv_tongtien_layoutmuahang);
         tv_muathetap = view.findViewById(R.id.tv_muathetap_cuahanghocvien);
+        spn_hinhthucthanhtoan = view.findViewById(R.id.spn_hinhthucthanhtoan);
     }
     private void search(String strSearch) {
         adapter.getFilter().filter(strSearch);
@@ -217,9 +233,42 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 tv_tongtien_layoutmuahang.setText(numberFormat.format(tongtien)+" vnđ");
             });
             btn_muangay.setOnClickListener(v1 -> {
-                int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                if (tongtien > soDu){
-                    Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                if (strhinhthuc.equals("Thanh toán bằng tiền trong tài khoản")){
+                    int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
+                    if (tongtien > soDu){
+                        Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                    }else {
+                        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+                        donHangChiTiet.setSoLuong(soluong);
+                        donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
+                        donHangChiTiet.setCuahang_id(cuaHang.getId());
+                        donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart+", "+hour+":"+minute+":"+second);
+                        donHangChiTiet.setTongtien(tongtien);
+                        donHangChiTiet.setGianiemyet(cuaHang.getGianhap());
+                        donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                        donHangChiTiet.setHinhthucthanhtoan(strhinhthuc);
+                        DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
+                        Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();
+                        List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+                        KhachHang khachHang = list1.get(0);
+                        soDuMoi = soDu - tongtien;
+                        khachHang.setSoDu(soDuMoi);
+                        DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
+                        List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
+                        CuaHang cuaHang1 = list2.get(0);
+                        cuaHang1.setSoLuong(cuaHang1.getSoLuong()-soluong);
+                        DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+
+                        LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                        lichSuGiaoDich.setSoTien(tongtien);
+                        lichSuGiaoDich.setType("Trừ");
+                        lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
+                        lichSuGiaoDich.setThoigian(format.format(new Date()));
+                        DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+
+                        layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
+                        capnhat();
+                    }
                 }else {
                     DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
                     donHangChiTiet.setSoLuong(soluong);
@@ -229,25 +278,9 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     donHangChiTiet.setTongtien(tongtien);
                     donHangChiTiet.setGianiemyet(cuaHang.getGianhap());
                     donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                    donHangChiTiet.setHinhthucthanhtoan(strhinhthuc);
                     DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
                     Toast.makeText(getContext(), "Mua hàng thành công vui lòng ra quầy nhận hàng", Toast.LENGTH_SHORT).show();
-                    List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
-                    KhachHang khachHang = list1.get(0);
-                    soDuMoi = soDu - tongtien;
-                    khachHang.setSoDu(soDuMoi);
-                    DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
-                    List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
-                    CuaHang cuaHang1 = list2.get(0);
-                    cuaHang1.setSoLuong(cuaHang1.getSoLuong()-soluong);
-                    DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
-
-                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
-                    lichSuGiaoDich.setSoTien(tongtien);
-                    lichSuGiaoDich.setType("Trừ");
-                    lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
-                    lichSuGiaoDich.setThoigian(format.format(new Date()));
-                    DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
-
                     layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
                     capnhat();
                 }
@@ -299,9 +332,45 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                 }
             });
             btn_muangay.setOnClickListener(v1 -> {
-                int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
-                if (tongtien > soDu){
-                    Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                if (strhinhthuc.equals("Thanh toán bằng tiền trong tài khoản")){
+                    int soDu = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien).get(0).getSoDu();
+                    if (tongtien > soDu){
+                        Toast.makeText(getContext(), "Số dư không đủ", Toast.LENGTH_SHORT).show();
+                    }else {
+                        int yearEnd = lichEnd.get(Calendar.YEAR);
+                        int monthEnd = lichEnd.get(Calendar.MONTH)+1;
+                        int dayEnd = lichEnd.get(Calendar.DAY_OF_MONTH);
+                        DonHangChiTiet donHangChiTiet = new DonHangChiTiet();
+                        donHangChiTiet.setKhachang_id(HocVien_MainActivity.userHocVien);
+                        donHangChiTiet.setCuahang_id(cuaHang.getId());
+                        donHangChiTiet.setTinhTrang("Chưa kiểm duyệt");
+                        donHangChiTiet.setTongtien(tongtien);
+                        donHangChiTiet.setGianiemyet(cuaHang.getGia());
+                        donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
+                        donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                        donHangChiTiet.setHinhthucthanhtoan(strhinhthuc);
+                        DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
+                        Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();
+                        List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
+                        KhachHang khachHang = list1.get(0);
+                        soDuMoi = soDu - tongtien;
+                        khachHang.setSoDu(soDuMoi);
+                        DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
+                        List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
+                        CuaHang cuaHang1 = list2.get(0);
+                        cuaHang1.setSoLuong(cuaHang1.getSoLuong()-1);
+                        DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
+
+                        LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
+                        lichSuGiaoDich.setSoTien(tongtien);
+                        lichSuGiaoDich.setType("Trừ");
+                        lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
+                        lichSuGiaoDich.setThoigian(format.format(new Date()));
+                        DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
+
+                        layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
+                        capnhat();
+                    }
                 }else {
                     int yearEnd = lichEnd.get(Calendar.YEAR);
                     int monthEnd = lichEnd.get(Calendar.MONTH)+1;
@@ -314,28 +383,14 @@ public class CuaHang_Fragment_HocVien extends Fragment {
                     donHangChiTiet.setGianiemyet(cuaHang.getGia());
                     donHangChiTiet.setStarttime(dayStart+"-"+monthStart+"-"+yearStart);
                     donHangChiTiet.setEndtime(dayEnd+"-"+monthEnd+"-"+yearEnd);
+                    donHangChiTiet.setHinhthucthanhtoan(strhinhthuc);
                     DuAn1DataBase.getInstance(getContext()).donHangChiTietDAO().insert(donHangChiTiet);
                     Toast.makeText(getContext(), "Đăng kí dịch vụ thành công", Toast.LENGTH_SHORT).show();
-                    List<KhachHang> list1 = DuAn1DataBase.getInstance(getContext()).khachHangDAO().checkAcc(HocVien_MainActivity.userHocVien);
-                    KhachHang khachHang = list1.get(0);
-                    soDuMoi = soDu - tongtien;
-                    khachHang.setSoDu(soDuMoi);
-                    DuAn1DataBase.getInstance(getContext()).khachHangDAO().update(khachHang);
-                    List<CuaHang> list2 = DuAn1DataBase.getInstance(getContext()).cuaHangDAO().getByID(String.valueOf(cuaHang.getId()));
-                    CuaHang cuaHang1 = list2.get(0);
-                    cuaHang1.setSoLuong(cuaHang1.getSoLuong()-1);
-                    DuAn1DataBase.getInstance(getContext()).cuaHangDAO().update(cuaHang1);
-
-                    LichSuGiaoDich lichSuGiaoDich = new LichSuGiaoDich();
-                    lichSuGiaoDich.setSoTien(tongtien);
-                    lichSuGiaoDich.setType("Trừ");
-                    lichSuGiaoDich.setKhachang_id(HocVien_MainActivity.userHocVien);
-                    lichSuGiaoDich.setThoigian(format.format(new Date()));
-                    DuAn1DataBase.getInstance(getContext()).lichSuGiaoDichDAO().insert(lichSuGiaoDich);
 
                     layout_muahang.animate().alpha(v).translationY(800).setDuration(600).start();
                     capnhat();
                 }
+
             });
         }
 

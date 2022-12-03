@@ -86,15 +86,24 @@
             android:textSize="15sp"
             android:fontFamily="sans-serif-condensed-medium"
             android:layout_below="@+id/tv_endtime_donhangchitiet"/>
-
+        <TextView
+            android:id="@+id/tv_hinhthucthanhtoan_donhangchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HTTT: Thanh toán khi nhận hàng"
+            android:textSize="15sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:layout_below="@+id/tv_tongtien_donhangchitiet"/>
         <TextView
             android:id="@+id/tv_tinhtrang_donhangchitiet"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Tình trạng: chưa kiểm duyệt"
             android:textSize="15sp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:layout_below="@+id/tv_tongtien_donhangchitiet"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+           android:layout_below="@+id/tv_thoigianmua_donhangchitiet"
             android:textColor="#FF0000"/>
 
     </RelativeLayout>
