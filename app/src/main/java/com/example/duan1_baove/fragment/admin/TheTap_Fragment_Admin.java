@@ -333,13 +333,12 @@ public class TheTap_Fragment_Admin extends Fragment {
                         opendialog(theTap);
                     }
                 });
-                adapter.setData(list);
-                LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
-                recyclerView.setLayoutManager(manager);
-                recyclerView.setAdapter(adapter);
             }
         }
-
+        adapter.setData(list);
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
     }
 
     private void capNhat(){

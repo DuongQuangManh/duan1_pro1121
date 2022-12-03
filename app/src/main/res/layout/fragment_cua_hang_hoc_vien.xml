@@ -90,7 +90,7 @@
         android:orientation="vertical"
         android:background="@color/white"
         android:padding="10dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         >
         <ImageView
             android:id="@+id/img_avt_layoutmuahang"
@@ -108,7 +108,7 @@
             android:layout_marginTop="125dp"
             android:layout_toEndOf="@+id/img_avt_layoutmuahang"
             android:text="250.000 vnđ"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="#FF0000"/>
 
         <TextView
@@ -120,7 +120,7 @@
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/img_avt_layoutmuahang"
             android:text="SL: 45"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
         <ImageView
             android:id="@+id/img_close_layoutmuahang"
             android:layout_width="30dp"
@@ -143,31 +143,32 @@
                 android:textSize="18sp"
                 android:fontFamily="sans-serif-condensed-medium"/>
             <LinearLayout
-                android:layout_width="140dp"
-                android:layout_height="30dp"
+                android:layout_width="110dp"
+                android:layout_height="20dp"
                 android:layout_alignParentEnd="true"
                 android:orientation="horizontal"
                 android:weightSum="10">
                 <ImageView
                     android:id="@+id/img_tru_layoutsoluong"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_dev"
                     android:layout_weight="3"
                     android:background="@drawable/bg_stroke"/>
                 <EditText
                     android:id="@+id/edt_soluong_layoutsoluong"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
                     android:layout_weight="4"
                     android:background="@drawable/bg_stroke"
                     android:layout_marginLeft="3dp"
                     android:text="10"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:textSize="13sp"/>
                 <ImageView
                     android:id="@+id/img_cong_layoutsoluong"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/ic_plus_black"
                     android:layout_weight="3"
                     android:background="@drawable/bg_stroke"
@@ -189,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hạn sử dụng"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:fontFamily="sans-serif-condensed-medium"/>
             <Spinner
                 android:id="@+id/spn_hansudung_layouthansudung"
@@ -199,7 +200,28 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/custom_edt"/>
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_above="@id/layout_tongtien"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hình thức thanh toán: "
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-condensed-medium"/>
+            <Spinner
+                android:id="@+id/spn_hinhthucthanhtoan"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/custom_edt"/>
+
+        </LinearLayout>
         <RelativeLayout
+            android:id="@+id/layout_tongtien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/view_layoutmuahang">
@@ -227,7 +249,7 @@
         <Button
             android:id="@+id/btn_muangay_layoutmuahang"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:text="Mua ngay"
             android:textSize="18sp"
             android:textAllCaps="false"
