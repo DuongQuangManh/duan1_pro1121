@@ -5,11 +5,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.duan1_baove.fragment.hocvien.Create_Fragment_HocVien;
-import com.example.duan1_baove.fragment.hocvien.Login_Fragment_HocVien;
+import com.example.duan1_baove.fragment.hocvien.DanhSachYeuCauNapTien_Fragment_HocVien;
+import com.example.duan1_baove.fragment.hocvien.NapTien_Fragment_HocVien;
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+public class ViewPagerAdapterNapTien extends FragmentStateAdapter {
+
+    public ViewPagerAdapterNapTien(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
@@ -17,9 +18,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 1:
-                return new Create_Fragment_HocVien();
-            default: return new Login_Fragment_HocVien();
+            case 1: return new DanhSachYeuCauNapTien_Fragment_HocVien();
+            default: return new NapTien_Fragment_HocVien();
         }
     }
 

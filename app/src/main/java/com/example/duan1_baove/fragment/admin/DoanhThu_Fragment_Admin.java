@@ -1,5 +1,6 @@
 package com.example.duan1_baove.fragment.admin;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -105,11 +106,16 @@ public class DoanhThu_Fragment_Admin extends Fragment {
         int luong =DuAn1DataBase.getInstance(getContext()).adminDAO().getTongLuong();
         int baotri= DuAn1DataBase.getInstance(getContext()).soTienBaoTriThietBiDAO().getMoneyByDate("%-"+thang+"-"+nam+"%");
         int tong = thetap +cuahang+dichvu-luong-baotri;
-        tv_tongtienthetap_thang.setText(format.format(thetap)+ " vnđ");
-        tv_tongtiencuahang_thang.setText(format.format(cuahang)+ " vnđ");
-        tv_tongtiendichvu_thang.setText(format.format(dichvu)+ " vnđ");
-        tv_luongnhanvien_thang.setText(format.format(luong)+ " vnđ");
-        tv_tienbaotri_thang.setText(format.format( baotri)+ " vnđ");
+        tv_tongtienthetap_thang.setText("+"+format.format(thetap)+ " vnđ");
+        tv_tongtiencuahang_thang.setText("+"+format.format(cuahang)+ " vnđ");
+        tv_tongtiendichvu_thang.setText("+"+format.format(dichvu)+ " vnđ");
+        tv_luongnhanvien_thang.setText("-"+format.format(luong)+ " vnđ");
+        tv_tienbaotri_thang.setText("-"+format.format( baotri)+ " vnđ");
+        if (tong <= 0){
+            tv_tongdoanhthu_thang.setTextColor(Color.RED);
+        }else {
+            tv_tongdoanhthu_thang.setTextColor(Color.GREEN);
+        }
         tv_tongdoanhthu_thang.setText(format.format(tong)+ " vnđ");
     }
 

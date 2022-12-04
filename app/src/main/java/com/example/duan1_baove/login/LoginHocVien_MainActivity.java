@@ -24,6 +24,7 @@ public class LoginHocVien_MainActivity extends AppCompatActivity {
         tv_dangky.setBackgroundColor(Color.TRANSPARENT);
         adapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(adapter);
+        viewPager2.setUserInputEnabled(false);
         tv_dangnhap.setOnClickListener(v -> {
             viewPager2.setCurrentItem(0);
             tv_dangnhap.setBackground(this.getResources().getDrawable(R.drawable.bg_white));
