@@ -534,7 +534,7 @@
                                 android:id="@+id/tv_luongnhanvien_thang"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#05C10D"
+                                android:textColor="#FF0000"
                                 android:text="100.000.000 vnđ"
                                 android:layout_toEndOf="@+id/tv_luong_thang"
                                 android:textSize="16sp"/>
@@ -555,7 +555,7 @@
                                 android:id="@+id/tv_tienbaotri_thang"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#05C10D"
+                                android:textColor="#FF0000"
                                 android:text="100.000.000 vnđ"
                                 android:layout_toEndOf="@+id/tv_baotrithietbi_thang"
                                 android:textSize="16sp"/>
