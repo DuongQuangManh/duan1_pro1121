@@ -35,12 +35,14 @@ public class NapTien_Fragment_Admin extends Fragment {
     ViewPager2 viewPager2;
     ViewPagerAdapterNapTienAdmin adapter;
     String[] tab = {"Nạp tiền","DS nạp tiền"};
+    TabDanhSachNapTien_Fragment_Admin frag1 = new TabDanhSachNapTien_Fragment_Admin();
+    TabNapTien_Fragment_Admin frag2 = new TabNapTien_Fragment_Admin();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view=  inflater.inflate(R.layout.fragment_nap_tien___admin, container, false);
         initUi();
-        adapter = new ViewPagerAdapterNapTienAdmin(getActivity());
+        adapter = new ViewPagerAdapterNapTienAdmin(getActivity(),frag2,frag1);
         viewPager2.setAdapter(adapter);
         tabLayout.setSelectedTabIndicator(R.drawable.bg_green);
         new TabLayoutMediator(tabLayout,viewPager2,(tab1, position) -> tab1.setText(tab[position])).attach();
@@ -53,5 +55,12 @@ public class NapTien_Fragment_Admin extends Fragment {
         viewPager2 = view.findViewById(R.id.viewpager_naptienadmin);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (frag2.view!=null){
+            frag2.update();
+        }
 
+    }
 }

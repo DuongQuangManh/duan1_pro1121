@@ -64,6 +64,7 @@ public class DoanhThu_Fragment_Admin extends Fragment {
     String[] months = {"","T1","T2","T3","T4","T5","T6","T7","T8","T9","T10","T11","T12"};
     int month = Calendar.getInstance().get(Calendar.MONTH)+1;
     TextView tv_thang;
+    BarEntry barEntry;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -160,7 +161,11 @@ public class DoanhThu_Fragment_Admin extends Fragment {
             Log.d("doanhthu933",luongnhanvien+"Thang "+i);
             Log.d("doanhthu933",sotienbaotrithietbi+"Thang "+i);
             Log.d("doanhthu933",tongdoanhthu+"");
-            BarEntry barEntry = new BarEntry(i,tongdoanhthu);
+            if (tongdoanhthu<=0){
+                barEntry = new BarEntry(i,0);
+            }else {
+                barEntry = new BarEntry(i,tongdoanhthu);
+            }
             list.add(barEntry);
         }
         BarDataSet set = new BarDataSet(list,"abc");

@@ -9,17 +9,20 @@ import com.example.duan1_baove.fragment.admin.TabDanhSachNapTien_Fragment_Admin;
 import com.example.duan1_baove.fragment.admin.TabNapTien_Fragment_Admin;
 
 public class ViewPagerAdapterNapTienAdmin extends FragmentStateAdapter {
+    Fragment fragment1,fragment2;
 
-    public ViewPagerAdapterNapTienAdmin(@NonNull FragmentActivity fragmentActivity) {
+    public ViewPagerAdapterNapTienAdmin(@NonNull FragmentActivity fragmentActivity,Fragment fragment,Fragment fragment1) {
         super(fragmentActivity);
+        this.fragment1 = fragment;
+        this.fragment2 = fragment1;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 1: return  new TabDanhSachNapTien_Fragment_Admin();
-            default:return new TabNapTien_Fragment_Admin();
+            case 1: return fragment2;
+            default:return fragment1;
         }
     }
 
