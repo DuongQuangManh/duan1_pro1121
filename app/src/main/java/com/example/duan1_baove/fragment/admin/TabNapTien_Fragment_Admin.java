@@ -75,7 +75,7 @@ public class TabNapTien_Fragment_Admin extends Fragment {
         return view;
     }
 
-    private void update() {
+    public void update() {
         list = DuAn1DataBase.getInstance(getContext()).khachHangDAO().getAll();
         SpinnerAdapterNapTien adapter = new SpinnerAdapterNapTien(getContext(), R.layout.item_spiner_naptien,list);
         spn_thanhvien.setAdapter(adapter);
