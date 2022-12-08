@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Loại thẻ tập"
+            android:text="Thẻ tập"
             android:background="@drawable/custom_header_dialog"
             android:textColor="@color/white"
             android:textSize="35sp"
