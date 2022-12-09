@@ -63,6 +63,7 @@ public class TaiKhoan_MainActivity_HocVien extends AppCompatActivity {
         khachHang = list.get(0);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,gioitinh);
         spn_gioitinh.setAdapter(adapter);
+        img = DuAn1DataBase.getInstance(this).khachHangDAO().getObject(HocVien_MainActivity.userHocVien).getAvata();
         spn_gioitinh.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -202,7 +203,6 @@ public class TaiKhoan_MainActivity_HocVien extends AppCompatActivity {
                 && resultCode == Activity.RESULT_OK) {
             img = getPathFromURI(Uri.parse(data.getDataString()));
             avt.setImageDrawable(Drawable.createFromPath(img));
-//            avt_adminmain.setImageDrawable(Drawable.createFromPath(img));
         }
     }
 

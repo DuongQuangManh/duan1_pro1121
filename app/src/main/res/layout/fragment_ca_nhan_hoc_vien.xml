@@ -207,17 +207,6 @@
                     android:layout_marginTop="20dp"
                     android:drawableEnd="@drawable/ic_next"/>
                 <TextView
-                    android:id="@+id/tv_doimauchudao_canhanhocvien"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Đổi màu chủ đạo"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#555454"
-                    android:layout_marginTop="20dp"
-                    android:drawableEnd="@drawable/ic_next"/>
-                <TextView
                     android:id="@+id/tv_dangxuat_canhanhocvien"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

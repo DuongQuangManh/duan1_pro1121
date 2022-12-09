@@ -294,7 +294,7 @@ public class CuaHang_Fragment_Admin extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (edt_name.getText().toString().trim().equals("PT")){
-                edt_soluong.setText(DuAn1DataBase.getInstance(getContext()).adminDAO().getSoluongPT(edt_name.getText().toString().trim())+"");
+                edt_soluong.setText(DuAn1DataBase.getInstance(getContext()).adminDAO().getSoluongPT(edt_name.getText().toString().trim())*5+"");
                 edt_soluong.setEnabled(false);
             }
         }
