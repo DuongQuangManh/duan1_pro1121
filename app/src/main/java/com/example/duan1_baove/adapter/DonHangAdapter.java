@@ -1,5 +1,6 @@
 package com.example.duan1_baove.adapter;
 
+import android.companion.WifiDeviceFilter;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_baove.R;
@@ -32,6 +34,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
     private List<DonHangChiTiet> listOld;
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private IClickListener iClickListener;
+    Calendar start,end;
 
     public DonHangAdapter(Context context, IClickListener iClickListener) {
         this.context = context;
@@ -116,6 +119,19 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.ViewHold
                 holder.tv_strarttime.setText("Thời gian bắt đầu: "+donHangChiTiet.getStarttime());
                 holder.tv_endtime.setText("Thời gian kết thúc: "+donHangChiTiet.getEndtime());
                 Log.d("zzzzzz","dịch vụ");
+                start = Calendar.getInstance();
+                end = Calendar.getInstance();
+                start.add(Calendar.MONTH,1);
+
+                end.set(Calendar.DAY_OF_MONTH,getArrayDate(donHangChiTiet.getEndtime())[0]);
+                end.set(Calendar.DAY_OF_MONTH,getArrayDate(donHangChiTiet.getEndtime())[1]);
+                end.set(Calendar.DAY_OF_MONTH,getArrayDate(donHangChiTiet.getEndtime())[2]);
+
+                if (end.getTime().getTime()-start.getTime().getTime()<=0){
+                    donHangChiTiet.setTinhTrang("Hết hạn");
+                    holder.tv_tinhtrang.setText("Hết hạn");
+                    holder.tv_tinhtrang.setTextColor(Color.RED);
+                }
             }
             holder.tv_tongtien.setText("Tổng tiền: "+numberFormat.format(donHangChiTiet.getTongtien())+ " vnđ");
             holder.tv_tinhtrang.setText("Tình trạng: "+donHangChiTiet.getTinhTrang());

@@ -59,7 +59,7 @@ public class TaiKhoan_Fragment_Admin extends Fragment {
         initUi();
         list = DuAn1DataBase.getInstance(getContext()).adminDAO().checkaccount(Admin_MainActivity.user);
         admin = list.get(0);
-
+        img = DuAn1DataBase.getInstance(getContext()).adminDAO().getObject(Admin_MainActivity.user).getHinhanh();
         if (admin.getHinhanh()==null){
             avt.setImageResource(R.drawable.ic_account);
         }else {

@@ -1,6 +1,7 @@
 package com.example.duan1_baove.fragment.hocvien;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +40,7 @@ public class CaNhan_Fragment_HocVien extends Fragment {
     private View view;
     private ImageView img_naptien;
     private CircleImageView avt_hocvien;
-    private TextView tv_name,tv_sodu,tv_taikhoan,tv_doimatkhau,tv_lichsugiaodich,tv_lienhe,tv_doimauchudao,tv_dangxuat,tv_thetapcuatoi,tv_dangkitapthu;
+    private TextView tv_name,tv_sodu,tv_taikhoan,tv_doimatkhau,tv_lichsugiaodich,tv_lienhe,tv_dangxuat,tv_thetapcuatoi,tv_dangkitapthu;
     NumberFormat numberFormat = new DecimalFormat("###,###,###");
     private LinearLayout layout_dangkitapthu;
     private View view_dangkitapthu;
@@ -133,6 +135,17 @@ public class CaNhan_Fragment_HocVien extends Fragment {
             getActivity().startActivity(intent);
             Animatoo.INSTANCE.animateSwipeLeft(getContext());
         });
+        tv_lienhe.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_lienhe);
+            dialog.show();
+            Window window =dialog.getWindow();
+            if (window==null){
+                return;
+            }
+            window.setBackgroundDrawable(null);
+        });
         return view;
     }
 
@@ -145,7 +158,6 @@ public class CaNhan_Fragment_HocVien extends Fragment {
         tv_doimatkhau = view.findViewById(R.id.tv_doimatkhau_canhanhocvien);
         tv_lichsugiaodich = view.findViewById(R.id.tv_lichsugiaodich_canhanhocvien);
         tv_lienhe = view.findViewById(R.id.tv_lienhe_canhanhocvien);
-        tv_doimauchudao = view.findViewById(R.id.tv_doimauchudao_canhanhocvien);
         tv_dangxuat = view.findViewById(R.id.tv_dangxuat_canhanhocvien);
         tv_dangkitapthu =view.findViewById(R.id.tv_dangkitapthu_canhanhocvien);
         tv_thetapcuatoi = view.findViewById(R.id.tv_thetapcuatoi_canhanhocvien);
